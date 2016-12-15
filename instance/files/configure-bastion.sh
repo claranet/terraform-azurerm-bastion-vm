@@ -2,6 +2,8 @@
 set -e
 set -x
 
+#curl -L https://bootstrap.saltstack.com | sudo sh
+wget -O - https://bootstrap.saltstack.com | sudo sh
 sudo mv /tmp/bastion-formula/* /srv/
 sudo rm -rf /tmp/bastion-formula
 sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' update
