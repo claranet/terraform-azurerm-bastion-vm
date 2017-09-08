@@ -1,5 +1,5 @@
 variable "resource_group_name" {}
-variable "env" {}
+variable "environment" {}
 variable "az_region" {}
 variable "ssh_key_pub" {}
 variable "network_interface_id" {}

@@ -1,3 +1,3 @@
 variable "resource_group_name" {}
-variable "env" {}
+variable "environment" {}
 variable "az_region" {}

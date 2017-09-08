@@ -1,5 +1,5 @@
 resource "azurerm_virtual_machine" "bastion" {
-    name = "acctvm.${var.env}.bastion"
+    name = "acctvm.${var.environment}.bastion"
     location = "${var.az_region}"
     resource_group_name =  "${var.resource_group_name}"
     network_interface_ids = ["${var.network_interface_id}"]
@@ -13,7 +13,7 @@ resource "azurerm_virtual_machine" "bastion" {
     }
 
     storage_os_disk {
-        name = "osdisk.${var.env}.bastion"
+        name = "osdisk.${var.environment}.bastion"
         vhd_uri = "${var.primary_blob_endpoint}${var.container_name}/bastion.vhd"
         caching = "ReadWrite"
         create_option = "FromImage"
@@ -35,7 +35,7 @@ resource "azurerm_virtual_machine" "bastion" {
     }
 
     tags {
-      environment = "${var.env}"
+      environment = "${var.environment}"
     }
 
     connection {
