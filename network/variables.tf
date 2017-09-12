@@ -4,8 +4,10 @@ variable "environment" {}
 
 variable "az_region" {}
 
-variable "ip_bastion" {}
+variable "private_ip_bastion" {}
 
-variable "subnet_bastion_id"{}
+variable "subnet_bastion_id" {}
 
-variable "zabbix_omni_cidr" {}
+variable "morea_admin_ips" {
+  type = "list"
+}

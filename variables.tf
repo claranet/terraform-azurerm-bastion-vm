@@ -4,16 +4,26 @@ variable "az_region" {}
 
 variable "environment" {}
 
-variable "resource_group_name" {}
+variable "support_resourcegroup_name" {}
+
+variable "support_dns_zone_name" {}
 
 variable "subnet_bastion_id" {}
 
-variable "vm_size" {}
-
-variable "ip_bastion" {
+variable "private_ip_bastion" {
   default = "10.10.1.10"
 }
 
-variable "ssh_key_pub" {}
+#variable "ssh_key_pub" {}
 
-variable "zabbix_omni_cidr" {}
+variable "vm_size" {}
+
+variable "zabbix_omni_cidr" {
+  default = "31.3.142.1/32"
+}
+
+variable "zabbix_proxy" {}
+
+variable "morea_admin_ips" {
+  type = "list"
+}
