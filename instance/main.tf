@@ -15,7 +15,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   vm_size               = "${var.vm_size}"
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
-  # delete_os_disk_on_termination = true
+  delete_os_disk_on_termination = true
 
 
   # Uncomment this line to delete the data disks automatically when deleting the VM
@@ -61,7 +61,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
     #private_key = "${file("~/.ssh/keys/${var.client_name}_${var.environment}_${var.aws_region}.pem")}"
     #private_key = "${file("~/.ssh/keys/baptiste-morea.pem")}"
     host        = "${var.public_ip}"
-    password    = "morea1234!"
+    password    = "Password1234!"
   }
   provisioner "local-exec" {
     command = "bash ${path.module}/files/prepare-formula.sh"

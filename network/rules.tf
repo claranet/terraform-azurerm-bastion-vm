@@ -14,7 +14,7 @@ resource "azurerm_network_security_rule" "bastion-allow-outbound" {
 
 resource "azurerm_network_security_rule" "bastion-deny-default" {
   name                        = "DenyInBound"
-  priority                    = 101
+  priority                    = 200
   direction                   = "Inbound"
   access                      = "Deny"
   protocol                    = "*"
@@ -27,12 +27,12 @@ resource "azurerm_network_security_rule" "bastion-deny-default" {
 }
 
 resource "azurerm_network_security_rule" "bastion-allow-ssh-morea" {
-  name                        = "AllowSshFromMorea"
-  priority                    = 100
+  name                        = "AllowSshFromMorea${count.index}"
+  priority                    = "10${count.index}"
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
-  source_port_range           = "22"
+  source_port_range           = "*"
   destination_port_range      = "22"
   source_address_prefix       = "${element(var.morea_admin_ips, count.index)}"
   destination_address_prefix  = "*"
