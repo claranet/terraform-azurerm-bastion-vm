@@ -1,0 +1,5 @@
+TO DO :
+
+- ADD SG rules for Zabbix support
+- Instance config is not good yet, Ubuntu 16.04 use at least zabbix-agent and proxy 3.0
++ SALT-281 [HOTFIX] issue on salt upgrade from 2016 to 2017 [New version salt 2017.7.1 conflit with previous version on upgrade.]
