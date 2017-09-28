@@ -22,7 +22,23 @@ variable "zabbix_omni_cidr" {
   default = "31.3.142.1/32"
 }
 
-variable "zabbix_proxy" {}
+variable "zabbix_proxy" {
+  default = "true"
+}
+
+variable "zabbix_use_allowed_cidrs" {
+  default = 0
+}
+
+variable "zabbix_allowed_cidrs" {
+  type    = "list"
+  default = []
+}
+
+variable "zabbix_proxy_cidr" {
+  #SET IF DIFFERENT FROM BASTION
+  default = ""
+}
 
 variable "morea_admin_ips" {
   type = "list"
