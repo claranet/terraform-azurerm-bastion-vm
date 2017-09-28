@@ -46,24 +46,20 @@ resource "azurerm_virtual_machine" "bastion_instance" {
     admin_password = "Password1234!"
   }
   os_profile_linux_config {
-    disable_password_authentication = false
+    disable_password_authentication = true
 
-    #ssh_keys {
-    #  path = "/home/morea/.ssh/authorized_keys"
-    #  key_data = "${var.ssh_key_pub}"
-    #}
+    ssh_keys {
+      path = "/home/morea/.ssh/authorized_keys"
+      key_data = "${var.ssh_key_pub}"
+    }
   }
   tags {
     environment = "${var.environment}"
   }
   connection {
     user = "morea"
-
-    #private_key = "${file("~/.ssh/keys/${var.client_name}_${var.environment}_${var.aws_region}.pem")}"
-    #private_key = "${file("~/.ssh/keys/baptiste-morea.pem")}"
+    private_key = "${file("~/.ssh/keys/${var.client_name}_${var.environment}.pem")}"
     host = "${var.public_ip}"
-
-    password = "Password1234!"
   }
   provisioner "local-exec" {
     command = "bash ${path.module}/files/prepare-formula.sh"

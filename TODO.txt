@@ -1,6 +1,8 @@
 TO DO :
 
-- ADD SG rules for Zabbix support
-- Modify access to bastion instance (user with pass right now, should be ssh)
 - Instance config is not good yet :
   SALT-281 [HOTFIX] issue on salt upgrade from 2016 to 2017 [New version salt 2017.7.1 conflit with previous version on upgrade.]
+
+Workaround :
+
+- SSH Key file should be : ~/.ssh/keys/${var.client_name}_${var.environment}.pem for now

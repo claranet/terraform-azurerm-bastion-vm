@@ -40,6 +40,6 @@ module "instance" {
   private_ip = "${module.network.bastion_network_private_ip}"
   public_ip  = "${module.network.bastion_network_public_ip}"
 
-  #ssh_key_pub                  = "${var.ssh_key_pub}"
+  ssh_key_pub = "${var.ssh_key_pub}"
   client_name = "${var.client_name}"
 }

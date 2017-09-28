@@ -12,6 +12,6 @@ variable "private_ip" {}
 
 variable "public_ip" {}
 
-#variable "ssh_key_pub" {}
+variable "ssh_key_pub" {}
 
 variable "vm_size" {}

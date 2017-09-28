@@ -14,7 +14,7 @@ variable "private_ip_bastion" {
   default = "10.10.1.10"
 }
 
-#variable "ssh_key_pub" {}
+variable "ssh_key_pub" {}
 
 variable "vm_size" {}
 
