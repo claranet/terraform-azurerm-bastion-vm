@@ -49,7 +49,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
     disable_password_authentication = true
 
     ssh_keys {
-      path = "/home/morea/.ssh/authorized_keys"
+      path     = "/home/morea/.ssh/authorized_keys"
       key_data = "${var.ssh_key_pub}"
     }
   }
@@ -57,9 +57,9 @@ resource "azurerm_virtual_machine" "bastion_instance" {
     environment = "${var.environment}"
   }
   connection {
-    user = "morea"
+    user        = "morea"
     private_key = "${file("~/.ssh/keys/${var.client_name}_${var.environment}.pem")}"
-    host = "${var.public_ip}"
+    host        = "${var.public_ip}"
   }
   provisioner "local-exec" {
     command = "bash ${path.module}/files/prepare-formula.sh"
