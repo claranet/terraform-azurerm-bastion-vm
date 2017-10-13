@@ -1,6 +1,6 @@
 resource "azurerm_managed_disk" "managed_data_bastion" {
   name                 = "managed_data_bastion"
-  location             = "${var.az_region}"
+  location             = "${var.azurerm_region}"
   resource_group_name  = "${var.support_resourcegroup_name}"
   storage_account_type = "Standard_LRS"
   create_option        = "Empty"
@@ -9,7 +9,7 @@ resource "azurerm_managed_disk" "managed_data_bastion" {
 
 resource "azurerm_virtual_machine" "bastion_instance" {
   name                  = "bastion"
-  location              = "${var.az_region}"
+  location              = "${var.azurerm_region}"
   resource_group_name   = "${var.support_resourcegroup_name}"
   network_interface_ids = ["${var.bastion_network_interface_id}"]
   vm_size               = "${var.vm_size}"
@@ -42,14 +42,14 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
   os_profile {
     computer_name  = "bastion"
-    admin_username = "morea"
+    admin_username = "claranet"
     admin_password = "Password1234!"
   }
   os_profile_linux_config {
     disable_password_authentication = true
 
     ssh_keys {
-      path     = "/home/morea/.ssh/authorized_keys"
+      path     = "/home/claranet/.ssh/authorized_keys"
       key_data = "${var.ssh_key_pub}"
     }
   }
@@ -57,7 +57,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
     environment = "${var.environment}"
   }
   connection {
-    user        = "morea"
+    user        = "claranet"
     private_key = "${file("~/.ssh/keys/${var.client_name}_${var.environment}.pem")}"
     host        = "${var.public_ip}"
   }

@@ -2,7 +2,7 @@ variable "resource_group_name" {}
 
 variable "environment" {}
 
-variable "az_region" {}
+variable "azurerm_region" {}
 
 variable "private_ip_bastion" {}
 

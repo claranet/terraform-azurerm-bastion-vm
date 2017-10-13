@@ -11,7 +11,7 @@ module "bastion" {
   source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=TER-14-azure-bastion-zabbix-proxy-templa"
   
   client_name                  = "${var.client_name}"
-  az_region                    = "${var.az_region}"
+  azurerm_region               = "${var.azurerm_region}"
   environment                  = "${var.environment}"
   
   support_resourcegroup_name   = "${var.support_resourcegroup_name}"
@@ -33,7 +33,7 @@ module "bastion" {
   source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=TER-14-azure-bastion-zabbix-proxy-templa"
   
   client_name                  = "morea-demo"
-  az_region                    = "West Europe"
+  azurerm_region               = "West Europe"
   environment                  = "support"
   
   support_resourcegroup_name   = "${module.infra.support_resourcegroup_name}"

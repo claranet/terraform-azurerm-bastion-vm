@@ -1,6 +1,6 @@
 variable "client_name" {}
 
-variable "az_region" {}
+variable "azurerm_region" {}
 
 variable "environment" {}
 

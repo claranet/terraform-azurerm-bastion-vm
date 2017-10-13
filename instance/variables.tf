@@ -2,7 +2,7 @@ variable "support_resourcegroup_name" {}
 
 variable "environment" {}
 
-variable "az_region" {}
+variable "azurerm_region" {}
 
 variable "bastion_network_interface_id" {}
 
