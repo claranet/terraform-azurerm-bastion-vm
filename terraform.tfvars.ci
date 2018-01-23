@@ -1,0 +1,8 @@
+azurerm_region="fr-central"
+client_name="test"
+environment="test"
+ssh_key_pub="abc"
+subnet_bastion_id="subnet-abc"
+support_dns_zone_name="test"
+support_resourcegroup_name="test"
+vm_size="10"
