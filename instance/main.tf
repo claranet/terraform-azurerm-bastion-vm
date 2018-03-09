@@ -81,14 +81,11 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   provisioner "file" {
-    count       = "${var.custom_vm_hostname == "" ? 1 : 0}"
-    source      = "${path.module}/files/set_hostname.sh"
+    source      = "${var.custom_vm_hostname == "" ? "${path.module}/files/set_hostname.sh" : "${path.module}/files/empty_script.sh" }"
     destination = "/tmp/set_hostname_bastion.sh"
   }
 
   provisioner "remote-exec" {
-    count = "${var.custom_vm_hostname == "" ? 1 : 0}"
-
     inline = [
       "chmod +x /tmp/set_hostname_bastion.sh",
       "NAME=${var.client_name}-bastion IP=${var.private_ip} /tmp/set_hostname_bastion.sh",
