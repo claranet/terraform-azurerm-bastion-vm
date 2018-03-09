@@ -52,17 +52,21 @@ variable "morea_admin_ips" {
 }
 
 variable "custom_vm_name" {
-  default = ""
+  description = "VM Name as displayed on the console"
+  default     = ""
 }
 
 variable "custom_vm_hostname" {
-  default = ""
+  description = "Bastion hostname"
+  default     = ""
 }
 
 variable "custom_disk_name" {
-  default = ""
+  description = "Bastion disk name as displayed in the console"
+  default     = ""
 }
 
 variable "custom_username" {
-  default = ""
+  description = "Default username to create on the bastion"
+  default     = ""
 }

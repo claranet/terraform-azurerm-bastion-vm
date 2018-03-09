@@ -3,12 +3,11 @@
 Workaround :
 
 - SSH Key file should be : ~/.ssh/keys/${var.client_name}_${var.environment}.pem for now
-- A variable map will be implemented to associate "West Europe" to "westeurope" or something like that
 
 Terraform module declaration example for your bastion support stack with default values :
 ```
 module "bastion" {
-  source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=TER-14-azure-bastion-zabbix-proxy-templa"
+  source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=xxx"
   
   client_name                  = "${var.client_name}"
   azurerm_region               = "${var.azurerm_region}"
@@ -30,7 +29,7 @@ module "bastion" {
 Terraform module declaration example for your bastion support stack with custom values :
 ```
 module "bastion" {
-  source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=TER-14-azure-bastion-zabbix-proxy-templa"
+  source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=xxx"
   
   client_name                  = "morea-demo"
   azurerm_region               = "West Europe"
@@ -46,6 +45,11 @@ module "bastion" {
   
   # Put your SSK Public Key here
   ssh_key_pub                  = "${file("./put_the_key_here.pub")}"
+
+  custom_vm_name     = "${var.custom_vm_name}"
+  custom_vm_hostname = "${var.custom_vm_hostname}"
+  custom_disk_name   = "${var.custom_disk_name}"
+  custom_username    = "${var.custom_username}"
 }
 ```
 
