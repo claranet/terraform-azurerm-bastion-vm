@@ -50,3 +50,11 @@ variable "morea_admin_ips" {
     "62.240.254.57/32",  # Claranet Rennes
   ]
 }
+
+variable "custom_vm_name" {
+  default = ""
+}
+
+variable "custom_vm_hostname" {
+  default = ""
+}
