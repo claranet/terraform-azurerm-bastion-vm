@@ -58,3 +58,11 @@ variable "custom_vm_name" {
 variable "custom_vm_hostname" {
   default = ""
 }
+
+variable "custom_disk_name" {
+  default = ""
+}
+
+variable "custom_username" {
+  default = ""
+}

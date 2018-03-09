@@ -16,7 +16,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   storage_os_disk {
-    name              = "bastion_os"
+    name              = "${coalesce(var.custom_disk_name, "md.${var.environment}.bastion")}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
@@ -24,7 +24,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
 
   os_profile {
     computer_name  = "${coalesce(var.custom_vm_hostname, "vm-${var.environment}-bastion")}"
-    admin_username = "claranet"
+    admin_username = "${coalesce(var.custom_username, "claranet")}"
     admin_password = "Password1234!"
   }
 

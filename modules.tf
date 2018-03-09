@@ -45,4 +45,6 @@ module "instance" {
 
   custom_vm_name     = "${var.custom_vm_name}"
   custom_vm_hostname = "${var.custom_vm_hostname}"
+  custom_disk_name   = "${var.custom_disk_name}"
+  custom_username    = "${var.custom_username}"
 }

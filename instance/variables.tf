@@ -19,3 +19,7 @@ variable "vm_size" {}
 variable "custom_vm_name" {}
 
 variable "custom_vm_hostname" {}
+
+variable "custom_disk_name" {}
+
+variable "custom_username" {}
