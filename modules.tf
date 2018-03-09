@@ -42,4 +42,7 @@ module "instance" {
 
   ssh_key_pub = "${var.ssh_key_pub}"
   client_name = "${var.client_name}"
+
+  custom_vm_name     = "${var.custom_vm_name}"
+  custom_vm_hostname = "${var.custom_vm_hostname}"
 }
