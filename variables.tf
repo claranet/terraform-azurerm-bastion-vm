@@ -40,17 +40,6 @@ variable "zabbix_proxy_cidr" {
   default = ""
 }
 
-variable "morea_admin_ips" {
-  type = "list"
-
-  default = [
-    "31.3.142.52/32",    # Morea bastion
-    "185.88.104.18/32",  # Morea VPN
-    "78.234.148.111/32", # Morea Coudray
-    "62.240.254.57/32",  # Claranet Rennes
-  ]
-}
-
 variable "custom_vm_name" {
   description = "VM Name as displayed on the console"
   default     = ""

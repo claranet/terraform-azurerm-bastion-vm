@@ -9,7 +9,7 @@ module "network" {
   subnet_bastion_id   = "${var.subnet_bastion_id}"
 
   zabbix_omni_cidr         = "${var.zabbix_omni_cidr}"
-  cloudpublic_admin_ips    = "${var.morea_admin_ips}"
+  cloudpublic_admin_ips    = "${data.terraform_remote_state.global_vars.admin_cidrs}"
   zabbix_use_allowed_cidrs = "${var.zabbix_use_allowed_cidrs}"
   zabbix_allowed_cidrs     = "${var.zabbix_allowed_cidrs}"
 
