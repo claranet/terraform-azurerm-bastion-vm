@@ -1,11 +1,11 @@
 # Azure Support Bastion module #
 
-Workaround :
+Workaround:
 
-- SSH Key file should be : ~/.ssh/keys/${var.client_name}_${var.environment}.pem for now
+- SSH Key file should be: `~/.ssh/keys/${var.client_name}_${var.environment}.pem` for now
 
-Terraform module declaration example for your bastion support stack with default values :
-```
+Terraform module declaration example for your bastion support stack with default values:
+```shell
 module "bastion" {
   source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=xxx"
   
@@ -26,8 +26,8 @@ module "bastion" {
 
 ```
 
-Terraform module declaration example for your bastion support stack with custom values :
-```
+Terraform module declaration example for your bastion support stack with custom values:
+```shell
 module "bastion" {
   source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=xxx"
   
