@@ -23,3 +23,8 @@ variable "custom_vm_hostname" {}
 variable "custom_disk_name" {}
 
 variable "custom_username" {}
+
+variable "custom_tags" {
+  description = "Custom map of tags to apply on every resources"
+  type        = "map"
+}

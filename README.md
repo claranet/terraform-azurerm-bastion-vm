@@ -61,6 +61,7 @@ module "bastion" {
 | client_name |  | string | - | yes |
 | custom_admin_ips | Others administrator IPs to allow | list | `<list>` | no |
 | custom_disk_name | Bastion disk name as displayed in the console | string | `` | no |
+| custom_tags | Custom map of tags to apply on every resources | map | `<map>` | no |
 | custom_username | Default username to create on the bastion | string | `` | no |
 | custom_vm_hostname | Bastion hostname | string | `` | no |
 | custom_vm_name | VM Name as displayed on the console | string | `` | no |

@@ -1,12 +1,17 @@
+locals {
+  bastion_tags = {
+    environment = "${var.environment}"
+    stack       = "bastion"
+  }
+}
+
 resource "azurerm_public_ip" "bastion" {
   name                         = "ip.pub.${var.environment}.bastion"
   location                     = "${var.azurerm_region}"
   resource_group_name          = "${var.resource_group_name}"
   public_ip_address_allocation = "static"
 
-  tags {
-    environment = "${var.environment}"
-  }
+  tags = "${merge(local.bastion_tags, var.custom_tags)}"
 }
 
 resource "azurerm_network_interface" "bastion" {
@@ -22,4 +27,6 @@ resource "azurerm_network_interface" "bastion" {
     private_ip_address            = "${var.private_ip_bastion}"
     public_ip_address_id          = "${azurerm_public_ip.bastion.id}"
   }
+
+  tags = "${merge(local.bastion_tags, var.custom_tags)}"
 }

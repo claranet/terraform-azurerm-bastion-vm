@@ -65,3 +65,9 @@ variable "custom_admin_ips" {
   type        = "list"
   default     = []
 }
+
+variable "custom_tags" {
+  description = "Custom map of tags to apply on every resources"
+  type        = "map"
+  default     = {}
+}

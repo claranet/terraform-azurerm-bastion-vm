@@ -1,3 +1,10 @@
+locals {
+  bastion_tags = {
+    environment = "${var.environment}"
+    stack       = "bastion"
+  }
+}
+
 resource "azurerm_virtual_machine" "bastion_instance" {
   name                  = "${coalesce(var.custom_vm_name, "vm.${var.environment}.bastion")}"
   location              = "${var.azurerm_region}"
@@ -37,9 +44,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
     }
   }
 
-  tags {
-    environment = "${var.environment}"
-  }
+  tags = "${merge(local.bastion_tags, var.custom_tags)}"
 
   connection {
     user        = "claranet"
