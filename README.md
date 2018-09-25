@@ -53,15 +53,36 @@ module "bastion" {
 }
 ```
 
-Outputs available:
-```
-bastion_network_interface_id
+## Inputs
 
-bastion_network_private_ip
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| azurerm_region |  | string | - | yes |
+| client_name |  | string | - | yes |
+| custom_admin_ips | Others administrator IPs to allow | list | `<list>` | no |
+| custom_disk_name | Bastion disk name as displayed in the console | string | `` | no |
+| custom_username | Default username to create on the bastion | string | `` | no |
+| custom_vm_hostname | Bastion hostname | string | `` | no |
+| custom_vm_name | VM Name as displayed on the console | string | `` | no |
+| environment |  | string | - | yes |
+| private_ip_bastion |  | string | `10.10.1.10` | no |
+| ssh_key_pub |  | string | - | yes |
+| subnet_bastion_id |  | string | - | yes |
+| support_dns_zone_name |  | string | - | yes |
+| support_resourcegroup_name |  | string | - | yes |
+| vm_size |  | string | - | yes |
+| zabbix_allowed_cidrs |  | list | `<list>` | no |
+| zabbix_omni_cidr |  | string | `31.3.142.1/32` | no |
+| zabbix_proxy |  | string | `true` | no |
+| zabbix_proxy_cidr |  | string | `` | no |
+| zabbix_use_allowed_cidrs |  | string | `0` | no |
 
-bastion_network_public_ip
+## Outputs
 
-record_bastion_name
-
-record_zabbix_name
-```
+| Name | Description |
+|------|-------------|
+| bastion_network_interface_id |  |
+| bastion_network_private_ip |  |
+| bastion_network_public_ip |  |
+| record_bastion_name |  |
+| record_zabbix_name |  |
