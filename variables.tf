@@ -59,3 +59,9 @@ variable "custom_username" {
   description = "Default username to create on the bastion"
   default     = ""
 }
+
+variable "custom_admin_ips" {
+  description = "Others administrator IPs to allow"
+  type        = "list"
+  default     = []
+}
