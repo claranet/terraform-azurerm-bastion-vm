@@ -1,7 +1,7 @@
 locals {
   bastion_tags = {
-    environment = "${var.environment}"
-    stack       = "bastion"
+    env   = "${var.environment}"
+    stack = "bastion"
   }
 }
 
