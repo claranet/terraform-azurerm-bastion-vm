@@ -15,3 +15,11 @@ variable "public_ip" {}
 variable "ssh_key_pub" {}
 
 variable "vm_size" {}
+
+variable "custom_vm_name" {}
+
+variable "custom_vm_hostname" {}
+
+variable "custom_disk_name" {}
+
+variable "custom_username" {}

@@ -40,13 +40,22 @@ variable "zabbix_proxy_cidr" {
   default = ""
 }
 
-variable "morea_admin_ips" {
-  type = "list"
+variable "custom_vm_name" {
+  description = "VM Name as displayed on the console"
+  default     = ""
+}
 
-  default = [
-    "31.3.142.52/32",    # Morea bastion
-    "31.3.136.12/32",    # Morea VPN
-    "78.234.148.111/32", # Morea Coudray
-    "62.240.254.57/32",  # Claranet Rennes
-  ]
+variable "custom_vm_hostname" {
+  description = "Bastion hostname"
+  default     = ""
+}
+
+variable "custom_disk_name" {
+  description = "Bastion disk name as displayed in the console"
+  default     = ""
+}
+
+variable "custom_username" {
+  description = "Default username to create on the bastion"
+  default     = ""
 }

@@ -9,7 +9,7 @@ module "network" {
   subnet_bastion_id   = "${var.subnet_bastion_id}"
 
   zabbix_omni_cidr         = "${var.zabbix_omni_cidr}"
-  cloudpublic_admin_ips    = "${var.morea_admin_ips}"
+  cloudpublic_admin_ips    = "${data.terraform_remote_state.global_vars.admin_cidrs}"
   zabbix_use_allowed_cidrs = "${var.zabbix_use_allowed_cidrs}"
   zabbix_allowed_cidrs     = "${var.zabbix_allowed_cidrs}"
 
@@ -42,4 +42,9 @@ module "instance" {
 
   ssh_key_pub = "${var.ssh_key_pub}"
   client_name = "${var.client_name}"
+
+  custom_vm_name     = "${var.custom_vm_name}"
+  custom_vm_hostname = "${var.custom_vm_hostname}"
+  custom_disk_name   = "${var.custom_disk_name}"
+  custom_username    = "${var.custom_username}"
 }
