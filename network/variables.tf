@@ -23,3 +23,8 @@ variable "zabbix_use_allowed_cidrs" {}
 variable "zabbix_proxy" {}
 
 variable "zabbix_proxy_cidr" {}
+
+variable "custom_tags" {
+  description = "Custom map of tags to apply on every resources"
+  type        = "map"
+}

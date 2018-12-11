@@ -15,6 +15,8 @@ module "network" {
 
   zabbix_proxy      = "${var.zabbix_proxy}"
   zabbix_proxy_cidr = "${var.zabbix_proxy_cidr}"
+
+  custom_tags = "${var.custom_tags}"
 }
 
 module "dns" {
@@ -47,4 +49,5 @@ module "instance" {
   custom_vm_hostname = "${var.custom_vm_hostname}"
   custom_disk_name   = "${var.custom_disk_name}"
   custom_username    = "${var.custom_username}"
+  custom_tags        = "${var.custom_tags}"
 }
