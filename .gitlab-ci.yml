@@ -18,5 +18,7 @@ tfvalidate:
   script:
     - mv main.tf.ci main.tf
     - mv terraform.tfvars.ci terraform.tfvars
+    - mkdir -p ~/.ssh/keys
+    - touch ~/.ssh/keys/test_test.pem
     - terraform init
     - terraform validate
