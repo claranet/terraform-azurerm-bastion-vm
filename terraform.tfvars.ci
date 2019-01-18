@@ -1,4 +1,4 @@
-azurerm_region="fr-central"
+location="fr-central"
 client_name="test"
 environment="test"
 ssh_key_pub="abc"

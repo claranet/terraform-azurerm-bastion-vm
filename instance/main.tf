@@ -7,7 +7,7 @@ locals {
 
 resource "azurerm_virtual_machine" "bastion_instance" {
   name                  = "${coalesce(var.custom_vm_name, "vm.${var.environment}.bastion")}"
-  location              = "${var.azurerm_region}"
+  location              = "${var.location}"
   resource_group_name   = "${var.support_resourcegroup_name}"
   network_interface_ids = ["${var.bastion_network_interface_id}"]
   vm_size               = "${var.vm_size}"
