@@ -22,8 +22,6 @@ module "rg" {
     stack        = "${var.stack}"
 }
 
-}
-
 module "subnet" {
     source              = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/subnet.git?ref=vX.X.X"
 
