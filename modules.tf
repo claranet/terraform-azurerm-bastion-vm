@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "bastion" {
-  name                         = "${var.stack}-${var.environment}-${var.location-short}-pubip"
+  name                         = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-pubip"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group_name}"
   public_ip_address_allocation = "static"
@@ -8,13 +8,13 @@ resource "azurerm_public_ip" "bastion" {
 }
 
 resource "azurerm_network_interface" "bastion" {
-  name                      = "${var.stack}-${var.environment}-${var.location-short}-nic"
+  name                      = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-nic"
   location                  = "${var.location}"
   resource_group_name       = "${var.resource_group_name}"
   network_security_group_id = "${var.network_security_group_id}"
 
   ip_configuration {
-    name                          = "${var.stack}-${var.environment}-${var.location-short}-ipconfig"
+    name                          = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-ipconfig"
     subnet_id                     = "${var.subnet_bastion_id}"
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.private_ip_bastion}"
@@ -25,7 +25,7 @@ resource "azurerm_network_interface" "bastion" {
 }
 
 resource "azurerm_virtual_machine" "bastion_instance" {
-  name                  = "${coalesce(var.custom_vm_name, "${var.stack}-${var.environment}-${var.location-short}-vm")}"
+  name                  = "${coalesce(var.custom_vm_name, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-vm")}"
   location              = "${var.location}"
   resource_group_name   = "${var.resource_group_name}"
   network_interface_ids = ["${azurerm_network_interface.bastion.id}"]
@@ -34,7 +34,6 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   # Uncomment this line to delete the OS disk automatically when deleting the VM
   # delete_os_disk_on_termination = "true"
 
-  # To update ?
   storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
@@ -42,13 +41,13 @@ resource "azurerm_virtual_machine" "bastion_instance" {
     version   = "latest"
   }
   storage_os_disk {
-    name              = "${coalesce(var.custom_disk_name, "${var.stack}-${var.environment}-${var.location-short}-osdisk")}"
+    name              = "${coalesce(var.custom_disk_name, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osdisk")}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = "${coalesce(var.custom_vm_hostname, "${var.stack}-${var.environment}-${var.location-short}-osprofile")}"
+    computer_name  = "${coalesce(var.custom_vm_hostname, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osprofile")}"
     admin_username = "${coalesce(var.custom_username, "claranet")}"
     admin_password = "Password1234!"
   }
