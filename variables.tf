@@ -31,10 +31,6 @@ variable "extra_tags" {
 }
 
 # Azure Network Interface
-variable "network_security_group_id" {
-  description = "The network security group id to associate with the interface"
-  type        = "string"
-}
 
 variable "subnet_bastion_id" {
   description = "The bastion subnet id"
@@ -86,11 +82,4 @@ variable "delete_os_disk_on_termination" {
   description = "Enable delete disk on termination"
   type        = "string"
   default     = "true"
-}
-
-# Azure DNS
-
-variable "support_dns_zone_name" {
-  description = "Support DNS zone name"
-  type        = "string"
 }

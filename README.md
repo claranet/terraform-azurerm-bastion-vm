@@ -83,13 +83,11 @@ module "bastion" {
 | extra_tags | Custom map of tags to apply on every resources | map | `<map>` | no |
 | location | Azure region to use | string | - | yes |
 | location-short | Short string for Azure location | string | - | yes |
-| network_security_group_id | The network security group id to associate with the interface | string | - | yes |
 | private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `` | no |
 | resource_group_name | Name of the resource group | string | - | yes |
 | ssh_key_pub | Root SSH pub key to deploy on the bastion | string | - | yes |
 | stack | Project stack name | string | - | yes |
 | subnet_bastion_id | The bastion subnet id | string | - | yes |
-| support_dns_zone_name | Support DNS zone name | string | - | yes |
 | vm_size | Bastion virtual machine size | string | - | yes |
 
 ## Outputs
@@ -100,5 +98,4 @@ module "bastion" {
 | bastion_network_interface_private_ip | Bastion private ip |
 | bastion_network_public_ip | Bastion public ip |
 | bastion_network_public_ip_id | Bastion public ip id |
-| bastion_record_dns_id | Bastion record dns id |
 | bastion_virtual_machine_id | Bastion virtual machine id |

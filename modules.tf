@@ -8,10 +8,9 @@ resource "azurerm_public_ip" "bastion" {
 }
 
 resource "azurerm_network_interface" "bastion" {
-  name                      = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-nic"
-  location                  = "${var.location}"
-  resource_group_name       = "${var.resource_group_name}"
-  network_security_group_id = "${var.network_security_group_id}"
+  name                = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-nic"
+  location            = "${var.location}"
+  resource_group_name = "${var.resource_group_name}"
 
   ip_configuration {
     name                          = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-ipconfig"
@@ -114,12 +113,4 @@ resource "azurerm_virtual_machine" "bastion_instance" {
       "NAME=${var.client_name}-bastion IP=${azurerm_network_interface.bastion.private_ip_address} /tmp/set_hostname_bastion.sh",
     ]
   }
-}
-
-resource "azurerm_dns_a_record" "record_bastion" {
-  name                = "bastion"
-  zone_name           = "${var.support_dns_zone_name}"
-  resource_group_name = "${var.resource_group_name}"
-  ttl                 = 300
-  records             = ["${azurerm_public_ip.bastion.ip_address}"]
 }
