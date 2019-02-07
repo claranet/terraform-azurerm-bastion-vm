@@ -82,6 +82,12 @@ variable "ssh_key_pub" {
   type        = "string"
 }
 
+variable "delete_os_disk_on_termination" {
+  description = "Enable delete disk on termination"
+  type        = "string"
+  default     = "true"
+}
+
 # Azure DNS
 
 variable "support_dns_zone_name" {

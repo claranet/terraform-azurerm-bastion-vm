@@ -78,6 +78,7 @@ module "bastion" {
 | custom_username | Default username to create on the bastion | string | `` | no |
 | custom_vm_hostname | Bastion hostname | string | `` | no |
 | custom_vm_name | VM Name as displayed on the console | string | `` | no |
+| delete_os_disk_on_termination | Enable delete disk on termination | string | `true` | no |
 | environment | Project environment | string | - | yes |
 | extra_tags | Custom map of tags to apply on every resources | map | `<map>` | no |
 | location | Azure region to use | string | - | yes |
