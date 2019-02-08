@@ -63,55 +63,32 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   tags = "${merge(local.bastion_tags, var.extra_tags)}"
+}
 
-  connection {
-    user        = "claranet"
-    private_key = "${file("~/.ssh/keys/${var.client_name}_${var.environment}.pem")}"
-    host        = "${azurerm_public_ip.bastion.ip_address}"
+data "template_file" "ansible_inventory" {
+  template = "${file("${path.module}/playbook-ansible/host_ini.tpl")}"
+
+  vars {
+    vm_fullname = "${azurerm_virtual_machine.bastion_instance.name}"
+    vm_ip       = "${azurerm_public_ip.bastion.ip_address}"
+    vm_user     = "claranet"
+  }
+}
+
+resource "local_file" "rendered_ansible_inventory" {
+  content  = "${data.template_file.ansible_inventory.rendered}"
+  filename = "${path.module}/playbook-ansible/host.ini"
+}
+
+resource "null_resource" "ansible_bootstrap_vm" {
+  depends_on = ["azurerm_virtual_machine.bastion_instance"]
+
+  triggers {
+    uuid = "${azurerm_virtual_machine.bastion_instance.id}"
   }
 
   provisioner "local-exec" {
-    command = "bash ${path.module}/files/prepare-formula.sh"
-  }
-
-  provisioner "file" {
-    source      = "/tmp/bastion-formula"
-    destination = "/tmp/"
-  }
-
-  provisioner "file" {
-    source      = "/tmp/morea-tools"
-    destination = "/tmp/"
-  }
-
-  provisioner "file" {
-    content     = "${data.template_file.top-pillar.rendered}"
-    destination = "/tmp/bastion-formula/pillar/top.sls"
-  }
-
-  provisioner "file" {
-    content     = "${data.template_file.pillar.rendered}"
-    destination = "/tmp/bastion-formula/pillar/bastion.sls"
-  }
-
-  provisioner "file" {
-    content     = "${data.template_file.top-salt.rendered}"
-    destination = "/tmp/bastion-formula/salt/top.sls"
-  }
-
-  provisioner "remote-exec" {
-    script = "${path.module}/files/configure-bastion.sh"
-  }
-
-  provisioner "file" {
-    source      = "${var.custom_vm_hostname == "" ? "${path.module}/files/set_hostname.sh" : "${path.module}/files/empty_script.sh" }"
-    destination = "/tmp/set_hostname_bastion.sh"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/set_hostname_bastion.sh",
-      "NAME=${var.client_name}-bastion IP=${azurerm_network_interface.bastion.private_ip_address} /tmp/set_hostname_bastion.sh",
-    ]
+    command     = "ansible-playbook main.yml"
+    working_dir = "${path.module}/playbook-ansible"
   }
 }
