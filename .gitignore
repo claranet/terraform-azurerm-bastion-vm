@@ -1,3 +1,5 @@
 .terraform
 main.tf
 terraform.tfvars
+playbook-ansible/host.ini
+playbook-ansible/main.retry
