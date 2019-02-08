@@ -87,6 +87,13 @@ module "bastion" {
 | resource_group_name | Name of the resource group | string | - | yes |
 | ssh_key_pub | Root SSH pub key to deploy on the bastion | string | - | yes |
 | stack | Project stack name | string | - | yes |
+| storage_image_offer | Specifies the offer of the image used to create the virtual machine | string | `UbuntuServer` | no |
+| storage_image_publisher | Specifies the publisher of the image used to create the virtual machine | string | `Canonical` | no |
+| storage_image_sku | Specifies the SKU of the image used to create the virtual machine | string | `16.04-LTS` | no |
+| storage_os_disk_caching | Specifies the caching requirements for the OS Disk | string | `ReadWrite` | no |
+| storage_os_disk_create_option | Specifies how the OS disk shoulb be created | string | `FromImage` | no |
+| storage_os_disk_disk_size_gb | Specifies the size of the OS Disk in gigabytes | string | - | yes |
+| storage_os_disk_managed_disk_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `Standard_LRS` | no |
 | subnet_bastion_id | The bastion subnet id | string | - | yes |
 | vm_size | Bastion virtual machine size | string | - | yes |
 

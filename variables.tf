@@ -83,3 +83,44 @@ variable "delete_os_disk_on_termination" {
   type        = "string"
   default     = "true"
 }
+
+variable "storage_image_publisher" {
+  description = "Specifies the publisher of the image used to create the virtual machine"
+  type        = "string"
+  default     = "Canonical"
+}
+
+variable "storage_image_offer" {
+  description = "Specifies the offer of the image used to create the virtual machine"
+  type        = "string"
+  default     = "UbuntuServer"
+}
+
+variable "storage_image_sku" {
+  description = "Specifies the SKU of the image used to create the virtual machine"
+  type        = "string"
+  default     = "16.04-LTS"
+}
+
+variable "storage_os_disk_caching" {
+  description = "Specifies the caching requirements for the OS Disk"
+  type        = "string"
+  default     = "ReadWrite"
+}
+
+variable "storage_os_disk_create_option" {
+  description = "Specifies how the OS disk shoulb be created"
+  type        = "string"
+  default     = "FromImage"
+}
+
+variable "storage_os_disk_managed_disk_type" {
+  description = "Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS]"
+  type        = "string"
+  default     = "Standard_LRS"
+}
+
+variable "storage_os_disk_disk_size_gb" {
+  description = "Specifies the size of the OS Disk in gigabytes"
+  type        = "string"
+}

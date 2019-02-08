@@ -33,17 +33,18 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   delete_os_disk_on_termination = "${var.delete_os_disk_on_termination}"
 
   storage_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
+    publisher = "${var.storage_image_publisher}"
+    offer     = "${var.storage_image_offer}"
+    sku       = "${var.storage_image_sku}"
     version   = "latest"
   }
 
   storage_os_disk {
     name              = "${coalesce(var.custom_disk_name, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osdisk")}"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
+    caching           = "${var.storage_os_disk_caching}"
+    create_option     = "${var.storage_os_disk_create_option}"
+    managed_disk_type = "${var.storage_os_disk_managed_disk_type}"
+    disk_size_gb      = "${var.storage_os_disk_disk_size_gb}"
   }
 
   os_profile {
