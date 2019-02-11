@@ -1,8 +1,9 @@
 # Azure Support Bastion module #
 
-Workaround:
+Requirements:
 
-- SSH Key file should be: `~/.ssh/keys/${var.client_name}_${var.environment}.pem` for now
+- SSH Key file should be generated: `~/.ssh/keys/${var.client_name}_${var.environment}.pem`
+- Ansible version >= 2.5
 
 Terraform module declaration example for your bastion support stack with all required modules:
 
@@ -71,15 +72,12 @@ module "bastion" {
   stack                        = "${var.stack}"
   resource_group_name          = "${module.rg.resource_group_name}"
 
-  network_security_group_id    = "${module.nsg.network_security_group_id}"
   subnet_bastion_id            = "${module.subnet.subnet_id}"
   
   vm_size                      = "Standard_DS1_v2"
   
   # Put your SSK Public Key here
   ssh_key_pub                  = "${file("./put_the_key_here.pub")}"
-  
-  support_dns_zone_name        = "${var.support_dns_zone_name}"
 }
 ```
 

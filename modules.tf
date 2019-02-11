@@ -88,10 +88,7 @@ resource "null_resource" "ansible_bootstrap_vm" {
   }
 
   provisioner "local-exec" {
-    command = <<CMD
-ansible-galaxy install -r requirements.yml; \
-ansible-playbook main.yml
-CMD
+    command = "ansible-galaxy install -r requirements.yml && ansible-playbook main.yml"
 
     working_dir = "${path.module}/playbook-ansible"
   }
