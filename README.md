@@ -70,6 +70,7 @@ module "bastion" {
   location-short               = "${module.azure-region.location-short}"
   environment                  = "${var.environment}"
   stack                        = "${var.stack}"
+  name                         = "${var.name}"
   resource_group_name          = "${module.rg.resource_group_name}"
 
   subnet_bastion_id            = "${module.subnet.subnet_id}"
@@ -95,6 +96,7 @@ module "bastion" {
 | extra_tags | Custom map of tags to apply on every resources | map | `<map>` | no |
 | location | Azure region to use | string | - | yes |
 | location-short | Short string for Azure location | string | - | yes |
+| name | Name used for resource naming | string | - | yes |
 | private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `` | no |
 | resource_group_name | Name of the resource group | string | - | yes |
 | ssh_key_pub | Root SSH pub key to deploy on the bastion | string | - | yes |

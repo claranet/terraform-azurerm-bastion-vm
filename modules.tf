@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "bastion" {
-  name                         = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-pubip"
+  name                         = "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-pubip"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group_name}"
   public_ip_address_allocation = "static"
@@ -8,12 +8,12 @@ resource "azurerm_public_ip" "bastion" {
 }
 
 resource "azurerm_network_interface" "bastion" {
-  name                = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-nic"
+  name                = "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-nic"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
 
   ip_configuration {
-    name                          = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-ipconfig"
+    name                          = "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-ipconfig"
     subnet_id                     = "${var.subnet_bastion_id}"
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.private_ip_bastion}"
@@ -24,7 +24,7 @@ resource "azurerm_network_interface" "bastion" {
 }
 
 resource "azurerm_virtual_machine" "bastion_instance" {
-  name                  = "${coalesce(var.custom_vm_name, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-vm")}"
+  name                  = "${coalesce(var.custom_vm_name, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-vm")}"
   location              = "${var.location}"
   resource_group_name   = "${var.resource_group_name}"
   network_interface_ids = ["${azurerm_network_interface.bastion.id}"]
@@ -40,7 +40,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   storage_os_disk {
-    name              = "${coalesce(var.custom_disk_name, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osdisk")}"
+    name              = "${coalesce(var.custom_disk_name, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osdisk")}"
     caching           = "${var.storage_os_disk_caching}"
     create_option     = "${var.storage_os_disk_create_option}"
     managed_disk_type = "${var.storage_os_disk_managed_disk_type}"
@@ -48,7 +48,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   os_profile {
-    computer_name  = "${coalesce(var.custom_vm_hostname, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osprofile")}"
+    computer_name  = "${coalesce(var.custom_vm_hostname, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osprofile")}"
     admin_username = "${coalesce(var.custom_username, "claranet")}"
     admin_password = "Password1234!"
   }

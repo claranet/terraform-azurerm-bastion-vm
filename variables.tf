@@ -24,6 +24,11 @@ variable "client_name" {
   type        = "string"
 }
 
+variable "name" {
+  description = "Name used for resource naming"
+  type        = "string"
+}
+
 variable "extra_tags" {
   description = "Custom map of tags to apply on every resources"
   type        = "map"
