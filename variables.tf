@@ -83,6 +83,11 @@ variable "ssh_key_pub" {
   type        = "string"
 }
 
+variable "private_key_path" {
+  description = "Root SSH private key path"
+  type        = "string"
+}
+
 variable "delete_os_disk_on_termination" {
   description = "Enable delete disk on termination"
   type        = "string"

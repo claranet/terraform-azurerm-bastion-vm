@@ -79,6 +79,7 @@ module "bastion" {
   
   # Put your SSK Public Key here
   ssh_key_pub                  = "${file("./put_the_key_here.pub")}"
+  private_key_path 	       = "${var.private_key_path}"
 }
 ```
 
@@ -98,6 +99,7 @@ module "bastion" {
 | location-short | Short string for Azure location | string | - | yes |
 | name | Name used for resource naming | string | - | yes |
 | private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `` | no |
+| private_key_path | Root SSH private key path | string | - | yes |
 | resource_group_name | Name of the resource group | string | - | yes |
 | ssh_key_pub | Root SSH pub key to deploy on the bastion | string | - | yes |
 | stack | Project stack name | string | - | yes |
