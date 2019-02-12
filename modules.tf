@@ -48,7 +48,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   os_profile {
-    computer_name  = "${coalesce(var.custom_vm_hostname, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osprofile")}"
+    computer_name  = "${coalesce(var.custom_vm_hostname, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}")}"
     admin_username = "${coalesce(var.custom_username, "claranet")}"
     admin_password = "Password1234!"
   }
@@ -88,7 +88,7 @@ resource "null_resource" "ansible_bootstrap_vm" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-galaxy install -r requirements.yml && ansible-playbook --private-key=${var.private_key_path} main.yml"
+    command = "ansible-galaxy install -r requirements.yml && ansible-playbook --private-key=${var.private_key_path} main.yml -e hostname=${azurerm_virtual_machine.bastion_instance.name}-${replace(azurerm_public_ip.bastion.ip_address, ".", "-")}"
 
     working_dir = "${path.module}/playbook-ansible"
   }

@@ -109,7 +109,7 @@ variable "storage_image_offer" {
 variable "storage_image_sku" {
   description = "Specifies the SKU of the image used to create the virtual machine"
   type        = "string"
-  default     = "16.04-LTS"
+  default     = "18.04-LTS"
 }
 
 variable "storage_os_disk_caching" {

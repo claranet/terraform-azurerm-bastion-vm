@@ -105,7 +105,7 @@ module "bastion" {
 | stack | Project stack name | string | - | yes |
 | storage_image_offer | Specifies the offer of the image used to create the virtual machine | string | `UbuntuServer` | no |
 | storage_image_publisher | Specifies the publisher of the image used to create the virtual machine | string | `Canonical` | no |
-| storage_image_sku | Specifies the SKU of the image used to create the virtual machine | string | `16.04-LTS` | no |
+| storage_image_sku | Specifies the SKU of the image used to create the virtual machine | string | `18.04-LTS` | no |
 | storage_os_disk_caching | Specifies the caching requirements for the OS Disk | string | `ReadWrite` | no |
 | storage_os_disk_create_option | Specifies how the OS disk shoulb be created | string | `FromImage` | no |
 | storage_os_disk_disk_size_gb | Specifies the size of the OS Disk in gigabytes | string | - | yes |
