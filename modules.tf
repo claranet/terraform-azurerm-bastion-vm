@@ -1,8 +1,8 @@
 module "network" {
   source = "./network"
 
-  environment    = "${var.environment}"
-  azurerm_region = "${var.azurerm_region}"
+  environment = "${var.environment}"
+  location    = "${var.location}"
 
   resource_group_name = "${var.support_resourcegroup_name}"
   private_ip_bastion  = "${var.private_ip_bastion}"
@@ -32,8 +32,8 @@ module "dns" {
 module "instance" {
   source = "./instance"
 
-  environment    = "${var.environment}"
-  azurerm_region = "${var.azurerm_region}"
+  environment = "${var.environment}"
+  location    = "${var.location}"
 
   support_resourcegroup_name   = "${var.support_resourcegroup_name}"
   bastion_network_interface_id = "${module.network.bastion_network_interface_id}"
