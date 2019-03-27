@@ -4,7 +4,7 @@ Workaround:
 
 - SSH Key file should be: `~/.ssh/keys/${var.client_name}_${var.environment}.pem` for now
 
-Terraform module declaration example for your bastion support stack with all required modules :
+Terraform module declaration example for your bastion support stack with all required modules:
 
 ```shell
 module "azure-region" {
@@ -22,6 +22,20 @@ module "rg" {
     stack        = "${var.stack}"
 }
 
+module "vnet" {
+    source              = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet.git?ref=xxx"
+    
+    environment         = "${var.environment}"
+    location            = "${module.azure-region.location}"
+    location-short      = "${module.azure-region.location-short}"
+    client_name         = "${var.client_name}"
+    stack               = "${var.stack}"
+    custom_vnet_name    = "${var.custom_vnet_name}"
+
+    resource_group_name     = "${module.rg.resource_group_name}"
+    vnet_cidr               = ["10.10.0.0/16"]
+}
+
 module "subnet" {
     source              = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/subnet.git?ref=vX.X.X"
 
@@ -33,7 +47,7 @@ module "subnet" {
 
     resource_group_name     = "${module.rg.resource_group_name}"
     virtual_network_name    = "${module.vnet.virtual_network_name}"
-    subnet_cidr             = "${var.subnet_cidr}"
+    subnet_cidr             = "10.10.10.0/24"
 }
 
 module "nsg" {
@@ -59,8 +73,8 @@ module "bastion" {
 
   network_security_group_id    = "${module.nsg.network_security_group_id}"
   subnet_bastion_id            = "${module.subnet.subnet_id}"
-
-  vm_size                      = "${var.vm_size}"
+  
+  vm_size                      = "Standard_DS1_v2"
   
   # Put your SSK Public Key here
   ssh_key_pub                  = "${file("./put_the_key_here.pub")}"
