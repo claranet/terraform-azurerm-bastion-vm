@@ -87,31 +87,33 @@ module "bastion" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| client_name | Client name/account used in naming | string | - | yes |
-| custom_disk_name | Bastion disk name as displayed in the console | string | `` | no |
-| custom_username | Default username to create on the bastion | string | `` | no |
-| custom_vm_hostname | Bastion hostname | string | `` | no |
-| custom_vm_name | VM Name as displayed on the console | string | `` | no |
-| delete_os_disk_on_termination | Enable delete disk on termination | string | `true` | no |
-| environment | Project environment | string | - | yes |
-| extra_tags | Custom map of tags to apply on every resources | map | `<map>` | no |
-| location | Azure region to use | string | - | yes |
-| location-short | Short string for Azure location | string | - | yes |
-| name | Name used for resource naming | string | - | yes |
-| private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `` | no |
-| private_key_path | Root SSH private key path | string | - | yes |
-| resource_group_name | Name of the resource group | string | - | yes |
-| ssh_key_pub | Root SSH pub key to deploy on the bastion | string | - | yes |
-| stack | Project stack name | string | - | yes |
-| storage_image_offer | Specifies the offer of the image used to create the virtual machine | string | `UbuntuServer` | no |
-| storage_image_publisher | Specifies the publisher of the image used to create the virtual machine | string | `Canonical` | no |
-| storage_image_sku | Specifies the SKU of the image used to create the virtual machine | string | `18.04-LTS` | no |
-| storage_os_disk_caching | Specifies the caching requirements for the OS Disk | string | `ReadWrite` | no |
-| storage_os_disk_create_option | Specifies how the OS disk shoulb be created | string | `FromImage` | no |
-| storage_os_disk_disk_size_gb | Specifies the size of the OS Disk in gigabytes | string | - | yes |
-| storage_os_disk_managed_disk_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `Standard_LRS` | no |
-| subnet_bastion_id | The bastion subnet id | string | - | yes |
-| vm_size | Bastion virtual machine size | string | - | yes |
+| ani\_extra\_tags | Custom map of tags to apply on network interface resource | map | `<map>` | no |
+| bastion\_extra\_tags | Custom map of tags to apply on bastion resource | map | `<map>` | no |
+| client\_name | Client name/account used in naming | string | n/a | yes |
+| custom\_disk\_name | Bastion disk name as displayed in the console | string | `""` | no |
+| custom\_username | Default username to create on the bastion | string | `""` | no |
+| custom\_vm\_hostname | Bastion hostname | string | `""` | no |
+| custom\_vm\_name | VM Name as displayed on the console | string | `""` | no |
+| delete\_os\_disk\_on\_termination | Enable delete disk on termination | string | `"true"` | no |
+| environment | Project environment | string | n/a | yes |
+| location | Azure region to use | string | n/a | yes |
+| location-short | Short string for Azure location | string | n/a | yes |
+| name | Name used for resource naming | string | n/a | yes |
+| private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `""` | no |
+| private\_key\_path | Root SSH private key path | string | n/a | yes |
+| pubip\_extra\_tags | Custom map of tags to apply on public ip resource | map | `<map>` | no |
+| resource\_group\_name | Name of the resource group | string | n/a | yes |
+| ssh\_key\_pub | Root SSH pub key to deploy on the bastion | string | n/a | yes |
+| stack | Project stack name | string | n/a | yes |
+| storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | string | `"UbuntuServer"` | no |
+| storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | string | `"Canonical"` | no |
+| storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | string | `"18.04-LTS"` | no |
+| storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | string | `"ReadWrite"` | no |
+| storage\_os\_disk\_create\_option | Specifies how the OS disk shoulb be created | string | `"FromImage"` | no |
+| storage\_os\_disk\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | string | n/a | yes |
+| storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `"Standard_LRS"` | no |
+| subnet\_bastion\_id | The bastion subnet id | string | n/a | yes |
+| vm\_size | Bastion virtual machine size | string | n/a | yes |
 
 ## Outputs
 
