@@ -1,73 +1,126 @@
-variable "client_name" {}
+# Global module variable definition
+variable "resource_group_name" {
+  description = "Name of the resource group"
+}
 
-variable "location" {}
+variable "location" {
+  description = "Azure region to use"
+}
 
-variable "environment" {}
+variable "location-short" {
+  description = "Short string for Azure location"
+}
 
-variable "support_resourcegroup_name" {}
+variable "environment" {
+  description = "Project environment"
+}
 
-variable "support_dns_zone_name" {}
+variable "stack" {
+  description = "Project stack name"
+}
 
-variable "subnet_bastion_id" {}
+variable "client_name" {
+  description = "Client name/account used in naming"
+  type        = "string"
+}
+
+variable "extra_tags" {
+  description = "Custom map of tags to apply on every resources"
+  type        = "map"
+  default     = {}
+}
+
+# Azure Network Interface
+
+variable "subnet_bastion_id" {
+  description = "The bastion subnet id"
+  type        = "string"
+}
 
 variable "private_ip_bastion" {
-  default = "10.10.1.10"
+  description = "Allows to define the private ip to associate with the bastion"
+  type        = "string"
+  default     = ""
 }
 
-variable "ssh_key_pub" {}
-
-variable "vm_size" {}
-
-variable "zabbix_omni_cidr" {
-  default = "31.3.142.1/32"
-}
-
-variable "zabbix_proxy" {
-  default = "true"
-}
-
-variable "zabbix_use_allowed_cidrs" {
-  default = 0
-}
-
-variable "zabbix_allowed_cidrs" {
-  type    = "list"
-  default = []
-}
-
-variable "zabbix_proxy_cidr" {
-  #SET IF DIFFERENT FROM BASTION
-  default = ""
+# Azure Virtual Machine
+variable "vm_size" {
+  description = "Bastion virtual machine size"
+  type        = "string"
 }
 
 variable "custom_vm_name" {
   description = "VM Name as displayed on the console"
+  type        = "string"
   default     = ""
 }
 
 variable "custom_vm_hostname" {
   description = "Bastion hostname"
+  type        = "string"
   default     = ""
 }
 
 variable "custom_disk_name" {
   description = "Bastion disk name as displayed in the console"
+  type        = "string"
   default     = ""
 }
 
 variable "custom_username" {
   description = "Default username to create on the bastion"
+  type        = "string"
   default     = ""
 }
 
-variable "custom_admin_ips" {
-  description = "Others administrator IPs to allow"
-  type        = "list"
-  default     = []
+variable "ssh_key_pub" {
+  description = "Root SSH pub key to deploy on the bastion"
+  type        = "string"
 }
 
-variable "custom_tags" {
-  description = "Custom map of tags to apply on every resources"
-  type        = "map"
-  default     = {}
+variable "delete_os_disk_on_termination" {
+  description = "Enable delete disk on termination"
+  type        = "string"
+  default     = "true"
+}
+
+variable "storage_image_publisher" {
+  description = "Specifies the publisher of the image used to create the virtual machine"
+  type        = "string"
+  default     = "Canonical"
+}
+
+variable "storage_image_offer" {
+  description = "Specifies the offer of the image used to create the virtual machine"
+  type        = "string"
+  default     = "UbuntuServer"
+}
+
+variable "storage_image_sku" {
+  description = "Specifies the SKU of the image used to create the virtual machine"
+  type        = "string"
+  default     = "16.04-LTS"
+}
+
+variable "storage_os_disk_caching" {
+  description = "Specifies the caching requirements for the OS Disk"
+  type        = "string"
+  default     = "ReadWrite"
+}
+
+variable "storage_os_disk_create_option" {
+  description = "Specifies how the OS disk shoulb be created"
+  type        = "string"
+  default     = "FromImage"
+}
+
+variable "storage_os_disk_managed_disk_type" {
+  description = "Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS]"
+  type        = "string"
+  default     = "Standard_LRS"
+}
+
+variable "storage_os_disk_disk_size_gb" {
+  description = "Specifies the size of the OS Disk in gigabytes"
+  type        = "string"
 }

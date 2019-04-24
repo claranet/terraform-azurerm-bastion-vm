@@ -4,52 +4,82 @@ Workaround:
 
 - SSH Key file should be: `~/.ssh/keys/${var.client_name}_${var.environment}.pem` for now
 
-Terraform module declaration example for your bastion support stack with default values:
+Terraform module declaration example for your bastion support stack with all required modules:
+
 ```shell
-module "bastion" {
-  source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=xxx"
-  
-  client_name                  = "${var.client_name}"
-  azurerm_region               = "${var.azurerm_region}"
-  environment                  = "${var.environment}"
-  
-  support_resourcegroup_name   = "${var.support_resourcegroup_name}"
-  support_dns_zone_name        = "${var.support_dns_zone_name}"
-  
-  subnet_bastion_id            = "${var.subnet_bastion_id}"
-  
-  vm_size                      = "${var.vm_size}"
-  
-  # Put your SSK Public Key here
-  ssh_key_pub                  = "${file("./put_the_key_here.pub")}"
+module "azure-region" {
+    source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/regions.git?ref=vX.X.X"
+
+    azure_region = "${var.azure_region}"
 }
 
-```
+module "rg" {
+    source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/rg.git?ref=vX.X.X"
 
-Terraform module declaration example for your bastion support stack with custom values:
-```shell
+    location     = "${module.azure-region.location}"
+    client_name  = "${var.client_name}"
+    environment  = "${var.environment}"
+    stack        = "${var.stack}"
+}
+
+module "vnet" {
+    source              = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet.git?ref=xxx"
+    
+    environment         = "${var.environment}"
+    location            = "${module.azure-region.location}"
+    location-short      = "${module.azure-region.location-short}"
+    client_name         = "${var.client_name}"
+    stack               = "${var.stack}"
+    custom_vnet_name    = "${var.custom_vnet_name}"
+
+    resource_group_name     = "${module.rg.resource_group_name}"
+    vnet_cidr               = ["10.10.0.0/16"]
+}
+
+module "subnet" {
+    source              = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/subnet.git?ref=vX.X.X"
+
+    environment         = "${var.environment}"
+    location-short      = "${module.azure-region.location-short}" 
+    client_name         = "${var.client_name}"
+    stack               = "${var.stack}"
+    custom_subnet_name  = "${var.custom_subnet_name}"
+
+    resource_group_name     = "${module.rg.resource_group_name}"
+    virtual_network_name    = "${module.vnet.virtual_network_name}"
+    subnet_cidr             = "10.10.10.0/24"
+}
+
+module "nsg" {
+    source                      = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/nsg.git?ref=xxx"
+    client_name                 = "${var.client_name}"
+    environment                 = "${var.environment}"
+    stack                       = "${var.stack}"
+    resource_group_name         = "${module.rg.resource_group_name}"
+    location                    = "${module.azure-region.location}"
+    location_short              = "${module.azure-region.location_short}"
+    name                        = "${var.name}"
+}
+
 module "bastion" {
-  source = "git::ssh://git@bitbucket.org/morea/terraform.feature.azurerm.support.bastion.git?ref=xxx"
+  source = "git@git.fr.clara.net:claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=xxx"
   
-  client_name                  = "morea-demo"
-  azurerm_region               = "West Europe"
-  environment                  = "support"
-  
-  support_resourcegroup_name   = "${module.infra.support_resourcegroup_name}"
-  support_dns_zone_name        = "${module.infra.support_dns_zone_name}"
-  
-  subnet_bastion_id            = "${module.infra.subnets_support_id[0]}"
-  private_ip_bastion           = "10.10.10.10"
+  client_name                  = "${var.client_name}"
+  location                     = "${module.azure-region.location}"
+  location-short               = "${module.azure-region.location-short}"
+  environment                  = "${var.environment}"
+  stack                        = "${var.stack}"
+  resource_group_name          = "${module.rg.resource_group_name}"
+
+  network_security_group_id    = "${module.nsg.network_security_group_id}"
+  subnet_bastion_id            = "${module.subnet.subnet_id}"
   
   vm_size                      = "Standard_DS1_v2"
   
   # Put your SSK Public Key here
   ssh_key_pub                  = "${file("./put_the_key_here.pub")}"
-
-  custom_vm_name     = "${var.custom_vm_name}"
-  custom_vm_hostname = "${var.custom_vm_hostname}"
-  custom_disk_name   = "${var.custom_disk_name}"
-  custom_username    = "${var.custom_username}"
+  
+  support_dns_zone_name        = "${var.support_dns_zone_name}"
 }
 ```
 
@@ -57,33 +87,36 @@ module "bastion" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| azurerm_region |  | string | - | yes |
-| client_name |  | string | - | yes |
-| custom_admin_ips | Others administrator IPs to allow | list | `<list>` | no |
+| client_name | Client name/account used in naming | string | - | yes |
 | custom_disk_name | Bastion disk name as displayed in the console | string | `` | no |
-| custom_tags | Custom map of tags to apply on every resources | map | `<map>` | no |
 | custom_username | Default username to create on the bastion | string | `` | no |
 | custom_vm_hostname | Bastion hostname | string | `` | no |
 | custom_vm_name | VM Name as displayed on the console | string | `` | no |
-| environment |  | string | - | yes |
-| private_ip_bastion |  | string | `10.10.1.10` | no |
-| ssh_key_pub |  | string | - | yes |
-| subnet_bastion_id |  | string | - | yes |
-| support_dns_zone_name |  | string | - | yes |
-| support_resourcegroup_name |  | string | - | yes |
-| vm_size |  | string | - | yes |
-| zabbix_allowed_cidrs |  | list | `<list>` | no |
-| zabbix_omni_cidr |  | string | `31.3.142.1/32` | no |
-| zabbix_proxy |  | string | `true` | no |
-| zabbix_proxy_cidr |  | string | `` | no |
-| zabbix_use_allowed_cidrs |  | string | `0` | no |
+| delete_os_disk_on_termination | Enable delete disk on termination | string | `true` | no |
+| environment | Project environment | string | - | yes |
+| extra_tags | Custom map of tags to apply on every resources | map | `<map>` | no |
+| location | Azure region to use | string | - | yes |
+| location-short | Short string for Azure location | string | - | yes |
+| private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `` | no |
+| resource_group_name | Name of the resource group | string | - | yes |
+| ssh_key_pub | Root SSH pub key to deploy on the bastion | string | - | yes |
+| stack | Project stack name | string | - | yes |
+| storage_image_offer | Specifies the offer of the image used to create the virtual machine | string | `UbuntuServer` | no |
+| storage_image_publisher | Specifies the publisher of the image used to create the virtual machine | string | `Canonical` | no |
+| storage_image_sku | Specifies the SKU of the image used to create the virtual machine | string | `16.04-LTS` | no |
+| storage_os_disk_caching | Specifies the caching requirements for the OS Disk | string | `ReadWrite` | no |
+| storage_os_disk_create_option | Specifies how the OS disk shoulb be created | string | `FromImage` | no |
+| storage_os_disk_disk_size_gb | Specifies the size of the OS Disk in gigabytes | string | - | yes |
+| storage_os_disk_managed_disk_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `Standard_LRS` | no |
+| subnet_bastion_id | The bastion subnet id | string | - | yes |
+| vm_size | Bastion virtual machine size | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| bastion_network_interface_id |  |
-| bastion_network_private_ip |  |
-| bastion_network_public_ip |  |
-| record_bastion_name |  |
-| record_zabbix_name |  |
+| bastion_network_interface_id | Bastion network interface id |
+| bastion_network_interface_private_ip | Bastion private ip |
+| bastion_network_public_ip | Bastion public ip |
+| bastion_network_public_ip_id | Bastion public ip id |
+| bastion_virtual_machine_id | Bastion virtual machine id |
