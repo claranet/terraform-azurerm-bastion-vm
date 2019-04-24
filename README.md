@@ -7,7 +7,7 @@ Requirements:
 
 Terraform module declaration example for your bastion support stack with all required modules:
 
-```shell
+```hcl
 module "azure-region" {
     source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/regions.git?ref=vX.X.X"
 
@@ -33,8 +33,8 @@ module "vnet" {
     stack               = "${var.stack}"
     custom_vnet_name    = "${var.custom_vnet_name}"
 
-    resource_group_name     = "${module.rg.resource_group_name}"
-    vnet_cidr               = ["10.10.0.0/16"]
+    resource_group_name = "${module.rg.resource_group_name}"
+    vnet_cidr           = ["10.10.0.0/16"]
 }
 
 module "subnet" {
@@ -46,40 +46,41 @@ module "subnet" {
     stack               = "${var.stack}"
     custom_subnet_name  = "${var.custom_subnet_name}"
 
-    resource_group_name     = "${module.rg.resource_group_name}"
-    virtual_network_name    = "${module.vnet.virtual_network_name}"
-    subnet_cidr             = "10.10.10.0/24"
+    resource_group_name  = "${module.rg.resource_group_name}"
+    virtual_network_name = "${module.vnet.virtual_network_name}"
+    subnet_cidr          = ["10.10.10.0/24"]
 }
 
 module "nsg" {
-    source                      = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/nsg.git?ref=xxx"
-    client_name                 = "${var.client_name}"
-    environment                 = "${var.environment}"
-    stack                       = "${var.stack}"
-    resource_group_name         = "${module.rg.resource_group_name}"
-    location                    = "${module.azure-region.location}"
-    location_short              = "${module.azure-region.location_short}"
-    name                        = "${var.name}"
+    source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/nsg.git?ref=vX.X.X"
+  
+    client_name         = "${var.client_name}"
+    environment         = "${var.environment}"
+    stack               = "${var.stack}"
+    resource_group_name = "${module.rg.resource_group_name}"
+    location            = "${module.azure-region.location}"
+    location_short      = "${module.azure-region.location-short}"
 }
 
 module "bastion" {
-  source = "git@git.fr.clara.net:claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=xxx"
-  
-  client_name                  = "${var.client_name}"
-  location                     = "${module.azure-region.location}"
-  location-short               = "${module.azure-region.location-short}"
-  environment                  = "${var.environment}"
-  stack                        = "${var.stack}"
-  name                         = "${var.name}"
-  resource_group_name          = "${module.rg.resource_group_name}"
+    source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=vX.X.X"
 
-  subnet_bastion_id            = "${module.subnet.subnet_id}"
-  
-  vm_size                      = "Standard_DS1_v2"
-  
-  # Put your SSK Public Key here
-  ssh_key_pub                  = "${file("./put_the_key_here.pub")}"
-  private_key_path 	       = "${var.private_key_path}"
+    client_name         = "${var.client_name}"
+    location            = "${module.azure-region.location}"
+    location-short      = "${module.azure-region.location-short}"
+    environment         = "${var.environment}"
+    stack               = "${var.stack}"
+    name                = "${var.name}"
+    resource_group_name = "${module.rg.resource_group_name}"
+
+    subnet_bastion_id = "${element(module.subnet.subnet_ids, 0)}"
+
+    vm_size                      = "Standard_DS1_v2"
+    storage_os_disk_disk_size_gb = "100"
+
+    # Put your SSH Public Key here
+    ssh_key_pub      = "${file("./put_the_key_here.pub")}"
+    private_key_path = "${var.private_key_path}"
 }
 ```
 
