@@ -1,0 +1,7 @@
+---
+- hosts: all
+  remote_user: claranet
+  become: yes
+  roles:
+    - role: claranet-cloud-image
+      tags: cloud-image

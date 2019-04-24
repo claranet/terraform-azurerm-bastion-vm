@@ -24,10 +24,9 @@ variable "client_name" {
   type        = "string"
 }
 
-variable "extra_tags" {
-  description = "Custom map of tags to apply on every resources"
-  type        = "map"
-  default     = {}
+variable "name" {
+  description = "Name used for resource naming"
+  type        = "string"
 }
 
 # Azure Network Interface
@@ -41,6 +40,12 @@ variable "private_ip_bastion" {
   description = "Allows to define the private ip to associate with the bastion"
   type        = "string"
   default     = ""
+}
+
+variable "pubip_extra_tags" {
+  description = "Custom map of tags to apply on public ip resource"
+  type        = "map"
+  default     = {}
 }
 
 # Azure Virtual Machine
@@ -78,6 +83,11 @@ variable "ssh_key_pub" {
   type        = "string"
 }
 
+variable "private_key_path" {
+  description = "Root SSH private key path"
+  type        = "string"
+}
+
 variable "delete_os_disk_on_termination" {
   description = "Enable delete disk on termination"
   type        = "string"
@@ -99,7 +109,7 @@ variable "storage_image_offer" {
 variable "storage_image_sku" {
   description = "Specifies the SKU of the image used to create the virtual machine"
   type        = "string"
-  default     = "16.04-LTS"
+  default     = "18.04-LTS"
 }
 
 variable "storage_os_disk_caching" {
@@ -123,4 +133,16 @@ variable "storage_os_disk_managed_disk_type" {
 variable "storage_os_disk_disk_size_gb" {
   description = "Specifies the size of the OS Disk in gigabytes"
   type        = "string"
+}
+
+variable "bastion_extra_tags" {
+  description = "Custom map of tags to apply on bastion resource"
+  type        = "map"
+  default     = {}
+}
+
+variable "ani_extra_tags" {
+  description = "Custom map of tags to apply on network interface resource"
+  type        = "map"
+  default     = {}
 }

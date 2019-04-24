@@ -1,30 +1,30 @@
 resource "azurerm_public_ip" "bastion" {
-  name                         = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-pubip"
+  name                         = "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-pubip"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group_name}"
   public_ip_address_allocation = "static"
 
-  tags = "${merge(local.bastion_tags, var.extra_tags)}"
+  tags = "${merge(local.bastion_tags, var.pubip_extra_tags)}"
 }
 
 resource "azurerm_network_interface" "bastion" {
-  name                = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-nic"
+  name                = "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-nic"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
 
   ip_configuration {
-    name                          = "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-ipconfig"
+    name                          = "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-ipconfig"
     subnet_id                     = "${var.subnet_bastion_id}"
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.private_ip_bastion}"
     public_ip_address_id          = "${azurerm_public_ip.bastion.id}"
   }
 
-  tags = "${merge(local.bastion_tags, var.extra_tags)}"
+  tags = "${merge(local.bastion_tags, var.ani_extra_tags)}"
 }
 
 resource "azurerm_virtual_machine" "bastion_instance" {
-  name                  = "${coalesce(var.custom_vm_name, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-vm")}"
+  name                  = "${coalesce(var.custom_vm_name, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-vm")}"
   location              = "${var.location}"
   resource_group_name   = "${var.resource_group_name}"
   network_interface_ids = ["${azurerm_network_interface.bastion.id}"]
@@ -40,7 +40,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   storage_os_disk {
-    name              = "${coalesce(var.custom_disk_name, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osdisk")}"
+    name              = "${coalesce(var.custom_disk_name, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osdisk")}"
     caching           = "${var.storage_os_disk_caching}"
     create_option     = "${var.storage_os_disk_create_option}"
     managed_disk_type = "${var.storage_os_disk_managed_disk_type}"
@@ -48,7 +48,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   os_profile {
-    computer_name  = "${coalesce(var.custom_vm_hostname, "${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osprofile")}"
+    computer_name  = "${coalesce(var.custom_vm_hostname, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}")}"
     admin_username = "${coalesce(var.custom_username, "claranet")}"
     admin_password = "Password1234!"
   }
@@ -62,56 +62,34 @@ resource "azurerm_virtual_machine" "bastion_instance" {
     }
   }
 
-  tags = "${merge(local.bastion_tags, var.extra_tags)}"
+  tags = "${merge(local.bastion_tags, var.bastion_extra_tags)}"
+}
 
-  connection {
-    user        = "claranet"
-    private_key = "${file("~/.ssh/keys/${var.client_name}_${var.environment}.pem")}"
-    host        = "${azurerm_public_ip.bastion.ip_address}"
+data "template_file" "ansible_inventory" {
+  template = "${file("${path.module}/playbook-ansible/host_ini.tpl")}"
+
+  vars {
+    vm_fullname = "${azurerm_virtual_machine.bastion_instance.name}"
+    vm_ip       = "${azurerm_public_ip.bastion.ip_address}"
+    vm_user     = "claranet"
+  }
+}
+
+resource "local_file" "rendered_ansible_inventory" {
+  content  = "${data.template_file.ansible_inventory.rendered}"
+  filename = "${path.module}/playbook-ansible/host.ini"
+}
+
+resource "null_resource" "ansible_bootstrap_vm" {
+  depends_on = ["azurerm_virtual_machine.bastion_instance"]
+
+  triggers {
+    uuid = "${azurerm_virtual_machine.bastion_instance.id}"
   }
 
   provisioner "local-exec" {
-    command = "bash ${path.module}/files/prepare-formula.sh"
-  }
+    command = "ansible-galaxy install -r requirements.yml && ansible-playbook --private-key=${var.private_key_path} main.yml -e hostname=${azurerm_virtual_machine.bastion_instance.name}-${replace(azurerm_public_ip.bastion.ip_address, ".", "-")}"
 
-  provisioner "file" {
-    source      = "/tmp/bastion-formula"
-    destination = "/tmp/"
-  }
-
-  provisioner "file" {
-    source      = "/tmp/morea-tools"
-    destination = "/tmp/"
-  }
-
-  provisioner "file" {
-    content     = "${data.template_file.top-pillar.rendered}"
-    destination = "/tmp/bastion-formula/pillar/top.sls"
-  }
-
-  provisioner "file" {
-    content     = "${data.template_file.pillar.rendered}"
-    destination = "/tmp/bastion-formula/pillar/bastion.sls"
-  }
-
-  provisioner "file" {
-    content     = "${data.template_file.top-salt.rendered}"
-    destination = "/tmp/bastion-formula/salt/top.sls"
-  }
-
-  provisioner "remote-exec" {
-    script = "${path.module}/files/configure-bastion.sh"
-  }
-
-  provisioner "file" {
-    source      = "${var.custom_vm_hostname == "" ? "${path.module}/files/set_hostname.sh" : "${path.module}/files/empty_script.sh" }"
-    destination = "/tmp/set_hostname_bastion.sh"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/set_hostname_bastion.sh",
-      "NAME=${var.client_name}-bastion IP=${azurerm_network_interface.bastion.private_ip_address} /tmp/set_hostname_bastion.sh",
-    ]
+    working_dir = "${path.module}/playbook-ansible"
   }
 }
