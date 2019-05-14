@@ -1,9 +1,13 @@
-# Azure Support Bastion module #
+# Azure Support Bastion module
 
-Requirements:
+This module creates a virtual machine to be used as a bastion instance for Claranet.
+
+## Requirements
 
 - SSH Key file should be generated: `~/.ssh/keys/${var.client_name}_${var.environment}.pem`
 - Ansible version >= 2.5
+
+## Usage
 
 Terraform module declaration example for your bastion support stack with all required modules:
 

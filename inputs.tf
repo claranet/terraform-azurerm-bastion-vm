@@ -7,7 +7,7 @@ variable "location" {
   description = "Azure region to use"
 }
 
-variable "location-short" {
+variable "location_short" {
   description = "Short string for Azure location"
 }
 
@@ -130,7 +130,7 @@ variable "storage_os_disk_managed_disk_type" {
   default     = "Standard_LRS"
 }
 
-variable "storage_os_disk_disk_size_gb" {
+variable "storage_os_disk_size_gb" {
   description = "Specifies the size of the OS Disk in gigabytes"
   type        = "string"
 }
