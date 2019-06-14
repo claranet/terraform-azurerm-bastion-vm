@@ -22,3 +22,8 @@ output "bastion_virtual_machine_id" {
   description = "Bastion virtual machine id"
   value       = "${azurerm_virtual_machine.bastion_instance.id}"
 }
+
+output "bastion_virtual_machine_name" {
+  description = "Bastion virtual machine name"
+  value       = "${azurerm_virtual_machine.bastion_instance.name}"
+}

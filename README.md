@@ -128,3 +128,5 @@ module "bastion" {
 | bastion\_network\_public\_ip | Bastion public ip |
 | bastion\_network\_public\_ip\_id | Bastion public ip id |
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
+| bastion\_virtual\_machine\_name | Bastion virtual machine name |
+
