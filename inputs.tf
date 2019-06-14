@@ -24,11 +24,6 @@ variable "client_name" {
   type        = "string"
 }
 
-variable "name" {
-  description = "Name used for resource naming"
-  type        = "string"
-}
-
 # Azure Network Interface
 
 variable "subnet_bastion_id" {

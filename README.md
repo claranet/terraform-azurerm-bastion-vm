@@ -102,8 +102,7 @@ module "bastion" {
 | delete\_os\_disk\_on\_termination | Enable delete disk on termination | string | `"true"` | no |
 | environment | Project environment | string | n/a | yes |
 | location | Azure region to use | string | n/a | yes |
-| location-short | Short string for Azure location | string | n/a | yes |
-| name | Name used for resource naming | string | n/a | yes |
+| location\_short | Short string for Azure location | string | n/a | yes |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `""` | no |
 | private\_key\_path | Root SSH private key path | string | n/a | yes |
 | pubip\_extra\_tags | Custom map of tags to apply on public ip resource | map | `<map>` | no |
@@ -115,8 +114,8 @@ module "bastion" {
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | string | `"18.04-LTS"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | string | `"ReadWrite"` | no |
 | storage\_os\_disk\_create\_option | Specifies how the OS disk shoulb be created | string | `"FromImage"` | no |
-| storage\_os\_disk\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | string | n/a | yes |
 | storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `"Standard_LRS"` | no |
+| storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | string | n/a | yes |
 | subnet\_bastion\_id | The bastion subnet id | string | n/a | yes |
 | vm\_size | Bastion virtual machine size | string | n/a | yes |
 
@@ -124,8 +123,8 @@ module "bastion" {
 
 | Name | Description |
 |------|-------------|
-| bastion_network_interface_id | Bastion network interface id |
-| bastion_network_interface_private_ip | Bastion private ip |
-| bastion_network_public_ip | Bastion public ip |
-| bastion_network_public_ip_id | Bastion public ip id |
-| bastion_virtual_machine_id | Bastion virtual machine id |
+| bastion\_network\_interface\_id | Bastion network interface id |
+| bastion\_network\_interface\_private\_ip | Bastion private ip |
+| bastion\_network\_public\_ip | Bastion public ip |
+| bastion\_network\_public\_ip\_id | Bastion public ip id |
+| bastion\_virtual\_machine\_id | Bastion virtual machine id |
