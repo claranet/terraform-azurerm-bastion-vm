@@ -50,7 +50,6 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   os_profile {
     computer_name  = "${coalesce(var.custom_vm_hostname, "${local.default_basename}")}"
     admin_username = "${coalesce(var.custom_username, "claranet")}"
-    admin_password = "Password1234!"
   }
 
   os_profile_linux_config {
