@@ -1,10 +1,10 @@
 # Azure Support Bastion module
 
-This module creates a virtual machine to be used as a bastion instance for Claranet.
+This module creates a virtual machine to be used as a bastion/jump-host instance for Claranet.
 
 ## Requirements
 
-- SSH Key file should be generated: `~/.ssh/keys/${var.client_name}_${var.environment}.pem`
+- SSH key files should be generated: `~/.ssh/keys/${var.client_name}_${var.environment}.[pem,pub]`
 - Ansible version >= 2.5
 
 ## Usage
@@ -103,6 +103,7 @@ module "bastion" {
 | environment | Project environment | string | n/a | yes |
 | location | Azure region to use | string | n/a | yes |
 | location\_short | Short string for Azure location | string | n/a | yes |
+| name\_prefix | Optional prefix for subnet names | string | `""` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `""` | no |
 | private\_key\_path | Root SSH private key path | string | n/a | yes |
 | pubip\_extra\_tags | Custom map of tags to apply on public ip resource | map | `<map>` | no |
@@ -130,3 +131,6 @@ module "bastion" {
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
 
+## Related documentation
+
+Azure remote management security documentation: [https://docs.microsoft.com/en-us/azure/security/azure-security-management]

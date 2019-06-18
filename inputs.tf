@@ -24,6 +24,12 @@ variable "client_name" {
   type        = "string"
 }
 
+variable "name_prefix" {
+  description = "Optional prefix for subnet names"
+  type        = "string"
+  default     = ""
+}
+
 # Azure Network Interface
 
 variable "subnet_bastion_id" {
