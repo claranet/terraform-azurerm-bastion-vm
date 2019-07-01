@@ -1,4 +1,4 @@
-# Unreleased
+# v0.2.0 - 2019-07-01
 
 Changed
   * AZ-49: Normalize variables and files, also fix minor issues
