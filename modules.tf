@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "bastion" {
-  name                         = "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-pubip"
+  name                         = "${local.default_basename}-pubip"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group_name}"
   public_ip_address_allocation = "static"
@@ -8,12 +8,12 @@ resource "azurerm_public_ip" "bastion" {
 }
 
 resource "azurerm_network_interface" "bastion" {
-  name                = "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-nic"
+  name                = "${local.default_basename}-nic"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
 
   ip_configuration {
-    name                          = "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-ipconfig"
+    name                          = "${local.default_basename}-ipconfig"
     subnet_id                     = "${var.subnet_bastion_id}"
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.private_ip_bastion}"
@@ -24,7 +24,7 @@ resource "azurerm_network_interface" "bastion" {
 }
 
 resource "azurerm_virtual_machine" "bastion_instance" {
-  name                  = "${coalesce(var.custom_vm_name, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-vm")}"
+  name                  = "${coalesce(var.custom_vm_name, "${local.default_basename}-vm")}"
   location              = "${var.location}"
   resource_group_name   = "${var.resource_group_name}"
   network_interface_ids = ["${azurerm_network_interface.bastion.id}"]
@@ -40,17 +40,16 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   storage_os_disk {
-    name              = "${coalesce(var.custom_disk_name, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}-osdisk")}"
+    name              = "${coalesce(var.custom_disk_name, "${local.default_basename}-osdisk")}"
     caching           = "${var.storage_os_disk_caching}"
     create_option     = "${var.storage_os_disk_create_option}"
     managed_disk_type = "${var.storage_os_disk_managed_disk_type}"
-    disk_size_gb      = "${var.storage_os_disk_disk_size_gb}"
+    disk_size_gb      = "${var.storage_os_disk_size_gb}"
   }
 
   os_profile {
-    computer_name  = "${coalesce(var.custom_vm_hostname, "${var.name}-${var.stack}-${var.client_name}-${var.location-short}-${var.environment}")}"
+    computer_name  = "${coalesce(var.custom_vm_hostname, "${local.default_basename}")}"
     admin_username = "${coalesce(var.custom_username, "claranet")}"
-    admin_password = "Password1234!"
   }
 
   os_profile_linux_config {
@@ -88,7 +87,7 @@ resource "null_resource" "ansible_bootstrap_vm" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-galaxy install -r requirements.yml && ansible-playbook --private-key=${var.private_key_path} main.yml -e hostname=${azurerm_virtual_machine.bastion_instance.name}-${replace(azurerm_public_ip.bastion.ip_address, ".", "-")}"
+    command = "ansible-galaxy install -r requirements.yml && ansible-playbook --private-key=${var.private_key_path} main.yml -e ansible_cloud_provider=azure -e hostname=${azurerm_virtual_machine.bastion_instance.name}-${replace(azurerm_public_ip.bastion.ip_address, ".", "-")}"
 
     working_dir = "${path.module}/playbook-ansible"
   }

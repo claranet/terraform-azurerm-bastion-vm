@@ -7,7 +7,7 @@ variable "location" {
   description = "Azure region to use"
 }
 
-variable "location-short" {
+variable "location_short" {
   description = "Short string for Azure location"
 }
 
@@ -24,9 +24,10 @@ variable "client_name" {
   type        = "string"
 }
 
-variable "name" {
-  description = "Name used for resource naming"
+variable "name_prefix" {
+  description = "Optional prefix for subnet names"
   type        = "string"
+  default     = ""
 }
 
 # Azure Network Interface
@@ -130,7 +131,7 @@ variable "storage_os_disk_managed_disk_type" {
   default     = "Standard_LRS"
 }
 
-variable "storage_os_disk_disk_size_gb" {
+variable "storage_os_disk_size_gb" {
   description = "Specifies the size of the OS Disk in gigabytes"
   type        = "string"
 }
