@@ -7,6 +7,8 @@ This module creates a virtual machine to be used as a bastion/jump-host instance
 - SSH key files should be generated: `~/.ssh/keys/${var.client_name}_${var.environment}.[pem,pub]`
 - Ansible version >= 2.5
 
+## Terraform version compatibility
+
 | Module version | Terraform version |
 |----------------|-------------------|
 | >= 2.x.x       | 0.12.x            |
@@ -48,14 +50,14 @@ module "azure-network-vnet" {
 module "azure-network-subnet" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/subnet.git?ref=vX.X.X"
 
-  environment		= "${var.environment}"
-  location_short	= "${module.azure-region.location_short}"
-  client_name		= "${var.client_name}"
-  stack			= "${var.stack}"
-  custom_subnet_names	= "${var.custom_subnet_names}"
+  environment		    = var.environment
+  location_short	    = module.azure-region.location_short
+  client_name		    = var.client_name
+  stack			        = var.stack
+  custom_subnet_names	= var.custom_subnet_names
 
-  resource_group_name  = "${module.rg.resource_group_name}"
-  virtual_network_name = "${module.vnet.virtual_network_name}"
+  resource_group_name  = module.rg.resource_group_name
+  virtual_network_name = module.vnet.virtual_network_name
   subnet_cidr_list     = ["10.10.10.0/24"]
 }
 
