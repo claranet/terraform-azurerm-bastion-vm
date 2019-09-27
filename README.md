@@ -19,7 +19,7 @@ This module creates a virtual machine to be used as a bastion/jump-host instance
 Terraform module declaration example for your bastion support stack with all required modules:
 
 ```hcl
-module "az-region" {
+module "azure-region" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/regions.git?ref=vX.X.X"
 
   azure_region = var.azure_region
@@ -28,7 +28,7 @@ module "az-region" {
 module "rg" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/rg.git?ref=vX.X.X"
 
-  location    = module.az-region.location
+  location    = module.azure-region.location
   client_name = var.client_name
   environment = var.environment
   stack       = var.stack
@@ -69,8 +69,8 @@ module "network-security-group" {
     environment         = var.environment
     stack               = var.stack
     resource_group_name = module.rg.resource_group_name
-    location            = module.az-region.location
-    location_short      = module.az-region.location_short
+    location            = module.azure-region.location
+    location_short      = module.azure-region.location_short
 
     # You can set either a prefix for generated name or a custom one for the resource naming
     custom_name = var.security_group_name
@@ -81,7 +81,7 @@ module "bastion" {
 
     client_name         = var.client_name
     location            = module.azure-region.location
-    location-short      = module.azure-region.location-short
+    location-short      = module.azure-region.location_short
     environment         = var.environment
     stack               = var.stack
     name                = var.name
