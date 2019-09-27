@@ -113,7 +113,7 @@ module "bastion" {
 | environment | Project environment | string | n/a | yes |
 | location | Azure region to use | string | n/a | yes |
 | location\_short | Short string for Azure location | string | n/a | yes |
-| name\_prefix | Optional prefix for subnet names | string | `""` | no |
+| name\_prefix | Optional prefix for subnet names | string | `"bastion-"` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `""` | no |
 | private\_key\_path | Root SSH private key path | string | n/a | yes |
 | pubip\_extra\_tags | Custom map of tags to apply on public ip resource | map(string) | `<map>` | no |
