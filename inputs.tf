@@ -32,7 +32,7 @@ variable "client_name" {
 variable "name_prefix" {
   description = "Optional prefix for subnet names"
   type        = string
-  default     = ""
+  default     = "bastion-"
 }
 
 # Azure Network Interface
