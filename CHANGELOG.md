@@ -1,4 +1,4 @@
-# v2.0.1 - Unreleased
+# v2.0.1 - 2019-12-30
 
 Changed
   * AZ-164: Fix warning from public IP allocation method
