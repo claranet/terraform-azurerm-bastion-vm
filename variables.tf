@@ -141,19 +141,19 @@ variable "storage_os_disk_size_gb" {
 }
 
 variable "bastion_extra_tags" {
-  description = "Custom map of tags to apply on bastion resource"
+  description = "Additional tags to associate with your bastion instance."
   type        = map(string)
   default     = {}
 }
 
 variable "ani_extra_tags" {
-  description = "Custom map of tags to apply on network interface resource"
+  description = "Additional tags to associate with your network interface."
   type        = map(string)
   default     = {}
 }
 
 variable "pubip_extra_tags" {
-  description = "Custom map of tags to apply on public ip resource"
+  description = "Additional tags to associate with your public ip."
   type        = map(string)
   default     = {}
 }
