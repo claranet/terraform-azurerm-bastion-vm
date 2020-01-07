@@ -52,3 +52,8 @@ output "bastion_storage_os_disk" {
   description = "Bastion storage OS disk object"
   value       = azurerm_virtual_machine.bastion_instance.storage_os_disk
 }
+
+output "bastion_public_domain_name_label" {
+  description = "Bastion public DNS"
+  value       = azurerm_public_ip.bastion.domain_name_label
+}

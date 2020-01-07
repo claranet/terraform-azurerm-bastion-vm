@@ -3,6 +3,7 @@ resource "azurerm_public_ip" "bastion" {
   location            = var.location
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
+  domain_name_label   = local.hostname
 
   tags = merge(local.bastion_tags, var.pubip_extra_tags)
 }
