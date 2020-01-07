@@ -28,3 +28,27 @@ output "bastion_virtual_machine_name" {
   value       = azurerm_virtual_machine.bastion_instance.name
 }
 
+output "bastion_username" {
+  description = "Username of the admin user"
+  value       = var.admin_username
+}
+
+output "bastion_virtual_machine_size" {
+  description = "Bastion Virtual Machine size"
+  value       = azurerm_virtual_machine.bastion_instance.vm_size
+}
+
+output "bastion_hostname" {
+  description = "Bastion hostname"
+  value       = local.hostname
+}
+
+output "bastion_storage_image_reference" {
+  description = "Bastion storage image reference object"
+  value       = azurerm_virtual_machine.bastion_instance.storage_image_reference
+}
+
+output "bastion_storage_os_disk" {
+  description = "Bastion storage OS disk object"
+  value       = azurerm_virtual_machine.bastion_instance.storage_os_disk
+}

@@ -4,8 +4,8 @@ This module creates a virtual machine to be used as a bastion/jump-host instance
 
 ## Requirements
 
-- SSH key files should be generated: `~/.ssh/keys/${var.client_name}_${var.environment}.[pem,pub]`
-- Ansible version >= 2.5
+* [AzureRM Terraform provider](https://www.terraform.io/docs/providers/azurerm/) >= 1.32
+* [Ansible](https://github.com/ansible/ansible/) >= 2.5
 
 ## Terraform version compatibility
 
@@ -102,18 +102,18 @@ module "bastion" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| admin\_username | Name of the admin user | string | `"claranet"` | no |
 | ani\_extra\_tags | Custom map of tags to apply on network interface resource | map(string) | `{}` | no |
 | bastion\_extra\_tags | Custom map of tags to apply on bastion resource | map(string) | `{}` | no |
 | client\_name | Client name/account used in naming | string | n/a | yes |
 | custom\_disk\_name | Bastion disk name as displayed in the console | string | `""` | no |
-| custom\_username | Default username to create on the bastion | string | `""` | no |
 | custom\_vm\_hostname | Bastion hostname | string | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | string | `""` | no |
-| delete\_os\_disk\_on\_termination | Enable delete disk on termination | string | `"true"` | no |
+| delete\_os\_disk\_on\_termination | Enable delete disk on termination | bool | `"true"` | no |
 | environment | Project environment | string | n/a | yes |
 | location | Azure location. | string | n/a | yes |
 | location\_short | Short string for Azure location. | string | n/a | yes |
-| name\_prefix | Optional prefix for subnet names | string | `"bastion-"` | no |
+| name\_prefix | Optional prefix for resources naming | string | `"bastion-"` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `""` | no |
 | private\_key\_path | Root SSH private key path | string | n/a | yes |
 | pubip\_extra\_tags | Custom map of tags to apply on public ip resource | map(string) | `{}` | no |
@@ -123,9 +123,10 @@ module "bastion" {
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | string | `"UbuntuServer"` | no |
 | storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | string | `"Canonical"` | no |
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | string | `"18.04-LTS"` | no |
+| storage\_image\_version | Specifies the version of the image used to create the virtual machine | string | `"latest"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | string | `"ReadWrite"` | no |
 | storage\_os\_disk\_create\_option | Specifies how the OS disk shoulb be created | string | `"FromImage"` | no |
-| storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | string | `"Standard_LRS"` | no |
+| storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `"Standard_LRS"` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | string | n/a | yes |
 | subnet\_bastion\_id | The bastion subnet id | string | n/a | yes |
 | vm\_size | Bastion virtual machine size | string | n/a | yes |
@@ -134,13 +135,18 @@ module "bastion" {
 
 | Name | Description |
 |------|-------------|
+| bastion\_hostname | Bastion hostname |
 | bastion\_network\_interface\_id | Bastion network interface id |
 | bastion\_network\_interface\_private\_ip | Bastion private ip |
 | bastion\_network\_public\_ip | Bastion public ip |
 | bastion\_network\_public\_ip\_id | Bastion public ip id |
+| bastion\_storage\_image\_reference | Bastion storage image reference object |
+| bastion\_storage\_os\_disk | Bastion storage OS disk object |
+| bastion\_username | Username of the admin user |
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
+| bastion\_virtual\_machine\_size | Bastion Virtual Machine size |
 
 ## Related documentation
 
-Azure remote management security documentation: [https://docs.microsoft.com/en-us/azure/security/azure-security-management]
+Azure remote management security documentation: [docs.microsoft.com/en-us/azure/security/azure-security-management](https://docs.microsoft.com/en-us/azure/security/azure-security-management)

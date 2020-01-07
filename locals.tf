@@ -3,6 +3,8 @@ locals {
 
   default_basename = "${local.name_prefix}${var.stack}-${var.client_name}-${var.location_short}-${var.environment}"
 
+  hostname = coalesce(var.custom_vm_hostname, local.default_basename)
+
   bastion_tags = {
     env    = var.environment
     stack  = var.stack

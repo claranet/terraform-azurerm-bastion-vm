@@ -30,13 +30,12 @@ variable "client_name" {
 }
 
 variable "name_prefix" {
-  description = "Optional prefix for subnet names"
+  description = "Optional prefix for resources naming"
   type        = string
   default     = "bastion-"
 }
 
 # Azure Network Interface
-
 variable "subnet_bastion_id" {
   description = "The bastion subnet id"
   type        = string
@@ -46,12 +45,6 @@ variable "private_ip_bastion" {
   description = "Allows to define the private ip to associate with the bastion"
   type        = string
   default     = ""
-}
-
-variable "pubip_extra_tags" {
-  description = "Custom map of tags to apply on public ip resource"
-  type        = map(string)
-  default     = {}
 }
 
 # Azure Virtual Machine
@@ -78,10 +71,10 @@ variable "custom_disk_name" {
   default     = ""
 }
 
-variable "custom_username" {
-  description = "Default username to create on the bastion"
+variable "admin_username" {
+  description = "Name of the admin user"
   type        = string
-  default     = ""
+  default     = "claranet"
 }
 
 variable "ssh_key_pub" {
@@ -96,8 +89,8 @@ variable "private_key_path" {
 
 variable "delete_os_disk_on_termination" {
   description = "Enable delete disk on termination"
-  type        = string
-  default     = "true"
+  type        = bool
+  default     = true
 }
 
 variable "storage_image_publisher" {
@@ -116,6 +109,12 @@ variable "storage_image_sku" {
   description = "Specifies the SKU of the image used to create the virtual machine"
   type        = string
   default     = "18.04-LTS"
+}
+
+variable "storage_image_version" {
+  description = "Specifies the version of the image used to create the virtual machine"
+  type        = string
+  default     = "latest"
 }
 
 variable "storage_os_disk_caching" {
@@ -153,3 +152,8 @@ variable "ani_extra_tags" {
   default     = {}
 }
 
+variable "pubip_extra_tags" {
+  description = "Custom map of tags to apply on public ip resource"
+  type        = map(string)
+  default     = {}
+}

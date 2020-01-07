@@ -36,7 +36,7 @@ resource "azurerm_virtual_machine" "bastion_instance" {
     publisher = var.storage_image_publisher
     offer     = var.storage_image_offer
     sku       = var.storage_image_sku
-    version   = "latest"
+    version   = var.storage_image_version
   }
 
   storage_os_disk {
@@ -48,15 +48,15 @@ resource "azurerm_virtual_machine" "bastion_instance" {
   }
 
   os_profile {
-    computer_name  = coalesce(var.custom_vm_hostname, local.default_basename)
-    admin_username = coalesce(var.custom_username, "claranet")
+    computer_name  = local.hostname
+    admin_username = var.admin_username
   }
 
   os_profile_linux_config {
     disable_password_authentication = "true"
 
     ssh_keys {
-      path     = "/home/claranet/.ssh/authorized_keys"
+      path     = format("/home/%s/.ssh/authorized_keys", var.admin_username)
       key_data = var.ssh_key_pub
     }
   }
@@ -70,7 +70,7 @@ data "template_file" "ansible_inventory" {
   vars = {
     vm_fullname = azurerm_virtual_machine.bastion_instance.name
     vm_ip       = azurerm_public_ip.bastion.ip_address
-    vm_user     = "claranet"
+    vm_user     = var.admin_username
   }
 }
 
@@ -92,4 +92,3 @@ resource "null_resource" "ansible_bootstrap_vm" {
     working_dir = "${path.module}/playbook-ansible"
   }
 }
-

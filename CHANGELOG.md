@@ -1,3 +1,8 @@
+# Unreleased
+
+Changed
+  * AZ-168: Refactoring and fixes, also new outputs
+
 # v2.0.2 - 2020-01-27
 
 Changed
