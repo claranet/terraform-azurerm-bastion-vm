@@ -1,4 +1,4 @@
-# v2.0.2 - unreleased
+# v2.0.2 - 2020-01-27
 
 Changed
   * AN-77: Use Ansible cloud image role tag version
