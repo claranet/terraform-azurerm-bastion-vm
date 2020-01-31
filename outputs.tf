@@ -28,13 +28,13 @@ output "bastion_virtual_machine_name" {
   value       = azurerm_virtual_machine.bastion_instance.name
 }
 
-output "bastion_username" {
+output "bastion_admin_username" {
   description = "Username of the admin user"
   value       = var.admin_username
 }
 
 output "bastion_virtual_machine_size" {
-  description = "Bastion Virtual Machine size"
+  description = "Bastion virtual machine size"
   value       = azurerm_virtual_machine.bastion_instance.vm_size
 }
 
