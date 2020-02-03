@@ -91,6 +91,7 @@ module "bastion" {
 
     vm_size                 = "Standard_DS1_v2"
     storage_os_disk_size_gb = "100"
+    private_ip_bastion      = "10.10.10.10"
 
     # Put your SSH Public Key here
     ssh_key_pub      = file("./put_the_key_here.pub")
@@ -114,7 +115,7 @@ module "bastion" {
 | location | Azure location. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | name\_prefix | Optional prefix for resources naming | `string` | `"bastion-"` | no |
-| private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | `""` | no |
+| private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | n/a | yes |
 | private\_key\_path | Root SSH private key path | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
