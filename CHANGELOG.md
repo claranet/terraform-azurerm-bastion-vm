@@ -2,6 +2,9 @@
 
 Changed
   * AZ-168: Refactoring and fixes
+    - Add ansible galaxy `--force` option to fetch the right roles version
+    - Private IP is mandatory when set to static
+    - Revamp README usage example
 
 # v2.1.0 - 2020-01-31
 
