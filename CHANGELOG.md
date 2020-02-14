@@ -1,4 +1,4 @@
-# v2.1.1 - Unreleased
+# v2.1.1 - 2020-02-14
 
 Changed
   * AZ-168: Refactoring and fixes
