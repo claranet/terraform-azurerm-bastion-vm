@@ -44,7 +44,6 @@ variable "subnet_bastion_id" {
 variable "private_ip_bastion" {
   description = "Allows to define the private ip to associate with the bastion"
   type        = string
-  default     = ""
 }
 
 # Azure Virtual Machine

@@ -20,13 +20,15 @@ Terraform module declaration example for your bastion support stack with all req
 
 ```hcl
 module "azure-region" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/regions.git?ref=vX.X.X"
+  source  = "claranet/regions/azurerm"
+  version = "2.x.x"
 
   azure_region = var.azure_region
 }
 
 module "rg" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/rg.git?ref=vX.X.X"
+  source  = "claranet/rg/azurerm"
+  version = "2.x.x"
 
   location    = module.azure-region.location
   client_name = var.client_name
@@ -35,66 +37,71 @@ module "rg" {
 }
 
 module "azure-network-vnet" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet.git?ref=vX.X.X"
-    
-  environment      = var.environment
-  location         = module.azure-region.location
-  location_short   = module.azure-region.location_short
-  client_name      = var.client_name
-  stack            = var.stack
+  source  = "claranet/vnet/azurerm"
+  version = "2.x.x"
+
+  environment    = var.environment
+  location       = module.azure-region.location
+  location_short = module.azure-region.location_short
+  client_name    = var.client_name
+  stack          = var.stack
 
   resource_group_name = module.rg.resource_group_name
   vnet_cidr           = ["10.10.0.0/16"]
 }
 
 module "azure-network-subnet" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/subnet.git?ref=vX.X.X"
+  source  = "claranet/subnet/azurerm"
+  version = "2.x.x"
 
-  environment           = var.environment
-  location_short        = module.azure-region.location_short
-  client_name           = var.client_name
-  stack                 = var.stack
-  custom_subnet_names   = var.custom_subnet_names
+  environment         = var.environment
+  location_short      = module.azure-region.location_short
+  client_name         = var.client_name
+  stack               = var.stack
+  custom_subnet_names = keys(local.subnets)
 
   resource_group_name  = module.rg.resource_group_name
-  virtual_network_name = module.vnet.virtual_network_name
-  subnet_cidr_list     = ["10.10.10.0/24"]
+  virtual_network_name = module.azure-network-vnet.virtual_network_name
+  subnet_cidr_list     = values(local.subnets)
 }
 
-
 module "network-security-group" {
-    source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/nsg.git?ref=vX.X.X"
+  source  = "claranet/nsg/azurerm"
+  version = "2.x.x"
 
-    client_name         = var.client_name
-    environment         = var.environment
-    stack               = var.stack
-    resource_group_name = module.rg.resource_group_name
-    location            = module.azure-region.location
-    location_short      = module.azure-region.location_short
+  client_name         = var.client_name
+  environment         = var.environment
+  stack               = var.stack
+  resource_group_name = module.rg.resource_group_name
+  location            = module.azure-region.location
+  location_short      = module.azure-region.location_short
 
-    # You can set either a prefix for generated name or a custom one for the resource naming
-    custom_name = var.security_group_name
+  # You can set either a prefix for generated name or a custom one for the resource naming
+  custom_name = local.security_group_names[x]
 }
 
 module "bastion" {
-    source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=vX.X.X"
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=vX.X.X"
 
-    client_name         = var.client_name
-    location            = module.azure-region.location
-    location_short      = module.azure-region.location_short
-    environment         = var.environment
-    stack               = var.stack
-    name                = var.name
-    resource_group_name = module.rg.resource_group_name
+  client_name         = var.client_name
+  location            = module.azure-region.location
+  location_short      = module.azure-region.location_short
+  environment         = var.environment
+  stack               = var.stack
+  resource_group_name = module.rg.resource_group_name
 
-    subnet_bastion_id = element(module.subnet.subnet_ids, 0)
+  # Custom resource name
+  #custom_vm_name = local.bastion_name
 
-    vm_size                 = "Standard_DS1_v2"
-    storage_os_disk_size_gb = "100"
+  subnet_bastion_id = element(module.azure-network-subnet.subnet_ids, 0)
 
-    # Put your SSH Public Key here
-    ssh_key_pub      = file("./put_the_key_here.pub")
-    private_key_path = var.private_key_path
+  vm_size                 = "Standard_DS1_v2"
+  storage_os_disk_size_gb = "100"
+  private_ip_bastion      = "10.10.10.10"
+
+  # Put your SSH Public Key here
+  ssh_key_pub      = file("./put_the_key_path_here.pub")
+  private_key_path = var.private_key_path
 }
 ```
 
@@ -114,7 +121,7 @@ module "bastion" {
 | location | Azure location. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | name\_prefix | Optional prefix for resources naming | `string` | `"bastion-"` | no |
-| private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | `""` | no |
+| private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | n/a | yes |
 | private\_key\_path | Root SSH private key path | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
