@@ -35,7 +35,36 @@ variable "name_prefix" {
   default     = "bastion-"
 }
 
+# Azure Public IP
+
+variable "custom_publicip_name" {
+  description = "Name for the Public IP Address resource"
+  type        = string
+  default     = ""
+}
+
+# Azure Public IP
+
+variable "custom_pip_name" {
+  description = "Name for the Public IP Address resource"
+  type        = string
+  default     = ""
+}
+
 # Azure Network Interface
+
+variable "custom_nic_name" {
+  description = "Name for the Network Interface"
+  type        = string
+  default     = ""
+}
+
+variable "custom_ipconfig_name" {
+  description = "Name for the Network Interface ip configuration"
+  type        = string
+  default     = ""
+}
+
 variable "subnet_bastion_id" {
   description = "The bastion subnet id"
   type        = string

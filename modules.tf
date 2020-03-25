@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "bastion" {
-  name                = "${local.default_basename}-pubip"
+  name                = coalesce(var.custom_publicip_name, "${local.default_basename}-pubip")
   location            = var.location
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
@@ -9,19 +9,19 @@ resource "azurerm_public_ip" "bastion" {
 }
 
 resource "azurerm_network_interface" "bastion" {
-  name                = "${local.default_basename}-nic"
+  name                = coalesce(var.custom_nic_name, "${local.default_basename}-nic")
   location            = var.location
   resource_group_name = var.resource_group_name
 
   ip_configuration {
-    name                          = "${local.default_basename}-ipconfig"
+    name                          = coalesce(var.custom_ipconfig_name, "${local.default_basename}-ipconfig")
     subnet_id                     = var.subnet_bastion_id
     private_ip_address_allocation = "static"
     private_ip_address            = var.private_ip_bastion
     public_ip_address_id          = azurerm_public_ip.bastion.id
   }
 
-  tags = merge(local.bastion_tags, var.ani_extra_tags)
+  tags = merge(local.bastion_tags, var.pubip_extra_tags)
 }
 
 resource "azurerm_virtual_machine" "bastion_instance" {

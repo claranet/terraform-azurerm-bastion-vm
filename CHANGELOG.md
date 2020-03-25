@@ -1,3 +1,11 @@
+# v2.2.0 - Unreleased
+
+Added
+  * AZ-112: Add custom resources names
+    - Custom name for NIC
+    - Custom name for NIC Ipconfiguration
+    - Custom name for Public IP
+
 # v2.1.1 - 2020-02-14
 
 Changed
