@@ -9,10 +9,11 @@ This module creates a virtual machine to be used as a bastion/jump-host instance
 
 ## Terraform version compatibility
 
-| Module version | Terraform version |
-|----------------|-------------------|
-| >= 2.x.x       | 0.12.x            |
-| < 2.x.x        | 0.11.x            |
+| Module version    | Terraform version | AzureRM version |
+|-------------------|-------------------|-----------------|
+| >= 3.x.x          | 0.12.x            | >= 2.0          |
+| >= 2.x.x, < 3.x.x | 0.12.x            | <  2.0          |
+| <  2.x.x          | 0.11.x            | <  2.0          |
 
 ## Usage
 
@@ -114,6 +115,10 @@ module "bastion" {
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | custom\_disk\_name | Bastion disk name as displayed in the console | `string` | `""` | no |
+| custom\_ipconfig\_name | Name for the Network Interface ip configuration | `string` | `""` | no |
+| custom\_nic\_name | Name for the Network Interface | `string` | `""` | no |
+| custom\_pip\_name | Name for the Public IP Address resource | `string` | `""` | no |
+| custom\_publicip\_name | Name for the Public IP Address resource | `string` | `""` | no |
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
 | delete\_os\_disk\_on\_termination | Enable delete disk on termination | `bool` | `true` | no |
