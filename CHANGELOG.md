@@ -1,4 +1,4 @@
-# v2.2.0 - Unreleased
+# v2.2.0 - 2020-03-25
 
 Added
   * AZ-112: Add custom resources names
