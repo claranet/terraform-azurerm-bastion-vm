@@ -1,10 +1,10 @@
 # Azure Support Bastion module
+[![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-yellow.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![TF Registry](https://img.shields.io/badge/terraform-registry-blue.svg)](https://registry.terraform.io/modules/claranet/bastion-vm/azurerm/)
 
 This module creates a virtual machine to be used as a bastion/jump-host instance for Claranet.
 
 ## Requirements
 
-* [AzureRM Terraform provider](https://www.terraform.io/docs/providers/azurerm/) >= 1.32
 * [Ansible](https://github.com/ansible/ansible/) >= 2.5
 
 ## Terraform version compatibility
@@ -22,14 +22,14 @@ Terraform module declaration example for your bastion support stack with all req
 ```hcl
 module "azure-region" {
   source  = "claranet/regions/azurerm"
-  version = "2.x.x"
+  version = "x.x.x"
 
   azure_region = var.azure_region
 }
 
 module "rg" {
   source  = "claranet/rg/azurerm"
-  version = "2.x.x"
+  version = "x.x.x"
 
   location    = module.azure-region.location
   client_name = var.client_name
@@ -39,7 +39,7 @@ module "rg" {
 
 module "azure-network-vnet" {
   source  = "claranet/vnet/azurerm"
-  version = "2.x.x"
+  version = "x.x.x"
 
   environment    = var.environment
   location       = module.azure-region.location
@@ -53,7 +53,7 @@ module "azure-network-vnet" {
 
 module "azure-network-subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "2.x.x"
+  version = "x.x.x"
 
   environment         = var.environment
   location_short      = module.azure-region.location_short
@@ -109,7 +109,7 @@ module "bastion" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | admin\_username | Name of the admin user | `string` | `"claranet"` | no |
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |

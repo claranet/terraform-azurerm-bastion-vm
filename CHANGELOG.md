@@ -1,3 +1,9 @@
+# v2.x.x / v3.0.0 - Unreleased
+
+Changed
+  * AZ-209: Update CI with Gitlab template
+  * AZ-142: Adding LICENSE / CONTRIBUTING + update README
+
 # v2.2.0 - 2020-03-25
 
 Added
