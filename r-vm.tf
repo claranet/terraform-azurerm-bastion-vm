@@ -1,7 +1,7 @@
 module "bastion-vm" {
   #   source  = "claranet/linux-vm/azurerm"
   #   version = "x.x.x"
-  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=AZ-234_nic_nsg"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=AZ-189-azurerm-v2-0"
 
   location            = var.location
   location_short      = var.location_short
@@ -18,8 +18,8 @@ module "bastion-vm" {
   custom_ipconfig_name  = coalesce(var.custom_ipconfig_name, "${local.default_basename}-ipconfig")
   custom_dns_label      = local.hostname
 
-  diagnostics_storage_account_name      = module.run-common.logs_storage_account_name
-  diagnostics_storage_account_sas_token = lookup(module.run-common.logs_storage_account_sas_token, "sastoken")
+  diagnostics_storage_account_name      = var.diagnostics_storage_account_name
+  diagnostics_storage_account_sas_token = var.diagnostics_storage_account_sas_token
 
   vm_size     = var.vm_size
   custom_name = coalesce(var.custom_vm_name, "${local.default_basename}-vm")
@@ -36,15 +36,9 @@ module "bastion-vm" {
     version   = var.storage_image_version
   }
 
-  storage_os_disk_config = {
-    name              = coalesce(var.custom_disk_name, "${local.default_basename}-osdisk")
-    caching           = var.storage_os_disk_caching
-    create_option     = var.storage_os_disk_create_option
-    managed_disk_type = var.storage_os_disk_managed_disk_type
-    disk_size_gb      = var.storage_os_disk_size_gb
-  }
-
-  delete_os_disk_on_termination = var.delete_os_disk_on_termination
+  os_disk_caching = var.storage_os_disk_caching
+  os_disk_size_gb = var.storage_os_disk_size_gb
+  os_disk_type    = var.storage_os_disk_managed_disk_type
 
   extra_tags = merge(local.bastion_tags, var.bastion_extra_tags)
 }
