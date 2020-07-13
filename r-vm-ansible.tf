@@ -19,7 +19,7 @@ resource "null_resource" "ansible_bootstrap_vm" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-galaxy install -r requirements.yml --force && ansible-playbook --private-key=${var.private_key_path} main.yml -e ansible_cloud_provider=azure -e hostname=${module.bastion-vm.vm_name}-${replace(module.bastion-vm.vm_public_ip_address, ".", "-")}"
+    command = "ansible-galaxy install -r requirements.yml --force && ansible-playbook --private-key=${var.private_key_path} main.yml -e cloud_provider=azure -e hostname=${module.bastion-vm.vm_name}-${replace(module.bastion-vm.vm_public_ip_address, ".", "-")}"
 
     working_dir = "${path.module}/playbook-ansible"
   }
