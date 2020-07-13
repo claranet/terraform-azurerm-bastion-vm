@@ -1,3 +1,3 @@
 # Claranet tools
 - src: git+ssh://git@git.fr.clara.net/claranet/cloudnative/projects/ansible/roles/claranet-cloud-image.git
-  version: v0.1.0-az
+  version: v0.1.1-az
