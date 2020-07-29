@@ -1,7 +1,6 @@
 module "bastion-vm" {
-  #   source  = "claranet/linux-vm/azurerm"
-  #   version = "x.x.x"
-  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=AZ-189-azurerm-v2-0"
+  source  = "claranet/linux-vm/azurerm"
+  version = "3.0.0"
 
   location            = var.location
   location_short      = var.location_short

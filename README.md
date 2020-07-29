@@ -68,7 +68,7 @@ module "azure-network-subnet" {
 
 module "network-security-group" {
   source  = "claranet/nsg/azurerm"
-  version = "2.x.x"
+  version = "x.x.x"
 
   client_name         = var.client_name
   environment         = var.environment
