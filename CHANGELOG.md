@@ -1,4 +1,4 @@
-# v3.1.0 - unreleased
+# v3.1.0 - 2020-07-30
 
 Breaking
   * AZ-236: Use the generic `linux-vm` module (many resources name changes)
