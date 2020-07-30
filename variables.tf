@@ -115,12 +115,6 @@ variable "private_key_path" {
   type        = string
 }
 
-variable "delete_os_disk_on_termination" {
-  description = "Enable delete disk on termination"
-  type        = bool
-  default     = true
-}
-
 variable "storage_image_publisher" {
   description = "Specifies the publisher of the image used to create the virtual machine"
   type        = string
@@ -151,12 +145,6 @@ variable "storage_os_disk_caching" {
   default     = "ReadWrite"
 }
 
-variable "storage_os_disk_create_option" {
-  description = "Specifies how the OS disk shoulb be created"
-  type        = string
-  default     = "FromImage"
-}
-
 variable "storage_os_disk_managed_disk_type" {
   description = "Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS]"
   type        = string
@@ -184,4 +172,15 @@ variable "pubip_extra_tags" {
   description = "Additional tags to associate with your public ip."
   type        = map(string)
   default     = {}
+}
+
+# Diagnostics/Logs
+variable "diagnostics_storage_account_name" {
+  description = "Name of the Storage Account in which store vm diagnostics"
+  type        = string
+}
+
+variable "diagnostics_storage_account_sas_token" {
+  description = "SAS token of the Storage Account in which store vm diagnostics"
+  type        = string
 }
