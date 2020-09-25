@@ -78,7 +78,7 @@ module "network-security-group" {
   location_short      = module.azure-region.location_short
 
   # You can set either a prefix for generated name or a custom one for the resource naming
-  custom_name = local.security_group_names[x]
+  custom_network_security_group_names = [var.security_group_name]
 }
 
 module "bastion" {
