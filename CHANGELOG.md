@@ -1,3 +1,8 @@
+# v3.1.1 - 2020-09-25
+
+Changed
+  * AZ-301: Update of the 'network-security-group' module (custom_name handling)
+
 # v3.1.0 - 2020-07-30
 
 Breaking
