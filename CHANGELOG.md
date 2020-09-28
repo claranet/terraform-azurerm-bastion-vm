@@ -1,7 +1,7 @@
-# v3.1.1 - 2020-09-25
+# v3.1.1 - 2020-09-28
 
-Changed
-  * AZ-301: Update of the 'network-security-group' module (custom_name handling)
+Fixed
+  * AZ-301: README update of the 'network-security-group' module example (custom_name handling)
 
 # v3.1.0 - 2020-07-30
 
