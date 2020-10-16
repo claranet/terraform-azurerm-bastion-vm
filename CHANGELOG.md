@@ -7,6 +7,7 @@ Updated
 
 Fixed
   * AZ-321: Allow use of specific tags for public IP and Network Interface
+  * AZ-324: Allow use of os_disk_custom_name variable
 
 # v3.1.1 - 2020-09-28
 
