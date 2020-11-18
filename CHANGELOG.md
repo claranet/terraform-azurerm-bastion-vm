@@ -1,3 +1,8 @@
+# v3.2.0 - Unreleased
+
+Fixed
+  * AZ-321: Allow use of specific tags for public IP and Network Interface
+
 # v3.1.1 - 2020-09-28
 
 Fixed
