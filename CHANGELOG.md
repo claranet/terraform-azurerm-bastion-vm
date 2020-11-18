@@ -1,4 +1,4 @@
-# v3.2.0 - Unreleased
+# v3.1.2 - 2020-11-18
 
 Fixed
   * AZ-321: Allow use of specific tags for public IP and Network Interface
@@ -6,7 +6,7 @@ Fixed
 # v3.1.1 - 2020-09-28
 
 Fixed
-  * AZ-301: README update of the 'network-security-group' module example (custom_name handling)
+  * AZ-301: README update of the 'network-security-group' module example (`custom_name` handling)
 
 # v3.1.0 - 2020-07-30
 
