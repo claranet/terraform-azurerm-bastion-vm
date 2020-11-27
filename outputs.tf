@@ -47,3 +47,8 @@ output "bastion_hostname" {
   description = "Bastion hostname"
   value       = local.hostname
 }
+
+output "bastion_virtual_machine_identity" {
+  description = "System Identity assigned to Bastion virtual machine"
+  value       = module.bastion-vm.vm_identity
+}

@@ -2,9 +2,10 @@
 
 Updated
   * AZ-273: Module now compatible terraform `v0.13+`
+  * AZ-273: Bump `linux-vm` module to `v4.0.0` and output VM System assigned identity
 
 Fixed
-  * AZ-324: Allow use of `os_disk_custom_name` variable
+  * AZ-324: Allow use of `storage_os_disk_custom_name` variable
 
 # v3.1.2 - 2020-11-18
 

@@ -155,6 +155,7 @@ module "bastion" {
 | bastion\_network\_public\_ip\_id | Bastion public ip ID |
 | bastion\_public\_domain\_name\_label | Bastion public DNS |
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
+| bastion\_virtual\_machine\_identity | System Identity assigned to Bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
 
