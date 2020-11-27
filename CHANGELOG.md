@@ -4,7 +4,7 @@ Updated
   * AZ-273: Module now compatible terraform `v0.13+`
 
 Fixed
-  * AZ-324: Allow use of os_disk_custom_name variable
+  * AZ-324: Allow use of `os_disk_custom_name` variable
 
 # v3.1.2 - 2020-11-18
 

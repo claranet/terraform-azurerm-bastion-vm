@@ -114,7 +114,6 @@ module "bastion" {
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
-| custom\_disk\_name | Bastion disk name as displayed in the console | `string` | `""` | no |
 | custom\_ipconfig\_name | Name for the Network Interface ip configuration | `string` | `""` | no |
 | custom\_nic\_name | Name for the Network Interface | `string` | `""` | no |
 | custom\_pip\_name | Name for the Public IP Address resource | `string` | `""` | no |
@@ -138,6 +137,7 @@ module "bastion" {
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
 | storage\_image\_version | Specifies the version of the image used to create the virtual machine | `string` | `"latest"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
+| storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
 | storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | `string` | `"Standard_LRS"` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_bastion\_id | The bastion subnet id | `string` | n/a | yes |

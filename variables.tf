@@ -93,12 +93,6 @@ variable "custom_vm_hostname" {
   default     = ""
 }
 
-variable "custom_disk_name" {
-  description = "Bastion disk name as displayed in the console"
-  type        = string
-  default     = ""
-}
-
 variable "admin_username" {
   description = "Name of the admin user"
   type        = string
@@ -137,6 +131,12 @@ variable "storage_image_version" {
   description = "Specifies the version of the image used to create the virtual machine"
   type        = string
   default     = "latest"
+}
+
+variable "storage_os_disk_custom_name" {
+  description = "Bastion OS disk name as displayed in the console"
+  type        = string
+  default     = ""
 }
 
 variable "storage_os_disk_caching" {

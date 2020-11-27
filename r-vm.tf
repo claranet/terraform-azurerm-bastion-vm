@@ -36,7 +36,7 @@ module "bastion-vm" {
   }
 
   os_disk_caching     = var.storage_os_disk_caching
-  os_disk_custom_name = var.custom_disk_name
+  os_disk_custom_name = var.storage_os_disk_custom_name
   os_disk_size_gb     = var.storage_os_disk_size_gb
   os_disk_type        = var.storage_os_disk_managed_disk_type
 
