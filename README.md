@@ -2,18 +2,18 @@
 [![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-yellow.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![TF Registry](https://img.shields.io/badge/terraform-registry-blue.svg)](https://registry.terraform.io/modules/claranet/bastion-vm/azurerm/)
 
 This module creates a virtual machine to be used as a bastion/jump-host instance for Claranet.
-
 ## Requirements
 
 * [Ansible](https://github.com/ansible/ansible/) >= 2.5
 
-## Terraform version compatibility
+## Version compatibility
 
-| Module version    | Terraform version | AzureRM version |
-|-------------------|-------------------|-----------------|
-| >= 3.x.x          | 0.12.x            | >= 2.0          |
-| >= 2.x.x, < 3.x.x | 0.12.x            | <  2.0          |
-| <  2.x.x          | 0.11.x            | <  2.0          |
+| Module version | Terraform version | AzureRM version |
+|----------------|-------------------| --------------- |
+| >= 4.x.x       | 0.13.x            | >= 2.0          |
+| >= 3.x.x       | 0.12.x            | >= 2.0          |
+| >= 2.x.x       | 0.12.x            | < 2.0           |
+| <  2.x.x       | 0.11.x            | < 2.0           |
 
 ## Usage
 
@@ -114,7 +114,6 @@ module "bastion" {
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
-| custom\_disk\_name | Bastion disk name as displayed in the console | `string` | `""` | no |
 | custom\_ipconfig\_name | Name for the Network Interface ip configuration | `string` | `""` | no |
 | custom\_nic\_name | Name for the Network Interface | `string` | `""` | no |
 | custom\_pip\_name | Name for the Public IP Address resource | `string` | `""` | no |
@@ -138,6 +137,7 @@ module "bastion" {
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
 | storage\_image\_version | Specifies the version of the image used to create the virtual machine | `string` | `"latest"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
+| storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
 | storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | `string` | `"Standard_LRS"` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_bastion\_id | The bastion subnet id | `string` | n/a | yes |
@@ -155,6 +155,7 @@ module "bastion" {
 | bastion\_network\_public\_ip\_id | Bastion public ip ID |
 | bastion\_public\_domain\_name\_label | Bastion public DNS |
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
+| bastion\_virtual\_machine\_identity | System Identity assigned to Bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
 
