@@ -1,7 +1,7 @@
 locals {
   name_prefix = var.name_prefix != "" ? replace(var.name_prefix, "/[a-z0-9]$/", "$0-") : ""
 
-  default_basename = "${local.name_prefix}${var.stack}-${var.client_name}-${var.location_short}-${var.environment}"
+  default_basename = lower("${local.name_prefix}${var.stack}-${var.client_name}-${var.location_short}-${var.environment}")
 
   hostname = coalesce(var.custom_vm_hostname, local.default_basename)
 
