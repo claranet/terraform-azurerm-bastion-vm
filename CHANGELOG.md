@@ -3,6 +3,7 @@
 Updated
   * AZ-532: Revamp README with latest `terraform-docs` tool
   * AZ-530: Cleanup module, fix linter errors
+  * AZ-530: Bump submodule `linux-vm` to `v4.1.2`
 
 # v4.1.0 - 2020-12-15
 

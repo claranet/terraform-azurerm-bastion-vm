@@ -119,7 +119,7 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | claranet/linux-vm/azurerm | 4.0.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | 4.1.2 |
 
 ## Resources
 
