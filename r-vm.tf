@@ -1,4 +1,4 @@
-module "bastion-vm" {
+module "bastion_vm" {
   source  = "claranet/linux-vm/azurerm"
   version = "4.0.0"
 
@@ -12,7 +12,7 @@ module "bastion-vm" {
   subnet_id         = var.subnet_bastion_id
   static_private_ip = var.private_ip_bastion
 
-  custom_public_ip_name = coalesce(var.custom_publicip_name, "${local.default_basename}-pubip")
+  custom_public_ip_name = coalesce(var.custom_public_ip_name, "${local.default_basename}-pubip")
   custom_nic_name       = coalesce(var.custom_nic_name, "${local.default_basename}-nic")
   custom_ipconfig_name  = coalesce(var.custom_ipconfig_name, "${local.default_basename}-ipconfig")
   custom_dns_label      = local.hostname

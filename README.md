@@ -111,15 +111,15 @@ module "bastion" {
 
 | Name | Version |
 |------|---------|
-| local | n/a |
-| null | n/a |
-| template | n/a |
+| local | >= 2.0 |
+| null | >= 3.0 |
+| template | >= 2.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion-vm | claranet/linux-vm/azurerm | 4.0.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | 4.0.0 |
 
 ## Resources
 
@@ -139,8 +139,7 @@ module "bastion" {
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | custom\_ipconfig\_name | Name for the Network Interface ip configuration | `string` | `""` | no |
 | custom\_nic\_name | Name for the Network Interface | `string` | `""` | no |
-| custom\_pip\_name | Name for the Public IP Address resource | `string` | `""` | no |
-| custom\_publicip\_name | Name for the Public IP Address resource | `string` | `""` | no |
+| custom\_public\_ip\_name | Name for the Public IP Address resource | `string` | `""` | no |
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store vm diagnostics | `string` | n/a | yes |

@@ -1,36 +1,36 @@
 output "bastion_network_public_ip" {
   description = "Bastion public ip"
-  value       = module.bastion-vm.vm_public_ip_address
+  value       = module.bastion_vm.vm_public_ip_address
 }
 
 output "bastion_public_domain_name_label" {
   description = "Bastion public DNS"
-  value       = module.bastion-vm.vm_public_domain_name_label
+  value       = module.bastion_vm.vm_public_domain_name_label
 }
 
 output "bastion_network_public_ip_id" {
   description = "Bastion public ip ID"
-  value       = module.bastion-vm.vm_public_ip_id
+  value       = module.bastion_vm.vm_public_ip_id
 }
 
 output "bastion_network_interface_id" {
   description = "Bastion network interface id"
-  value       = module.bastion-vm.vm_nic_id
+  value       = module.bastion_vm.vm_nic_id
 }
 
 output "bastion_network_interface_private_ip" {
   description = "Bastion private ip"
-  value       = module.bastion-vm.vm_private_ip_address
+  value       = module.bastion_vm.vm_private_ip_address
 }
 
 output "bastion_virtual_machine_id" {
   description = "Bastion virtual machine id"
-  value       = module.bastion-vm.vm_id
+  value       = module.bastion_vm.vm_id
 }
 
 output "bastion_virtual_machine_name" {
   description = "Bastion virtual machine name"
-  value       = module.bastion-vm.vm_name
+  value       = module.bastion_vm.vm_name
 }
 
 output "bastion_admin_username" {
@@ -50,5 +50,5 @@ output "bastion_hostname" {
 
 output "bastion_virtual_machine_identity" {
   description = "System Identity assigned to Bastion virtual machine"
-  value       = module.bastion-vm.vm_identity
+  value       = module.bastion_vm.vm_identity
 }

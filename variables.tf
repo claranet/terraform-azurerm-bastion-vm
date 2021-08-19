@@ -37,15 +37,7 @@ variable "name_prefix" {
 
 # Azure Public IP
 
-variable "custom_publicip_name" {
-  description = "Name for the Public IP Address resource"
-  type        = string
-  default     = ""
-}
-
-# Azure Public IP
-
-variable "custom_pip_name" {
+variable "custom_public_ip_name" {
   description = "Name for the Public IP Address resource"
   type        = string
   default     = ""
