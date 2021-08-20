@@ -137,12 +137,6 @@ variable "storage_os_disk_caching" {
   default     = "ReadWrite"
 }
 
-variable "storage_os_disk_managed_disk_type" {
-  description = "Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS]"
-  type        = string
-  default     = "Standard_LRS"
-}
-
 variable "storage_os_disk_size_gb" {
   description = "Specifies the size of the OS Disk in gigabytes"
   type        = string
