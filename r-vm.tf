@@ -1,6 +1,6 @@
-module "bastion-vm" {
+module "bastion_vm" {
   source  = "claranet/linux-vm/azurerm"
-  version = "4.0.0"
+  version = "4.1.2"
 
   location            = var.location
   location_short      = var.location_short
@@ -12,7 +12,7 @@ module "bastion-vm" {
   subnet_id         = var.subnet_bastion_id
   static_private_ip = var.private_ip_bastion
 
-  custom_public_ip_name = coalesce(var.custom_publicip_name, "${local.default_basename}-pubip")
+  custom_public_ip_name = coalesce(var.custom_public_ip_name, "${local.default_basename}-pubip")
   custom_nic_name       = coalesce(var.custom_nic_name, "${local.default_basename}-nic")
   custom_ipconfig_name  = coalesce(var.custom_ipconfig_name, "${local.default_basename}-ipconfig")
   custom_dns_label      = local.hostname
@@ -38,7 +38,6 @@ module "bastion-vm" {
   os_disk_caching     = var.storage_os_disk_caching
   os_disk_custom_name = var.storage_os_disk_custom_name
   os_disk_size_gb     = var.storage_os_disk_size_gb
-  os_disk_type        = var.storage_os_disk_managed_disk_type
 
   extra_tags           = merge(local.bastion_tags, var.bastion_extra_tags)
   public_ip_extra_tags = merge(local.bastion_tags, var.pubip_extra_tags)

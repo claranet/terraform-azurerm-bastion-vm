@@ -9,7 +9,7 @@ This module creates a virtual machine to be used as a bastion/jump-host instance
 ## Version compatibility
 
 | Module version | Terraform version | AzureRM version |
-|----------------|-------------------| --------------- |
+| -------------- | ----------------- | --------------- |
 | >= 4.x.x       | 0.13.x            | >= 2.0          |
 | >= 3.x.x       | 0.12.x            | >= 2.0          |
 | >= 2.x.x       | 0.12.x            | < 2.0           |
@@ -106,6 +106,29 @@ module "bastion" {
 }
 ```
 
+<!-- BEGIN_TF_DOCS -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| local | >= 2.0 |
+| null | >= 3.0 |
+| template | >= 2.0 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| bastion\_vm | claranet/linux-vm/azurerm | 4.1.2 |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [local_file.rendered_ansible_inventory](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
+| [null_resource.ansible_bootstrap_vm](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [template_file.ansible_inventory](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -116,8 +139,7 @@ module "bastion" {
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | custom\_ipconfig\_name | Name for the Network Interface ip configuration | `string` | `""` | no |
 | custom\_nic\_name | Name for the Network Interface | `string` | `""` | no |
-| custom\_pip\_name | Name for the Public IP Address resource | `string` | `""` | no |
-| custom\_publicip\_name | Name for the Public IP Address resource | `string` | `""` | no |
+| custom\_public\_ip\_name | Name for the Public IP Address resource | `string` | `""` | no |
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
@@ -138,7 +160,6 @@ module "bastion" {
 | storage\_image\_version | Specifies the version of the image used to create the virtual machine | `string` | `"latest"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
 | storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
-| storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | `string` | `"Standard_LRS"` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_bastion\_id | The bastion subnet id | `string` | n/a | yes |
 | vm\_size | Bastion virtual machine size | `string` | n/a | yes |
@@ -158,7 +179,7 @@ module "bastion" {
 | bastion\_virtual\_machine\_identity | System Identity assigned to Bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
-
+<!-- END_TF_DOCS -->
 ## Related documentation
 
 Azure remote management security documentation: [docs.microsoft.com/en-us/azure/security/azure-security-management](https://docs.microsoft.com/en-us/azure/security/azure-security-management)

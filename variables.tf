@@ -37,15 +37,7 @@ variable "name_prefix" {
 
 # Azure Public IP
 
-variable "custom_publicip_name" {
-  description = "Name for the Public IP Address resource"
-  type        = string
-  default     = ""
-}
-
-# Azure Public IP
-
-variable "custom_pip_name" {
+variable "custom_public_ip_name" {
   description = "Name for the Public IP Address resource"
   type        = string
   default     = ""
@@ -143,12 +135,6 @@ variable "storage_os_disk_caching" {
   description = "Specifies the caching requirements for the OS Disk"
   type        = string
   default     = "ReadWrite"
-}
-
-variable "storage_os_disk_managed_disk_type" {
-  description = "Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS]"
-  type        = string
-  default     = "Standard_LRS"
 }
 
 variable "storage_os_disk_size_gb" {
