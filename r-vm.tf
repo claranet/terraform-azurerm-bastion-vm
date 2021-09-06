@@ -42,4 +42,6 @@ module "bastion_vm" {
   extra_tags           = merge(local.bastion_tags, var.bastion_extra_tags)
   public_ip_extra_tags = merge(local.bastion_tags, var.pubip_extra_tags)
   nic_extra_tags       = merge(local.bastion_tags, var.ani_extra_tags)
+
+  public_ip_sku = var.public_ip_sku
 }
