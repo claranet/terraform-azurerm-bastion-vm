@@ -3,3 +3,6 @@ main.tf
 terraform.tfvars
 playbook-ansible/host.ini
 playbook-ansible/main.retry
+.terraform.lock.hcl
+!examples/**/main.tf
+!examples/**/terraform.tfvars
