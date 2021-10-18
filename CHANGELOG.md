@@ -1,4 +1,4 @@
-# Unreleased
+# v4.3.0 - 2021-10-19
 
 Breaking
   * AZ-492: Refactor SSH keys management
