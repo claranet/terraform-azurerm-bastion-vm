@@ -3,6 +3,9 @@
 Breaking
   * AZ-492: Refactor SSH keys management
 
+Added
+  * AZ-561: Allow to deploy Bastion vm without public IP
+
 Changed
   * AZ-572: Revamp examples and improve CI
 

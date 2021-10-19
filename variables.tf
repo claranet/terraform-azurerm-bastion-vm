@@ -43,6 +43,16 @@ variable "custom_public_ip_name" {
   default     = ""
 }
 
+variable "public_ip_sku" {
+  description = <<EOD
+Public IP SKU attached to the VM. Can be `null` if no public IP is needed.
+If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private ip. 
+Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory.
+EOD
+  type        = string
+  default     = "Standard"
+}
+
 # Azure Network Interface
 
 variable "custom_nic_name" {

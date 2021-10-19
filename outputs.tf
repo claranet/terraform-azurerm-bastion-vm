@@ -1,16 +1,16 @@
 output "bastion_network_public_ip" {
   description = "Bastion public ip"
-  value       = module.bastion_vm.vm_public_ip_address
+  value       = try(module.bastion_vm.vm_public_ip_address, "")
 }
 
 output "bastion_public_domain_name_label" {
   description = "Bastion public DNS"
-  value       = module.bastion_vm.vm_public_domain_name_label
+  value       = try(module.bastion_vm.vm_public_domain_name_label, "")
 }
 
 output "bastion_network_public_ip_id" {
   description = "Bastion public ip ID"
-  value       = module.bastion_vm.vm_public_ip_id
+  value       = try(module.bastion_vm.vm_public_ip_id, "")
 }
 
 output "bastion_network_interface_id" {
