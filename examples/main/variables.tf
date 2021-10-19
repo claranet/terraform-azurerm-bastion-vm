@@ -18,16 +18,6 @@ variable "stack" {
   type        = string
 }
 
-variable "ssh_private_key_path" {
-  description = "SSH Private Key path on bastion VM"
-  type        = string
-}
-
-variable "ssh_public_key" {
-  description = "SSH public key to authorize on bastion"
-  type        = string
-}
-
 variable "security_group_name" {
   description = "Custom name for the Network Security Group"
   type        = string

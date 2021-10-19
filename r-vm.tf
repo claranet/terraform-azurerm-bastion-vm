@@ -24,7 +24,7 @@ module "bastion_vm" {
   custom_name = coalesce(var.custom_vm_name, "${local.default_basename}-vm")
 
   admin_username = var.admin_username
-  ssh_public_key = var.ssh_key_pub
+  ssh_public_key = local.ssh_public_key
 
   zone_id = 1
 

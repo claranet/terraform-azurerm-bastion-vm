@@ -91,13 +91,13 @@ variable "admin_username" {
   default     = "claranet"
 }
 
-variable "ssh_key_pub" {
-  description = "Root SSH pub key to deploy on the bastion"
+variable "ssh_public_key" {
+  description = "SSH public key, generated if empty"
   type        = string
 }
 
-variable "private_key_path" {
-  description = "Root SSH private key path"
+variable "ssh_private_key" {
+  description = "SSH private key, generated if empty"
   type        = string
 }
 

@@ -70,6 +70,10 @@ module "logs" {
   resource_group_name = module.rg.resource_group_name
 }
 
+resource "tls_private_key" "bastion" {
+  algorithm = "RSA"
+}
+
 module "bastion" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=vX.X.X"
 
@@ -89,9 +93,9 @@ module "bastion" {
   storage_os_disk_size_gb = "100"
   private_ip_bastion      = "10.10.10.10"
 
-  # Put your SSH Public Key here
-  ssh_key_pub      = var.ssh_public_key
-  private_key_path = var.ssh_private_key_path
+  # Optional: Put your SSH key here
+  ssh_public_key  = tls_private_key.bastion.public_key_openssh
+  ssh_private_key = tls_private_key.bastion.private_key_pem
 
   diagnostics_storage_account_name      = module.logs.logs_storage_account_name
   diagnostics_storage_account_sas_token = module.logs.logs_storage_account_sas_token

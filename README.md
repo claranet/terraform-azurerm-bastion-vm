@@ -96,6 +96,10 @@ module "logs" {
   resource_group_name = module.rg.resource_group_name
 }
 
+resource "tls_private_key" "bastion" {
+  algorithm = "RSA"
+}
+
 module "bastion" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=vX.X.X"
 
@@ -115,9 +119,9 @@ module "bastion" {
   storage_os_disk_size_gb = "100"
   private_ip_bastion      = "10.10.10.10"
 
-  # Put your SSH Public Key here
-  ssh_key_pub      = var.ssh_public_key
-  private_key_path = var.ssh_private_key_path
+  # Optional: Put your SSH key here
+  ssh_public_key  = tls_private_key.bastion.public_key_openssh
+  ssh_private_key = tls_private_key.bastion.private_key_pem
 
   diagnostics_storage_account_name      = module.logs.logs_storage_account_name
   diagnostics_storage_account_sas_token = module.logs.logs_storage_account_sas_token
@@ -132,6 +136,7 @@ module "bastion" {
 | local | >= 2.0 |
 | null | >= 3.0 |
 | template | >= 2.0 |
+| tls | >= 3.0 |
 
 ## Modules
 
@@ -144,7 +149,9 @@ module "bastion" {
 | Name | Type |
 |------|------|
 | [local_file.rendered_ansible_inventory](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
+| [local_file.ssh_private_key](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [null_resource.ansible_bootstrap_vm](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [tls_private_key.ssh](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 | [template_file.ansible_inventory](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 
 ## Inputs
@@ -167,10 +174,10 @@ module "bastion" {
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | name\_prefix | Optional prefix for resources naming | `string` | `"bastion-"` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | n/a | yes |
-| private\_key\_path | Root SSH private key path | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
-| ssh\_key\_pub | Root SSH pub key to deploy on the bastion | `string` | n/a | yes |
+| ssh\_private\_key | SSH private key, generated if empty | `string` | n/a | yes |
+| ssh\_public\_key | SSH public key, generated if empty | `string` | n/a | yes |
 | stack | Project stack name | `string` | n/a | yes |
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
 | storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | `string` | `"Canonical"` | no |
@@ -197,7 +204,10 @@ module "bastion" {
 | bastion\_virtual\_machine\_identity | System Identity assigned to Bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
+| ssh\_private\_key | SSH private key |
+| ssh\_public\_key | SSH public key |
 <!-- END_TF_DOCS -->
+
 ## Related documentation
 
 Azure remote management security documentation: [docs.microsoft.com/en-us/azure/security/azure-security-management](https://docs.microsoft.com/en-us/azure/security/azure-security-management)

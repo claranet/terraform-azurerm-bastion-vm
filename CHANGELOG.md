@@ -1,5 +1,8 @@
 # Unreleased
 
+Breaking
+  * AZ-492: Refactor SSH keys management
+
 Changed
   * AZ-572: Revamp examples and improve CI
 
