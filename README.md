@@ -124,7 +124,7 @@ module "bastion" {
   ssh_private_key = tls_private_key.bastion.private_key_pem
 
   diagnostics_storage_account_name      = module.logs.logs_storage_account_name
-  diagnostics_storage_account_sas_token = module.logs.logs_storage_account_sas_token
+  diagnostics_storage_account_sas_token = module.logs.logs_storage_account_sas_token["sastoken"]
 }
 
 ```

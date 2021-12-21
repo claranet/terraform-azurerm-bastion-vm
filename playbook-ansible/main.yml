@@ -2,6 +2,10 @@
 - hosts: all
   remote_user: claranet
   become: yes
+  pre_tasks:
+    - name: Wait 60 seconds for target connection to become reachable
+      wait_for_connection:
+        timeout: 60
   roles:
     - role: claranet-cloud-image
       tags: cloud-image
