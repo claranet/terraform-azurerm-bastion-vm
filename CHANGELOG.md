@@ -1,4 +1,4 @@
-# Unreleased
+# v4.3.1 - 2021-12-21
 
 Fixed
   * AZ-607: Update example usage and wait until the bastion VM is reachable before executing the Ansible playbook
