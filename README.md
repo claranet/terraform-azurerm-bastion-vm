@@ -133,6 +133,7 @@ module "bastion" {
 
 | Name | Version |
 |------|---------|
+| azurecaf | ~> 1.1 |
 | local | >= 2.0 |
 | null | >= 3.0 |
 | template | >= 2.0 |
@@ -142,12 +143,13 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | claranet/linux-vm/azurerm | 4.1.2 |
+| bastion\_vm | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git | AZ-515_caf_naming |
 
 ## Resources
 
 | Name | Type |
 |------|------|
+| [azurecaf_name.vm_host](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [local_file.rendered_ansible_inventory](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [local_file.ssh_private_key](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [null_resource.ansible_bootstrap_vm](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
@@ -172,7 +174,8 @@ module "bastion" {
 | environment | Project environment | `string` | n/a | yes |
 | location | Azure location. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
-| name\_prefix | Optional prefix for resources naming | `string` | `"bastion-"` | no |
+| name\_prefix | Optional prefix for the generated name | `string` | `"bastion"` | no |
+| name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
 | public\_ip\_sku | Public IP SKU attached to the VM. Can be `null` if no public IP is needed.<br>If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private ip. <br>Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory. | `string` | `"Standard"` | no |
@@ -188,6 +191,7 @@ module "bastion" {
 | storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_bastion\_id | The bastion subnet id | `string` | n/a | yes |
+| use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_*_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | vm\_size | Bastion virtual machine size | `string` | n/a | yes |
 
 ## Outputs

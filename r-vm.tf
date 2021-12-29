@@ -1,6 +1,7 @@
 module "bastion_vm" {
-  source  = "claranet/linux-vm/azurerm"
-  version = "4.1.2"
+  # source  = "claranet/linux-vm/azurerm"
+  # version = "4.1.2"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=AZ-515_caf_naming"
 
   location            = var.location
   location_short      = var.location_short
@@ -12,16 +13,20 @@ module "bastion_vm" {
   subnet_id         = var.subnet_bastion_id
   static_private_ip = var.private_ip_bastion
 
-  custom_public_ip_name = coalesce(var.custom_public_ip_name, "${local.default_basename}-pubip")
-  custom_nic_name       = coalesce(var.custom_nic_name, "${local.default_basename}-nic")
-  custom_ipconfig_name  = coalesce(var.custom_ipconfig_name, "${local.default_basename}-ipconfig")
+  name_prefix    = var.name_prefix
+  name_suffix    = var.name_suffix
+  use_caf_naming = var.use_caf_naming
+
+  custom_public_ip_name = var.custom_public_ip_name
+  custom_nic_name       = var.custom_nic_name
+  custom_ipconfig_name  = var.custom_ipconfig_name
   custom_dns_label      = local.hostname
 
   diagnostics_storage_account_name      = var.diagnostics_storage_account_name
   diagnostics_storage_account_sas_token = var.diagnostics_storage_account_sas_token
 
   vm_size     = var.vm_size
-  custom_name = coalesce(var.custom_vm_name, "${local.default_basename}-vm")
+  custom_name = var.custom_vm_name
 
   admin_username = var.admin_username
   ssh_public_key = local.ssh_public_key
