@@ -70,6 +70,24 @@ module "logs" {
   resource_group_name = module.rg.resource_group_name
 }
 
+module "az_monitor" {
+  source  = "claranet/run-iaas/azurerm//modules/vm-monitoring"
+  version = "x.x.x"
+
+  client_name    = var.client_name
+  location       = module.azure_region.location
+  location_short = module.azure_region.location_short
+  environment    = var.environment
+  stack          = var.stack
+
+  resource_group_name        = module.rg.resource_group_name
+  log_analytics_workspace_id = module.logs.log_analytics_workspace_id
+
+  extra_tags = {
+    foo = "bar"
+  }
+}
+
 resource "tls_private_key" "bastion" {
   algorithm = "RSA"
 }
@@ -97,6 +115,10 @@ module "bastion" {
   ssh_public_key  = tls_private_key.bastion.public_key_openssh
   ssh_private_key = tls_private_key.bastion.private_key_pem
 
+  # Diag/logs
   diagnostics_storage_account_name      = module.logs.logs_storage_account_name
-  diagnostics_storage_account_sas_token = module.logs.logs_storage_account_sas_token["sastoken"]
+  diagnostics_storage_account_sas_token = null # used by legacy agent only
+  azure_monitor_data_collection_rule_id = module.az_monitor.data_collection_rule_id
+  log_analytics_workspace_guid          = module.logs.log_analytics_workspace_guid
+  log_analytics_workspace_key           = module.logs.log_analytics_workspace_primary_key
 }

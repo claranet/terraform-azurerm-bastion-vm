@@ -1,7 +1,6 @@
 module "bastion_vm" {
-  # source  = "claranet/linux-vm/azurerm"
-  # version = "4.1.2"
-  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=AZ-515_caf_naming"
+  source  = "claranet/linux-vm/azurerm"
+  version = "5.0.0"
 
   location            = var.location
   location_short      = var.location_short
@@ -13,6 +12,7 @@ module "bastion_vm" {
   subnet_id         = var.subnet_bastion_id
   static_private_ip = var.private_ip_bastion
 
+  # Naming
   name_prefix    = var.name_prefix
   name_suffix    = var.name_suffix
   use_caf_naming = var.use_caf_naming
@@ -22,8 +22,17 @@ module "bastion_vm" {
   custom_ipconfig_name  = var.custom_ipconfig_name
   custom_dns_label      = local.hostname
 
-  diagnostics_storage_account_name      = var.diagnostics_storage_account_name
-  diagnostics_storage_account_sas_token = var.diagnostics_storage_account_sas_token
+  # Diag/logs
+  diagnostics_storage_account_name         = var.diagnostics_storage_account_name
+  diagnostics_storage_account_sas_token    = var.diagnostics_storage_account_sas_token
+  use_legacy_monitoring_agent              = var.use_legacy_monitoring_agent
+  azure_monitor_data_collection_rule_id    = var.azure_monitor_data_collection_rule_id
+  azure_monitor_agent_version              = var.azure_monitor_agent_version
+  azure_monitor_agent_auto_upgrade_enabled = var.azure_monitor_agent_auto_upgrade_enabled
+  log_analytics_workspace_guid             = var.log_analytics_workspace_guid
+  log_analytics_workspace_key              = var.log_analytics_workspace_key
+  log_analytics_agent_enabled              = var.log_analytics_agent_enabled
+  log_analytics_agent_version              = var.log_analytics_agent_version
 
   vm_size     = var.vm_size
   custom_name = var.custom_vm_name

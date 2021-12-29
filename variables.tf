@@ -125,14 +125,3 @@ variable "pubip_extra_tags" {
   type        = map(string)
   default     = {}
 }
-
-# Diagnostics/Logs
-variable "diagnostics_storage_account_name" {
-  description = "Name of the Storage Account in which store vm diagnostics"
-  type        = string
-}
-
-variable "diagnostics_storage_account_sas_token" {
-  description = "SAS token of the Storage Account in which store vm diagnostics"
-  type        = string
-}

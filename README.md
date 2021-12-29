@@ -96,6 +96,24 @@ module "logs" {
   resource_group_name = module.rg.resource_group_name
 }
 
+module "az_monitor" {
+  source  = "claranet/run-iaas/azurerm//modules/vm-monitoring"
+  version = "x.x.x"
+
+  client_name    = var.client_name
+  location       = module.azure_region.location
+  location_short = module.azure_region.location_short
+  environment    = var.environment
+  stack          = var.stack
+
+  resource_group_name        = module.rg.resource_group_name
+  log_analytics_workspace_id = module.logs.log_analytics_workspace_id
+
+  extra_tags = {
+    foo = "bar"
+  }
+}
+
 resource "tls_private_key" "bastion" {
   algorithm = "RSA"
 }
@@ -123,8 +141,12 @@ module "bastion" {
   ssh_public_key  = tls_private_key.bastion.public_key_openssh
   ssh_private_key = tls_private_key.bastion.private_key_pem
 
+  # Diag/logs
   diagnostics_storage_account_name      = module.logs.logs_storage_account_name
-  diagnostics_storage_account_sas_token = module.logs.logs_storage_account_sas_token["sastoken"]
+  diagnostics_storage_account_sas_token = null # used by legacy agent only
+  azure_monitor_data_collection_rule_id = module.az_monitor.data_collection_rule_id
+  log_analytics_workspace_guid          = module.logs.log_analytics_workspace_guid
+  log_analytics_workspace_key           = module.logs.log_analytics_workspace_primary_key
 }
 
 ```
@@ -143,7 +165,7 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git | AZ-515_caf_naming |
+| bastion\_vm | claranet/linux-vm/azurerm | 5.0.0 |
 
 ## Resources
 
@@ -162,6 +184,9 @@ module "bastion" {
 |------|-------------|------|---------|:--------:|
 | admin\_username | Name of the admin user | `string` | `"claranet"` | no |
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
+| azure\_monitor\_agent\_auto\_upgrade\_enabled | Automatically update agent when publisher releases a new version of the agent | `bool` | `false` | no |
+| azure\_monitor\_agent\_version | Azure Monitor Agent extension version | `string` | `"1.12"` | no |
+| azure\_monitor\_data\_collection\_rule\_id | Data Collection Rule ID from Azure Monitor for metrics and logs collection. Used with new monitoring agent, set to `null` if legacy agent is used. | `string` | n/a | yes |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | custom\_ipconfig\_name | Name for the Network Interface ip configuration | `string` | `""` | no |
@@ -170,10 +195,14 @@ module "bastion" {
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
-| diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
+| diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store vm diagnostics. Used only with legacy monitoring agent, set to `null` if not needed. | `string` | `null` | no |
 | environment | Project environment | `string` | n/a | yes |
 | location | Azure location. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
+| log\_analytics\_agent\_enabled | Deploy Log Analytics VM extension - depending of OS (cf. https://docs.microsoft.com/fr-fr/azure/azure-monitor/agents/agents-overview#linux) | `bool` | `true` | no |
+| log\_analytics\_agent\_version | Azure Log Analytics extension version | `string` | `"1.13"` | no |
+| log\_analytics\_workspace\_guid | GUID of the Log Analytics Workspace to link with | `string` | `null` | no |
+| log\_analytics\_workspace\_key | Access key of the Log Analytics Workspace to link with | `string` | `null` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `"bastion"` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | n/a | yes |
@@ -192,6 +221,7 @@ module "bastion" {
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_bastion\_id | The bastion subnet id | `string` | n/a | yes |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_*_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
+| use\_legacy\_monitoring\_agent | True to use the legacy monitoring agent instead of Azure Monitor Agent | `bool` | `false` | no |
 | vm\_size | Bastion virtual machine size | `string` | n/a | yes |
 
 ## Outputs
