@@ -29,20 +29,7 @@ variable "client_name" {
   type        = string
 }
 
-variable "name_prefix" {
-  description = "Optional prefix for resources naming"
-  type        = string
-  default     = "bastion-"
-}
-
 # Azure Public IP
-
-variable "custom_public_ip_name" {
-  description = "Name for the Public IP Address resource"
-  type        = string
-  default     = ""
-}
-
 variable "public_ip_sku" {
   description = <<EOD
 Public IP SKU attached to the VM. Can be `null` if no public IP is needed.
@@ -54,19 +41,6 @@ EOD
 }
 
 # Azure Network Interface
-
-variable "custom_nic_name" {
-  description = "Name for the Network Interface"
-  type        = string
-  default     = ""
-}
-
-variable "custom_ipconfig_name" {
-  description = "Name for the Network Interface ip configuration"
-  type        = string
-  default     = ""
-}
-
 variable "subnet_bastion_id" {
   description = "The bastion subnet id"
   type        = string
@@ -81,18 +55,6 @@ variable "private_ip_bastion" {
 variable "vm_size" {
   description = "Bastion virtual machine size"
   type        = string
-}
-
-variable "custom_vm_name" {
-  description = "VM Name as displayed on the console"
-  type        = string
-  default     = ""
-}
-
-variable "custom_vm_hostname" {
-  description = "Bastion hostname"
-  type        = string
-  default     = ""
 }
 
 variable "admin_username" {
@@ -135,12 +97,6 @@ variable "storage_image_version" {
   default     = "latest"
 }
 
-variable "storage_os_disk_custom_name" {
-  description = "Bastion OS disk name as displayed in the console"
-  type        = string
-  default     = ""
-}
-
 variable "storage_os_disk_caching" {
   description = "Specifies the caching requirements for the OS Disk"
   type        = string
@@ -168,15 +124,4 @@ variable "pubip_extra_tags" {
   description = "Additional tags to associate with your public ip."
   type        = map(string)
   default     = {}
-}
-
-# Diagnostics/Logs
-variable "diagnostics_storage_account_name" {
-  description = "Name of the Storage Account in which store vm diagnostics"
-  type        = string
-}
-
-variable "diagnostics_storage_account_sas_token" {
-  description = "SAS token of the Storage Account in which store vm diagnostics"
-  type        = string
 }
