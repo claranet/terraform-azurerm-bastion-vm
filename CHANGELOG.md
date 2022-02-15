@@ -1,4 +1,5 @@
 # UNRELEASED
+
 Updated
   * AZ-676: Bump Ansible-Playbook `claranet-cloud-image` to `v0.2.1` 
 
