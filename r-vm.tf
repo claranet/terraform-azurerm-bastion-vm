@@ -42,12 +42,14 @@ module "bastion_vm" {
 
   zone_id = 1
 
-  vm_image = {
+  vm_image = var.storage_image_publisher != "" ? {
     publisher = var.storage_image_publisher
     offer     = var.storage_image_offer
     sku       = var.storage_image_sku
     version   = var.storage_image_version
-  }
+  } : {}
+
+  vm_image_id = var.storage_image_id
 
   os_disk_caching     = var.storage_os_disk_caching
   os_disk_custom_name = var.storage_os_disk_custom_name

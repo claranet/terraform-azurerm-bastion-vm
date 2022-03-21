@@ -1,3 +1,8 @@
+# Unreleased
+
+Added
+  * AZ-711: Add `storage_image_id` to prov custom image
+
 # v5.2.0 - 2022-04-15
 
 Added
@@ -9,7 +14,7 @@ Changed
 # v5.1.0 - 2022-02-15
 
 Updated
-  * AZ-676: Bump Ansible-Playbook `claranet-cloud-image` to `v0.2.1` 
+  * AZ-676: Bump Ansible-Playbook `claranet-cloud-image` to `v0.2.1`
 
 # v5.0.0 - 2022-01-13
 
