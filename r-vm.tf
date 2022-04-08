@@ -1,6 +1,6 @@
 module "bastion_vm" {
   source  = "claranet/linux-vm/azurerm"
-  version = "5.0.0"
+  version = "5.2.0"
 
   location            = var.location
   location_short      = var.location_short
@@ -52,6 +52,8 @@ module "bastion_vm" {
   os_disk_caching     = var.storage_os_disk_caching
   os_disk_custom_name = var.storage_os_disk_custom_name
   os_disk_size_gb     = var.storage_os_disk_size_gb
+
+  default_tags_enabled = var.default_tags_enabled
 
   extra_tags           = merge(local.bastion_tags, var.bastion_extra_tags)
   public_ip_extra_tags = merge(local.bastion_tags, var.pubip_extra_tags)

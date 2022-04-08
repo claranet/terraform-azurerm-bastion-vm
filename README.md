@@ -165,7 +165,7 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | claranet/linux-vm/azurerm | 5.0.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | 5.2.0 |
 
 ## Resources
 
@@ -194,6 +194,7 @@ module "bastion" {
 | custom\_public\_ip\_name | Name for the Public IP Address resource | `string` | `""` | no |
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
+| default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
 | diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store vm diagnostics. Used only with legacy monitoring agent, set to `null` if not needed. | `string` | `null` | no |
 | environment | Project environment | `string` | n/a | yes |
