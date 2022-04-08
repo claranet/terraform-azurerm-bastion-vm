@@ -40,6 +40,12 @@ EOD
   default     = "Standard"
 }
 
+variable "public_ip_zones" {
+  description = "Zones for public IP attached to the VM. Can be `null` if no zone distpatch."
+  type        = list(number)
+  default     = [1, 2, 3]
+}
+
 # Azure Network Interface
 variable "subnet_bastion_id" {
   description = "The bastion subnet id"
