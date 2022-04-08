@@ -21,3 +21,15 @@ variable "pubip_extra_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "storage_os_disk_tagging_enabled" {
+  description = "Should OS disk tagging be enabled? Defaults to `true`."
+  type        = bool
+  default     = true
+}
+
+variable "storage_os_disk_extra_tags" {
+  description = "Additional tags to set on the OS disk."
+  type        = map(string)
+  default     = {}
+}
