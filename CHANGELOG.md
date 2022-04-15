@@ -1,3 +1,11 @@
+# Unreleased
+
+Added
+  * AZ-615: Add an option to enable or disable default tags
+
+Changed
+  * AZ-614: Optional OS disk tagging
+
 # v5.1.0 - 2022-02-15
 
 Updated
