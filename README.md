@@ -208,11 +208,12 @@ module "bastion" {
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
-| public\_ip\_sku | Public IP SKU attached to the VM. Can be `null` if no public IP is needed.<br>If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private ip. <br>Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory. | `string` | `"Standard"` | no |
+| public\_ip\_sku | Public IP SKU attached to the VM. Can be `null` if no public IP is needed.<br>If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private ip.<br>Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory. | `string` | `"Standard"` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
 | ssh\_private\_key | SSH private key, generated if empty | `string` | n/a | yes |
 | ssh\_public\_key | SSH public key, generated if empty | `string` | n/a | yes |
 | stack | Project stack name | `string` | n/a | yes |
+| storage\_image\_id | Specifies the image ID used to create the virtual machine | `string` | `null` | no |
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
 | storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | `string` | `"Canonical"` | no |
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |

@@ -33,7 +33,7 @@ variable "client_name" {
 variable "public_ip_sku" {
   description = <<EOD
 Public IP SKU attached to the VM. Can be `null` if no public IP is needed.
-If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private ip. 
+If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private ip.
 Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory.
 EOD
   type        = string
@@ -95,6 +95,12 @@ variable "storage_image_version" {
   description = "Specifies the version of the image used to create the virtual machine"
   type        = string
   default     = "latest"
+}
+
+variable "storage_image_id" {
+  description = "Specifies the image ID used to create the virtual machine"
+  type        = string
+  default     = null
 }
 
 variable "storage_os_disk_caching" {
