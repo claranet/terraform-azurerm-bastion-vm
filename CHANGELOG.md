@@ -1,4 +1,4 @@
-# Unreleased
+# v5.3.0 - 2022-05-13
 
 Added
   * AZ-711: Add `storage_image_id` parameter to provision the bastion VM with a custom image
