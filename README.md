@@ -165,7 +165,7 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git | AZ-717_provider_azure_v3 |
+| bastion\_vm | claranet/linux-vm/azurerm | 6.0.0 |
 
 ## Resources
 
