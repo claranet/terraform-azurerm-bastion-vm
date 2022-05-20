@@ -1,6 +1,6 @@
 module "bastion_vm" {
   source  = "claranet/linux-vm/azurerm"
-  version = "5.2.0"
+  version = "6.0.0"
 
   location            = var.location
   location_short      = var.location_short
@@ -37,6 +37,9 @@ module "bastion_vm" {
   vm_size     = var.vm_size
   custom_name = var.custom_vm_name
 
+  public_ip_sku   = var.public_ip_sku
+  public_ip_zones = var.public_ip_zones
+
   admin_username = var.admin_username
   ssh_public_key = local.ssh_public_key
 
@@ -62,6 +65,4 @@ module "bastion_vm" {
   public_ip_extra_tags = merge(local.bastion_tags, var.pubip_extra_tags)
   nic_extra_tags       = merge(local.bastion_tags, var.ani_extra_tags)
   os_disk_extra_tags   = merge(local.bastion_tags, var.storage_os_disk_extra_tags)
-
-  public_ip_sku = var.public_ip_sku
 }

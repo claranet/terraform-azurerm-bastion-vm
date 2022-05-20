@@ -1,3 +1,8 @@
+# Unreleased
+
+Breaking
+  * AZ-717: Bump module and `linux-vm` module for AzureRM provider `v3.0+`
+
 # v5.3.0 - 2022-05-13
 
 Added
