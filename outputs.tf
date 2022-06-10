@@ -63,3 +63,14 @@ output "ssh_private_key" {
   value       = local.ssh_private_key
   sensitive   = true
 }
+
+output "bastion_ssh_public_key" {
+  description = "SSH public key"
+  value       = local.ssh_public_key
+}
+
+output "bastion_ssh_private_key" {
+  description = "SSH private key"
+  value       = local.ssh_private_key
+  sensitive   = true
+}
