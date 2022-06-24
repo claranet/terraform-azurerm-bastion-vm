@@ -240,12 +240,15 @@ module "bastion" {
 | bastion\_network\_public\_ip | Bastion public ip |
 | bastion\_network\_public\_ip\_id | Bastion public ip ID |
 | bastion\_public\_domain\_name\_label | Bastion public DNS |
+| bastion\_ssh\_private\_key | SSH private key |
+| bastion\_ssh\_public\_key | SSH public key |
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
 | bastion\_virtual\_machine\_identity | System Identity assigned to Bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
 | ssh\_private\_key | SSH private key |
 | ssh\_public\_key | SSH public key |
+| terraform\_module | Information about this Terraform module |
 <!-- END_TF_DOCS -->
 
 ## Related documentation
