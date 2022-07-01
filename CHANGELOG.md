@@ -1,4 +1,4 @@
-# Unreleased
+# v6.2.0 - 2022-07-01
 
 Changed
   * AZ-789: Support Ubuntu 20.04 & 22.04
