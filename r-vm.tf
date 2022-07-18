@@ -1,6 +1,7 @@
 module "bastion_vm" {
-  source  = "claranet/linux-vm/azurerm"
-  version = "6.5.0"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=add_var_overwrite_behaviour_os_disk_tagging"
+  # source  = "claranet/linux-vm/azurerm"
+  # version = "6.5.0"
 
   location            = var.location
   location_short      = var.location_short
@@ -57,10 +58,10 @@ module "bastion_vm" {
 
   vm_image_id = var.storage_image_id
 
-  # OS Disk
-  os_disk_caching              = var.storage_os_disk_caching
-  os_disk_custom_name          = var.storage_os_disk_custom_name
-  os_disk_size_gb              = var.storage_os_disk_size_gb
+  os_disk_caching        = var.storage_os_disk_caching
+  os_disk_custom_name    = var.storage_os_disk_custom_name
+  os_disk_size_gb        = var.storage_os_disk_size_gb
+  os_disk_overwrite_tags = var.storage_os_disk_overwrite_tags
   os_disk_storage_account_type = var.storage_os_disk_account_type
 
   # AAD SSH Login option
