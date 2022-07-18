@@ -54,9 +54,10 @@ module "bastion_vm" {
 
   vm_image_id = var.storage_image_id
 
-  os_disk_caching     = var.storage_os_disk_caching
-  os_disk_custom_name = var.storage_os_disk_custom_name
-  os_disk_size_gb     = var.storage_os_disk_size_gb
+  os_disk_caching        = var.storage_os_disk_caching
+  os_disk_custom_name    = var.storage_os_disk_custom_name
+  os_disk_size_gb        = var.storage_os_disk_size_gb
+  os_disk_overwrite_tags = var.storage_os_disk_overwrite_tags
 
   default_tags_enabled    = var.default_tags_enabled
   os_disk_tagging_enabled = var.storage_os_disk_tagging_enabled

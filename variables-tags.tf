@@ -33,3 +33,9 @@ variable "storage_os_disk_extra_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "storage_os_disk_overwrite_tags" {
+  description = "Given tags must be merged with existing ones for os disk storage."
+  type        = bool
+  default     = true
+}
