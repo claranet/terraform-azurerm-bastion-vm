@@ -1,5 +1,5 @@
 module "bastion_vm" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=add_var_overwrite_behaviour_os_disk_tagging_wip"
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/linux-vm.git?ref=add_var_overwrite_behaviour_os_disk_tagging_wip"
   version = "6.0.0"
 
   location            = var.location
