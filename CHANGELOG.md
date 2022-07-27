@@ -1,3 +1,8 @@
+# v6.2.1 - Unreleased
+
+Fixed
+  * AZ-806: Fix module source in example
+
 # v6.2.0 - 2022-07-01
 
 Changed
