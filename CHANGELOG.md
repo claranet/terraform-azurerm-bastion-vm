@@ -1,4 +1,4 @@
-# v6.2.1 - Unreleased
+# Unreleased
 
 Fixed
   * AZ-806: Fix module source in example
