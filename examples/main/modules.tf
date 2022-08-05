@@ -93,7 +93,8 @@ resource "tls_private_key" "bastion" {
 }
 
 module "bastion" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=vX.X.X"
+  # tflint-ignore: terraform_module_pinned_source
+  source = "git::https://github.com/claranet/terraform-azurerm-bastion-vm"
 
   client_name         = var.client_name
   location            = module.azure_region.location
