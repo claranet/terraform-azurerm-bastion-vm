@@ -1,6 +1,7 @@
 module "bastion_vm" {
-  source  = "claranet/linux-vm/azurerm"
-  version = "6.0.0"
+  # source  = "claranet/linux-vm/azurerm"
+  # version = "6.4.0"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=AZ-818_add_rbac_option"
 
   location            = var.location
   location_short      = var.location_short
@@ -43,7 +44,10 @@ module "bastion_vm" {
   admin_username = var.admin_username
   ssh_public_key = local.ssh_public_key
 
-  zone_id = 1
+  zone_id  = var.vm_zone
+  identity = var.identity
+
+  backup_policy_id = var.backup_policy_id
 
   vm_image = var.storage_image_publisher != "" ? {
     publisher = var.storage_image_publisher
@@ -54,15 +58,24 @@ module "bastion_vm" {
 
   vm_image_id = var.storage_image_id
 
+  # OS Disk
   os_disk_caching     = var.storage_os_disk_caching
   os_disk_custom_name = var.storage_os_disk_custom_name
   os_disk_size_gb     = var.storage_os_disk_size_gb
 
+  # AAD SSH Login option
+  aad_ssh_login_enabled           = var.aad_ssh_login_enabled
+  aad_ssh_login_extension_version = var.aad_ssh_login_extension_version
+  aad_ssh_login_user_objects_ids  = var.aad_ssh_login_user_objects_ids
+  aad_ssh_login_admin_objects_ids = var.aad_ssh_login_admin_objects_ids
+
+  # Tags
   default_tags_enabled    = var.default_tags_enabled
   os_disk_tagging_enabled = var.storage_os_disk_tagging_enabled
 
-  extra_tags           = merge(local.bastion_tags, var.bastion_extra_tags)
-  public_ip_extra_tags = merge(local.bastion_tags, var.pubip_extra_tags)
-  nic_extra_tags       = merge(local.bastion_tags, var.ani_extra_tags)
-  os_disk_extra_tags   = merge(local.bastion_tags, var.storage_os_disk_extra_tags)
+  extra_tags            = merge(local.bastion_tags, var.bastion_extra_tags)
+  public_ip_extra_tags  = merge(local.bastion_tags, var.pubip_extra_tags)
+  nic_extra_tags        = merge(local.bastion_tags, var.ani_extra_tags)
+  os_disk_extra_tags    = merge(local.bastion_tags, var.storage_os_disk_extra_tags)
+  extensions_extra_tags = merge(local.bastion_tags, var.extensions_extra_tags)
 }

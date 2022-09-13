@@ -88,6 +88,24 @@ module "az_monitor" {
   }
 }
 
+module "az_vm_backup" {
+  source  = "claranet/run-iaas/azurerm//modules/backup"
+  version = "x.x.x"
+
+  location       = module.azure_region.location
+  location_short = module.azure_region.location_short
+  client_name    = var.client_name
+  environment    = var.environment
+  stack          = var.stack
+
+  resource_group_name = module.rg.resource_group_name
+
+  logs_destinations_ids = [
+    module.logs.logs_storage_account_id,
+    module.logs.log_analytics_workspace_id
+  ]
+}
+
 resource "tls_private_key" "bastion" {
   algorithm = "RSA"
 }
@@ -111,6 +129,9 @@ module "bastion" {
   vm_size                 = "Standard_DS1_v2"
   storage_os_disk_size_gb = "100"
   private_ip_bastion      = "10.10.10.10"
+
+  # Set to null to deactivate backup
+  backup_policy_id = module.az_vm_backup.vm_backup_policy_id
 
   # Optional: Put your SSH key here
   ssh_public_key  = tls_private_key.bastion.public_key_openssh

@@ -1,3 +1,17 @@
+# Unreleased
+
+Changed
+  * AZ-825: Bump Linux VM module to latest version
+
+Added
+  * AZ-825: Add tags on deployed VM extensions and add `extensions_extra_tags` parameter
+  * AZ-814: Add backup option
+  * AZ-818: Add Azure Active Directory SSH Login capability
+
+Fixed
+  * AZ-828: Bump `vm_os_disk_tagging` module to latest `v4.0.2`
+  * AZ-717: Bump legacy `vm-logs` module to latest `v4.2.0`
+
 # v6.2.1 - 2022-08-05
 
 Fixed
