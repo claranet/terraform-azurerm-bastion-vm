@@ -1,7 +1,6 @@
 module "bastion_vm" {
-  # source  = "claranet/linux-vm/azurerm"
-  # version = "6.4.0"
-  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=AZ-818_add_rbac_option"
+  source  = "claranet/linux-vm/azurerm"
+  version = "6.5.0"
 
   location            = var.location
   location_short      = var.location_short

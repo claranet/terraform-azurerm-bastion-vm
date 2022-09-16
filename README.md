@@ -187,7 +187,7 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git | AZ-818_add_rbac_option |
+| bastion\_vm | claranet/linux-vm/azurerm | 6.5.0 |
 
 ## Resources
 
