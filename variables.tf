@@ -64,13 +64,13 @@ variable "vm_size" {
 }
 
 variable "vm_zone" {
-  description = "Bastion virtual machine zone"
+  description = "Bastion Virtual Machine zone."
   type        = number
   default     = 1
 }
 
 variable "admin_username" {
-  description = "Name of the admin user"
+  description = "Name of the admin user."
   type        = string
   default     = "claranet"
 }
@@ -122,13 +122,13 @@ variable "storage_os_disk_caching" {
 }
 
 variable "storage_os_disk_size_gb" {
-  description = "Specifies the size of the OS Disk in gigabytes"
+  description = "Specifies the size of the OS Disk in gigabytes."
   type        = string
 }
 
 ## Identity variables
 variable "identity" {
-  description = "Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity"
+  description = "Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity."
   type = object({
     type         = string
     identity_ids = list(string)
@@ -141,6 +141,6 @@ variable "identity" {
 
 ## Backup variable
 variable "backup_policy_id" {
-  description = "Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup)"
+  description = "Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup)."
   type        = string
 }
