@@ -1,4 +1,4 @@
-# Unreleased
+# v6.3.0 - 2022-09-16
 
 Changed
   * AZ-825: Bump Linux VM module to latest version
