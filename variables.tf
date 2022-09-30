@@ -127,7 +127,7 @@ variable "storage_os_disk_size_gb" {
 }
 
 variable "storage_os_disk_account_type" {
-  description = "The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`"
+  description = "The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`."
   type        = string
   default     = "Premium_ZRS"
 }
