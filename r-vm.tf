@@ -58,9 +58,10 @@ module "bastion_vm" {
   vm_image_id = var.storage_image_id
 
   # OS Disk
-  os_disk_caching     = var.storage_os_disk_caching
-  os_disk_custom_name = var.storage_os_disk_custom_name
-  os_disk_size_gb     = var.storage_os_disk_size_gb
+  os_disk_caching              = var.storage_os_disk_caching
+  os_disk_custom_name          = var.storage_os_disk_custom_name
+  os_disk_size_gb              = var.storage_os_disk_size_gb
+  os_disk_storage_account_type = var.storage_os_disk_account_type
 
   # AAD SSH Login option
   aad_ssh_login_enabled           = var.aad_ssh_login_enabled

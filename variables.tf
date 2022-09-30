@@ -126,6 +126,12 @@ variable "storage_os_disk_size_gb" {
   type        = string
 }
 
+variable "storage_os_disk_account_type" {
+  description = "The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`"
+  type        = string
+  default     = "Premium_ZRS"
+}
+
 ## Identity variables
 variable "identity" {
   description = "Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity."

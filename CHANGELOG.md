@@ -3,6 +3,9 @@
 Breaking
   * AZ-840: Update to Terraform `v1.3`
 
+Added
+  * AZ-838: Add `storage_os_disk_account_type` default value to `Premium_ZRS`
+
 # v6.3.0 - 2022-09-16
 
 Changed
