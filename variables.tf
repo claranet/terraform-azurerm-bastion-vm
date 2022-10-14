@@ -40,6 +40,12 @@ EOD
   default     = "Standard"
 }
 
+variable "custom_facing_ip_address" {
+  description = "Custom IP address to use (for ansible provisioning, and SSH connection), useful if you have a firewall in front of the VM."
+  default     = null
+  type        = string
+}
+
 variable "public_ip_zones" {
   description = "Zones for public IP attached to the VM. Can be `null` if no zone distpatch."
   type        = list(number)
