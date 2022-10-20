@@ -4,7 +4,8 @@ Added
   * AZ-878: Add `custom_facing_ip_address`, needed if you are behind a firewall/dnat
 
 Changed
-  * Bump module `linux-vm`
+  * AZ-858: Bump module `linux-vm` to latest `v7.1.0`
+  * AZ-858: OS disk storage tags can now be merged with existing ones using `os_disk_overwrite_tags` variable
 
 # v7.0.0 - 2022-09-30
 
@@ -32,11 +33,6 @@ Fixed
 
 Fixed
   * AZ-806: Fix module source in example
-=======
-# v6.3.0 - 2022-07-18
-
-Changed
-  * Bump module `linux-vm` module to `v6.2.0`
 
 # v6.2.0 - 2022-07-01
 
