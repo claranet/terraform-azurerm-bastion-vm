@@ -217,6 +217,7 @@ module "bastion" {
 | backup\_policy\_id | Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup). | `string` | n/a | yes |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
+| custom\_facing\_ip\_address | Custom IP address to use (for ansible provisioning, and SSH connection), useful if you have a firewall in front of the VM. | `string` | `null` | no |
 | custom\_ipconfig\_name | Name for the Network Interface ip configuration | `string` | `""` | no |
 | custom\_nic\_name | Name for the Network Interface | `string` | `""` | no |
 | custom\_public\_ip\_name | Name for the Public IP Address resource | `string` | `""` | no |
