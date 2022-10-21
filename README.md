@@ -188,7 +188,7 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | claranet/linux-vm/azurerm | 7.1.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | 7.2.0 |
 
 ## Resources
 
@@ -217,6 +217,7 @@ module "bastion" {
 | backup\_policy\_id | Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup). | `string` | n/a | yes |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
+| custom\_data | The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created. | `string` | `null` | no |
 | custom\_facing\_ip\_address | Custom IP address to use (for ansible provisioning, and SSH connection), useful if you have a firewall in front of the VM. | `string` | `null` | no |
 | custom\_ipconfig\_name | Name for the Network Interface ip configuration | `string` | `""` | no |
 | custom\_nic\_name | Name for the Network Interface | `string` | `""` | no |
@@ -260,6 +261,7 @@ module "bastion" {
 | subnet\_bastion\_id | The bastion subnet id | `string` | n/a | yes |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_*_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | use\_legacy\_monitoring\_agent | True to use the legacy monitoring agent instead of Azure Monitor Agent | `bool` | `false` | no |
+| user\_data | The Base64-Encoded User Data which should be used for this Virtual Machine. | `string` | `null` | no |
 | vm\_size | Bastion virtual machine size | `string` | n/a | yes |
 | vm\_zone | Bastion Virtual Machine zone. | `number` | `1` | no |
 
