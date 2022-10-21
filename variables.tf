@@ -91,6 +91,22 @@ variable "ssh_private_key" {
   type        = string
 }
 
+# VM boot scripts
+
+variable "custom_data" {
+  description = "The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created."
+  type        = string
+  default     = null
+}
+
+variable "user_data" {
+  description = "The Base64-Encoded User Data which should be used for this Virtual Machine."
+  type        = string
+  default     = null
+}
+
+# VM OS disk/image
+
 variable "storage_image_publisher" {
   description = "Specifies the publisher of the image used to create the virtual machine"
   type        = string

@@ -2,6 +2,7 @@
 
 Added
   * AZ-878: Add `custom_facing_ip_address`, needed if you are behind a firewall/dnat
+  * AZ-857: Add `user_data` variable
 
 Changed
   * AZ-858: Bump module `linux-vm` to latest `v7.1.0`

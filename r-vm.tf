@@ -1,6 +1,6 @@
 module "bastion_vm" {
   source  = "claranet/linux-vm/azurerm"
-  version = "7.1.0"
+  version = "7.2.0"
 
   location            = var.location
   location_short      = var.location_short
@@ -36,6 +36,10 @@ module "bastion_vm" {
 
   vm_size     = var.vm_size
   custom_name = var.custom_vm_name
+
+  # Boot scripts
+  custom_data = var.custom_data
+  user_data   = var.user_data
 
   public_ip_sku   = var.public_ip_sku
   public_ip_zones = var.public_ip_zones
