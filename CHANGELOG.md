@@ -1,4 +1,4 @@
-# Unreleased
+# v7.1.0 - 2022-10-21
 
 Added
   * AZ-878: Add `custom_facing_ip_address`, needed if you are behind a firewall/dnat
