@@ -178,7 +178,7 @@ module "bastion" {
 
 | Name | Version |
 |------|---------|
-| azurecaf | ~> 1.1 |
+| azurecaf | ~> 1.2, >= 1.2.22 |
 | local | >= 2.0 |
 | null | >= 3.0 |
 | template | >= 2.0 |
@@ -188,17 +188,17 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | claranet/linux-vm/azurerm | 7.2.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | 7.4.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [azurecaf_name.vm_host](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [local_file.rendered_ansible_inventory](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [local_file.ssh_private_key](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [null_resource.ansible_bootstrap_vm](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [tls_private_key.ssh](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
+| [azurecaf_name.vm_host](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
 | [template_file.ansible_inventory](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 
 ## Inputs
