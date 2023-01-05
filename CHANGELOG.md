@@ -1,4 +1,4 @@
-# Unreleased
+# v7.3.0 - 2023-01-05
 
 Added
   * AZ-971: Add `patch_mode` variable
