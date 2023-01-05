@@ -52,6 +52,7 @@ module "bastion_vm" {
   identity = var.identity
 
   backup_policy_id = var.backup_policy_id
+  patch_mode       = var.patch_mode
 
   vm_image = var.storage_image_publisher != "" ? {
     publisher = var.storage_image_publisher
