@@ -172,3 +172,10 @@ variable "backup_policy_id" {
   description = "Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup)."
   type        = string
 }
+
+# Update Management
+variable "patch_mode" {
+  description = "Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault`"
+  type        = string
+  default     = "ImageDefault"
+}
