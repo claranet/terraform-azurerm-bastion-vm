@@ -1,3 +1,9 @@
+
+# Unreleased
+
+Added
+  * AZ-837: Add maintenance configuration attachment option
+
 # v7.3.1 - 2023-01-18
 
 Changed
