@@ -1,3 +1,8 @@
+# Unreleased
+
+Added
+  * [GH-2](https://github.com/claranet/terraform-azurerm-bastion-vm/pull/2): Add `deploy_builtin_ansible_playbook` flag
+
 # v7.3.1 - 2023-01-18
 
 Changed

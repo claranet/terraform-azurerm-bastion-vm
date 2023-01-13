@@ -29,6 +29,13 @@ variable "client_name" {
   type        = string
 }
 
+# Ansible playbook
+variable "deploy_builtin_ansible_playbook" {
+  description = "If set to the `true`, the builtin bootstrapped ansible playbook will be exectued."
+  type        = bool
+  default     = true
+}
+
 # Azure Public IP
 variable "public_ip_sku" {
   description = <<EOD
