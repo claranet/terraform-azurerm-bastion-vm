@@ -1,17 +1,11 @@
-data "template_file" "ansible_inventory" {
-
-  template = file("${path.module}/playbook-ansible/host_ini.tpl")
-
-  vars = {
-    vm_fullname = module.bastion_vm.vm_name
-    vm_ip       = local.bastion_ansible_inventory_ip
-    vm_user     = var.admin_username
-  }
-}
-
 resource "local_file" "rendered_ansible_inventory" {
-
-  content  = data.template_file.ansible_inventory.rendered
+  content = templatefile(
+    "${path.module}/playbook-ansible/host_ini.tpl", {
+      vm_fullname = module.bastion_vm.vm_name
+      vm_ip       = local.bastion_ansible_inventory_ip
+      vm_user     = var.admin_username
+    }
+  )
   filename = "${path.module}/playbook-ansible/host.ini"
 }
 
@@ -22,7 +16,6 @@ resource "local_file" "ssh_private_key" {
 }
 
 resource "null_resource" "ansible_bootstrap_vm" {
-
   triggers = {
     uuid = module.bastion_vm.vm_id
   }
