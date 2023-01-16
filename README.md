@@ -187,7 +187,7 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | claranet/linux-vm/azurerm | 7.4.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | 7.5.0 |
 
 ## Resources
 
@@ -280,6 +280,7 @@ module "bastion" {
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
 | bastion\_virtual\_machine\_identity | System Identity assigned to Bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
+| bastion\_virtual\_machine\_os\_disk | Bastion virtual Machine OS disk |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
 | ssh\_private\_key | SSH private key |
 | ssh\_public\_key | SSH public key |

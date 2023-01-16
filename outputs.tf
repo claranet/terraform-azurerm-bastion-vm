@@ -74,3 +74,8 @@ output "bastion_ssh_private_key" {
   value       = local.ssh_private_key
   sensitive   = true
 }
+
+output "bastion_virtual_machine_os_disk" {
+  description = "Bastion virtual Machine OS disk"
+  value       = module.bastion_vm.vm_os_disk
+}
