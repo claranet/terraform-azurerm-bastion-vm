@@ -181,7 +181,6 @@ module "bastion" {
 | azurecaf | ~> 1.2, >= 1.2.22 |
 | local | >= 2.0 |
 | null | >= 3.0 |
-| template | >= 2.0 |
 | tls | >= 3.0 |
 
 ## Modules
@@ -199,7 +198,6 @@ module "bastion" {
 | [null_resource.ansible_bootstrap_vm](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [tls_private_key.ssh](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 | [azurecaf_name.vm_host](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
-| [template_file.ansible_inventory](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 
 ## Inputs
 
