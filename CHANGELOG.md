@@ -1,4 +1,4 @@
-# Unreleased
+# v7.3.1 - 2023-01-18
 
 Changed
   * [GH-1](https://github.com/claranet/terraform-azurerm-bastion-vm/pull/1): Use `templatefile` func instead of deprecated module
