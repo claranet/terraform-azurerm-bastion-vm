@@ -181,14 +181,13 @@ module "bastion" {
 | azurecaf | ~> 1.2, >= 1.2.22 |
 | local | >= 2.0 |
 | null | >= 3.0 |
-| template | >= 2.0 |
 | tls | >= 3.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | claranet/linux-vm/azurerm | 7.4.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | 7.5.0 |
 
 ## Resources
 
@@ -199,7 +198,6 @@ module "bastion" {
 | [null_resource.ansible_bootstrap_vm](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [tls_private_key.ssh](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 | [azurecaf_name.vm_host](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
-| [template_file.ansible_inventory](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 
 ## Inputs
 
@@ -282,6 +280,7 @@ module "bastion" {
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
 | bastion\_virtual\_machine\_identity | System Identity assigned to Bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
+| bastion\_virtual\_machine\_os\_disk | Bastion virtual Machine OS disk |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
 | ssh\_private\_key | SSH private key |
 | ssh\_public\_key | SSH public key |
