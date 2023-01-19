@@ -1,4 +1,6 @@
 resource "local_file" "rendered_ansible_inventory" {
+  for_each = toset(var.deploy_builtin_ansible_playbook ? ["enabled"] : [])
+
   content = templatefile(
     "${path.module}/playbook-ansible/host_ini.tpl", {
       vm_fullname = module.bastion_vm.vm_name
@@ -10,12 +12,21 @@ resource "local_file" "rendered_ansible_inventory" {
 }
 
 resource "local_file" "ssh_private_key" {
+  for_each = toset(var.deploy_builtin_ansible_playbook ? ["enabled"] : [])
+
   content         = local.ssh_private_key
   filename        = "${path.module}/playbook-ansible/ssh_private_key.pem"
   file_permission = "0400"
 }
 
+moved {
+  from = null_resource.ansible_bootstrap_vm
+  to   = null_resource.ansible_bootstrap_vm["enabled"]
+}
+
 resource "null_resource" "ansible_bootstrap_vm" {
+  for_each = toset(var.deploy_builtin_ansible_playbook ? ["enabled"] : [])
+
   triggers = {
     uuid = module.bastion_vm.vm_id
   }
