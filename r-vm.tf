@@ -1,6 +1,6 @@
 module "bastion_vm" {
   source  = "claranet/linux-vm/azurerm"
-  version = "7.5.0"
+  version = "7.6.0"
 
   location            = var.location
   location_short      = var.location_short
@@ -51,8 +51,9 @@ module "bastion_vm" {
   zone_id  = var.vm_zone
   identity = var.identity
 
-  backup_policy_id = var.backup_policy_id
-  patch_mode       = var.patch_mode
+  backup_policy_id              = var.backup_policy_id
+  patch_mode                    = var.patch_mode
+  maintenance_configuration_ids = var.maintenance_configuration_ids
 
   vm_image = var.storage_image_publisher != "" ? {
     publisher = var.storage_image_publisher

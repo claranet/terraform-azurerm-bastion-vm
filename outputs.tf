@@ -79,3 +79,8 @@ output "bastion_virtual_machine_os_disk" {
   description = "Bastion virtual Machine OS disk"
   value       = module.bastion_vm.vm_os_disk
 }
+
+output "bastion_maintenance_configurations_assignments" {
+  description = "Maintenance configurations assignments configurations."
+  value       = module.bastion_vm.maintenance_configurations_assignments
+}

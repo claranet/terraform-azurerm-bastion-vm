@@ -187,7 +187,7 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | claranet/linux-vm/azurerm | 7.5.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | 7.6.0 |
 
 ## Resources
 
@@ -234,6 +234,7 @@ module "bastion" {
 | log\_analytics\_agent\_version | Azure Log Analytics extension version | `string` | `"1.13"` | no |
 | log\_analytics\_workspace\_guid | GUID of the Log Analytics Workspace to link with | `string` | `null` | no |
 | log\_analytics\_workspace\_key | Access key of the Log Analytics Workspace to link with | `string` | `null` | no |
+| maintenance\_configuration\_ids | List of maintenance configurations to attach to this VM. | `list(string)` | `[]` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `"bastion"` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
 | patch\_mode | Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault` | `string` | `"ImageDefault"` | no |
@@ -270,6 +271,7 @@ module "bastion" {
 |------|-------------|
 | bastion\_admin\_username | Username of the admin user |
 | bastion\_hostname | Bastion hostname |
+| bastion\_maintenance\_configurations\_assignments | Maintenance configurations assignments configurations. |
 | bastion\_network\_interface\_id | Bastion network interface id |
 | bastion\_network\_interface\_private\_ip | Bastion private ip |
 | bastion\_network\_public\_ip | Bastion public ip |
