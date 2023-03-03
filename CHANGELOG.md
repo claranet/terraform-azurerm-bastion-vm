@@ -1,3 +1,8 @@
+# Unreleased
+
+Changed
+  * AZ-1019: Bump `linux-vm` module
+
 # v7.4.0 - 2023-02-08
 
 Added
