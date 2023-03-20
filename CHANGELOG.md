@@ -1,3 +1,8 @@
+# Unreleased
+
+Changed
+  * AZ-1026: Bump default OS SKU to Ubuntu 20.04 LTS
+
 # v7.5.0 - 2023-03-03
 
 Changed
