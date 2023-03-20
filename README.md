@@ -254,9 +254,9 @@ module "bastion" {
 | ssh\_public\_key | SSH public key, generated if empty | `string` | n/a | yes |
 | stack | Project stack name | `string` | n/a | yes |
 | storage\_image\_id | Specifies the image ID used to create the virtual machine | `string` | `null` | no |
-| storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
+| storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"0001-com-ubuntu-server-focal"` | no |
 | storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | `string` | `"Canonical"` | no |
-| storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
+| storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"20_04-lts"` | no |
 | storage\_image\_version | Specifies the version of the image used to create the virtual machine | `string` | `"latest"` | no |
 | storage\_os\_disk\_account\_type | The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`. | `string` | `"Premium_ZRS"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |

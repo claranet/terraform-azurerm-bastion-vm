@@ -116,13 +116,13 @@ variable "storage_image_publisher" {
 variable "storage_image_offer" {
   description = "Specifies the offer of the image used to create the virtual machine"
   type        = string
-  default     = "UbuntuServer"
+  default     = "0001-com-ubuntu-server-focal"
 }
 
 variable "storage_image_sku" {
   description = "Specifies the SKU of the image used to create the virtual machine"
   type        = string
-  default     = "18.04-LTS"
+  default     = "20_04-lts"
 }
 
 variable "storage_image_version" {
