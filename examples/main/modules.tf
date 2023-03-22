@@ -141,5 +141,4 @@ module "bastion" {
   diagnostics_storage_account_name      = module.logs.logs_storage_account_name
   diagnostics_storage_account_sas_token = null # used by legacy agent only
   azure_monitor_data_collection_rule_id = module.az_monitor.data_collection_rule_id
-  log_analytics_agent_enabled           = false
 }
