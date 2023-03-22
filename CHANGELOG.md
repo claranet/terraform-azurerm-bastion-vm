@@ -2,6 +2,7 @@
 
 Changed
   * AZ-1026: Bump default OS SKU to Ubuntu 20.04 LTS
+  * AZ-1026: Bump Claranet Cloud Image Ansible role
 
 # v7.5.0 - 2023-03-03
 
