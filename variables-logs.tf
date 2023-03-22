@@ -48,7 +48,7 @@ variable "azure_monitor_agent_auto_upgrade_enabled" {
 variable "log_analytics_agent_enabled" {
   description = "Deploy Log Analytics VM extension - depending of OS (cf. https://docs.microsoft.com/fr-fr/azure/azure-monitor/agents/agents-overview#linux)"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "log_analytics_agent_version" {
