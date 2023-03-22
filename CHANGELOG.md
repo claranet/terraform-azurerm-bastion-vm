@@ -1,4 +1,4 @@
-# Unreleased
+# v7.6.0 - 2023-03-22
 
 Changed
   * AZ-1026: Bump default OS SKU to Ubuntu 22.04 LTS
