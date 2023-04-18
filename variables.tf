@@ -41,9 +41,15 @@ EOD
 }
 
 variable "custom_facing_ip_address" {
-  description = "Custom IP address to use (for ansible provisioning, and SSH connection), useful if you have a firewall in front of the VM."
-  default     = null
+  description = "Custom IP address to use (for Ansible provisioning, and SSH connection), useful if you have a firewall in front of the VM."
   type        = string
+  default     = null
+}
+
+variable "ansible_port" {
+  description = "Port to use for Ansible provisioning. Default to `22`. It can be interesting to customize the value if you are running Ansible through an SSH tunnel."
+  type        = number
+  default     = 22
 }
 
 variable "public_ip_zones" {
