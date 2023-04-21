@@ -186,7 +186,6 @@ module "bastion" {
 | aad\_ssh\_login\_user\_objects\_ids | Azure Active Directory objects IDs allowed to connect as standard user on the VM. | `list(string)` | `[]` | no |
 | admin\_username | Name of the admin user. | `string` | `"claranet"` | no |
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
-| ansible\_port | Port to use for Ansible provisioning. Default to `22`. It can be interesting to customize the value if you are running Ansible through an SSH tunnel. | `number` | `22` | no |
 | azure\_monitor\_agent\_auto\_upgrade\_enabled | Automatically update agent when publisher releases a new version of the agent | `bool` | `false` | no |
 | azure\_monitor\_agent\_version | Azure Monitor Agent extension version | `string` | `"1.12"` | no |
 | azure\_monitor\_data\_collection\_rule\_id | Data Collection Rule ID from Azure Monitor for metrics and logs collection. Used with new monitoring agent, set to `null` if legacy agent is used. | `string` | n/a | yes |
@@ -194,7 +193,7 @@ module "bastion" {
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | custom\_data | The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created. | `string` | `null` | no |
-| custom\_facing\_ip\_address | Custom IP address to use (for Ansible provisioning, and SSH connection), useful if you have a firewall in front of the VM. | `string` | `null` | no |
+| custom\_facing\_ip\_address | Custom IP address to use (for ansible provisioning, and SSH connection), useful if you have a firewall in front of the VM. | `string` | `null` | no |
 | custom\_ipconfig\_name | Name for the Network Interface ip configuration | `string` | `""` | no |
 | custom\_nic\_name | Name for the Network Interface | `string` | `""` | no |
 | custom\_public\_ip\_name | Name for the Public IP Address resource | `string` | `""` | no |

@@ -3,7 +3,6 @@ resource "local_file" "rendered_ansible_inventory" {
     "${path.module}/playbook-ansible/host_ini.tpl", {
       vm_fullname = module.bastion_vm.vm_name
       vm_ip       = local.bastion_ansible_inventory_ip
-      vm_port     = var.ansible_port
       vm_user     = var.admin_username
     }
   )
