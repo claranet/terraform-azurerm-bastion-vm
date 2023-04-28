@@ -1,4 +1,4 @@
-# Unreleased
+# v7.6.1 - 2023-04-28
 
 Removed
   * AZ-1064: Remove the Ansible `ansible_port` variable in the `playbook-ansible/host_ini.tpl` file so that SSH connection port can be specified via an SSH config file
