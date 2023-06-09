@@ -1,3 +1,8 @@
+# Unreleased
+
+Added
+  * AZ-1080: Bump `linux-vm` module to add `bypassPlatformSafetyChecksOnUserSchedule` when `patch_mode` is `AutomaticByPlatform`.
+
 # v7.6.1 - 2023-04-28
 
 Removed
