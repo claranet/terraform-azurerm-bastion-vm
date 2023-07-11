@@ -46,6 +46,7 @@ module "bastion_vm" {
   public_ip_zones = var.public_ip_zones
 
   admin_username = var.admin_username
+  admin_password = var.admin_password
   ssh_public_key = local.ssh_public_key
 
   zone_id  = var.vm_zone

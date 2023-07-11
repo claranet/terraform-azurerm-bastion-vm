@@ -1,3 +1,8 @@
+# Unreleased
+
+Added
+  * AZ-1115: Add `admin_password` parameter (used by Claranet OneBastion)
+
 # v7.7.0 - 2023-06-09
 
 Added
