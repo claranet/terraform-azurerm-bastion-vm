@@ -1,6 +1,6 @@
 module "bastion_vm" {
   source  = "claranet/linux-vm/azurerm"
-  version = "~> 7.8.0"
+  version = "~> 7.8.1"
 
   location            = var.location
   location_short      = var.location_short
