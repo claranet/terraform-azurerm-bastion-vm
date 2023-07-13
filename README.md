@@ -247,6 +247,7 @@ module "bastion" {
 
 | Name | Description |
 |------|-------------|
+| bastion\_admin\_password | Password of the admin user |
 | bastion\_admin\_username | Username of the admin user |
 | bastion\_hostname | Bastion hostname |
 | bastion\_maintenance\_configurations\_assignments | Maintenance configurations assignments configurations. |
