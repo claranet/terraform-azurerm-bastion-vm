@@ -75,6 +75,13 @@ variable "vm_zone" {
   default     = 1
 }
 
+# Authentication
+variable "admin_password" {
+  description = "Password for the administrator account of the virtual machine."
+  type        = string
+  default     = null
+}
+
 variable "admin_username" {
   description = "Name of the admin user."
   type        = string

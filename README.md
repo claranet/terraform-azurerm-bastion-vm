@@ -164,7 +164,7 @@ module "bastion" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion\_vm | claranet/linux-vm/azurerm | ~> 7.8.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | ~> 7.8.1 |
 
 ## Resources
 
@@ -184,6 +184,7 @@ module "bastion" {
 | aad\_ssh\_login\_enabled | Enable SSH logins with Azure Active Directory. | `bool` | `false` | no |
 | aad\_ssh\_login\_extension\_version | VM Extension version for Azure Active Directory SSH Login extension. | `string` | `"1.0"` | no |
 | aad\_ssh\_login\_user\_objects\_ids | Azure Active Directory objects IDs allowed to connect as standard user on the VM. | `list(string)` | `[]` | no |
+| admin\_password | Password for the administrator account of the virtual machine. | `string` | `null` | no |
 | admin\_username | Name of the admin user. | `string` | `"claranet"` | no |
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
 | azure\_monitor\_agent\_auto\_upgrade\_enabled | Automatically update agent when publisher releases a new version of the agent | `bool` | `false` | no |
@@ -246,6 +247,7 @@ module "bastion" {
 
 | Name | Description |
 |------|-------------|
+| bastion\_admin\_password | Password of the admin user |
 | bastion\_admin\_username | Username of the admin user |
 | bastion\_hostname | Bastion hostname |
 | bastion\_maintenance\_configurations\_assignments | Maintenance configurations assignments configurations. |
