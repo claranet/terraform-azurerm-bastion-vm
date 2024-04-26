@@ -1,3 +1,29 @@
+## 7.8.1 (2024-04-26)
+
+
+### Styles
+
+* **output:** remove unused version from outputs-module f1c9c55
+
+
+### Continuous Integration
+
+* **AZ-1391:** enable semantic-release [skip ci] 3a6dc8e
+* **AZ-1391:** update semantic-release config [skip ci] b8e3e78
+
+
+### Miscellaneous Chores
+
+* **deps:** add renovate.json 64633b4
+* **deps:** enable automerge on renovate 98065a9
+* **deps:** update AzureRM minimum version 2203266
+* **deps:** update dependency claranet/cloudnative/projects/ansible/roles/claranet-cloud-image to v0.6.0 f1263f1
+* **deps:** update dependency trivy to v0.50.2 8176543
+* **deps:** update renovate.json 4e2703b
+* **deps:** update terraform claranet/linux-vm/azurerm to ~> 7.11.0 9486e47
+* **pre-commit:** update commitlint hook 0789ba2
+* **release:** remove legacy `VERSION` file e81a419
+
 # v7.8.0 - 2023-07-21
 
 Added
