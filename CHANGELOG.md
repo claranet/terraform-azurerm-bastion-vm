@@ -1,3 +1,36 @@
+## 8.0.0 (2024-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** changes introduced with AzureRM provider `v3.108.0`
+
+### Bug Fixes
+
+* **deps:** upgrade `linux-vm` to latest version 88115d9
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.7.0 8484ea5
+* **deps:** update dependency opentofu to v1.7.1 e90ef24
+* **deps:** update dependency opentofu to v1.7.2 80c8b61
+* **deps:** update dependency pre-commit to v3.7.1 0f41d8d
+* **deps:** update dependency terraform-docs to v0.18.0 86df030
+* **deps:** update dependency tflint to v0.51.0 e4cf77c
+* **deps:** update dependency tflint to v0.51.1 f7bf44f
+* **deps:** update dependency tflint to v0.51.2 44e925b
+* **deps:** update dependency trivy to v0.50.4 e555247
+* **deps:** update dependency trivy to v0.51.0 9dbf571
+* **deps:** update dependency trivy to v0.51.1 d4386c3
+* **deps:** update dependency trivy to v0.51.2 a7ea957
+* **deps:** update dependency trivy to v0.51.3 8920043
+* **deps:** update dependency trivy to v0.51.4 00d8fe1
+* **deps:** update dependency trivy to v0.52.0 afe4a19
+* **deps:** update dependency trivy to v0.52.1 e293b27
+* **deps:** update dependency trivy to v0.52.2 95eb625
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.92.0 c50f59b
+
 ## 7.8.1 (2024-04-26)
 
 
