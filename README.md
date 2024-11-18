@@ -1,7 +1,10 @@
 # Azure Support Bastion module
 [![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-yellow.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![TF Registry](https://img.shields.io/badge/terraform-registry-blue.svg)](https://registry.terraform.io/modules/claranet/bastion-vm/azurerm/)
 
+> ⚠ This module is deprecated in favor of [linux-vm](https://github.com/claranet/terraform-azurerm-linux-vm) module with your own provisioning (scripts, Ansible or Golden Images).
+
 This module creates a virtual machine to be used as a bastion/jump-host instance for Claranet.
+
 ## Requirements
 
 * [Ansible](https://github.com/ansible/ansible/) >= 2.5
